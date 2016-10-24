@@ -2,7 +2,8 @@ import {
   apiFetchUserList,
   apiFetchOrderList,
   apiFetchShipmentList,
-  apiFetchUser
+  apiFetchUser,
+  apiFetchOrder
 } from './apiFeathers'
 import {
   FETCH_USER_LIST_REQUEST,
@@ -12,7 +13,9 @@ import {
   FETCH_SHIPMENT_LIST_REQUEST,
   FETCH_SHIPMENT_LIST_SUCCESS,
   FETCH_USER_REQUEST,
-  FETCH_USER_SUCCESS
+  FETCH_USER_SUCCESS,
+  FETCH_ORDER_REQUEST,
+  FETCH_ORDER_SUCCESS
 } from './actionTypes'
 
 export function fetchUserListRequest () {
@@ -49,6 +52,30 @@ export function fetchOrderListRequest () {
       .catch(err => console.error('Unable to fetch orders', err))
   }
 }
+export function fetchOrder (id) {
+  return (dispatch) => {
+    dispatch({
+      type: FETCH_ORDER_REQUEST,
+      payload: {
+        id
+      }
+    })
+    return apiFetchOrder(id)
+      .then(order => {
+        dispatch({
+          type: FETCH_ORDER_SUCCESS,
+          payload: {
+            id,
+            order
+          }
+        })
+      })
+      .catch(err => console.error('Unable to fetch user', err))
+  }
+}
+
+// SHIPMENT
+
 export function fetchShipmentListRequest () {
   return (dispatch) => {
     dispatch({
@@ -64,6 +91,8 @@ export function fetchShipmentListRequest () {
       .catch(err => console.error('Unable to fetch shipments', err))
   }
 }
+
+// USER
 
 export function fetchUser (id) {
   return (dispatch, getState) => {

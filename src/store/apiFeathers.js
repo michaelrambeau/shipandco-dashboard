@@ -43,3 +43,8 @@ export function apiFetchUser (id) {
   console.log('API request', url)
   return request(url)
 }
+export function apiFetchOrder (id) {
+  const url = `${API_END_POINT}/orders/${id}`
+  console.log('API request', url)
+  return request(url)
+}

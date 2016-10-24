@@ -1,17 +1,28 @@
 import React from 'react'
-import OrderListContainer from './containers/OrderListContainer'
+import { fetchOrder } from 'store/actionCreators'
+import Order from './containers/OrderContainer'
+import OrderList from './containers/OrderListContainer'
 
 const OrdersLayout = ({ children }) => <div>{children}</div>
 
-const OrdersRoute = (store) => ({
-  component: OrderListContainer
+const OrderListRoute = (store) => ({
+  component: OrderList
+})
+
+const OrderRoute = (store) => ({
+  path: ':id',
+  getComponent: (state, cb) => {
+    const id = state.params.id
+    store.dispatch(fetchOrder(id))
+    cb(null, Order)
+  }
 })
 
 export default (store) => ({
   component : OrdersLayout,
   path: 'orders',
-  indexRoute: OrdersRoute(store)
-  // childRoutes: [
-  //   Orders(store)
-  // ]
+  indexRoute: OrderListRoute(store),
+  childRoutes: [
+    OrderRoute(store)
+  ]
 })

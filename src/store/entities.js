@@ -2,7 +2,8 @@ import {
   FETCH_USER_LIST_SUCCESS,
   FETCH_ORDER_LIST_SUCCESS,
   FETCH_SHIPMENT_LIST_SUCCESS,
-  FETCH_USER_SUCCESS
+  FETCH_USER_SUCCESS,
+  FETCH_ORDER_SUCCESS
 } from './actionTypes'
 
 const initialState = {
@@ -51,6 +52,17 @@ const ACTION_HANDLERS = {
     return {
       ...state,
       users
+    }
+  },
+  [FETCH_ORDER_SUCCESS]: (state, action) => {
+    const { order, id } = action.payload
+    const orders = {
+      ...state.orders,
+      [id]: order
+    }
+    return {
+      ...state,
+      orders
     }
   }
 }
