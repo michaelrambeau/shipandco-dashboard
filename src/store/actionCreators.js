@@ -1,128 +1,56 @@
 import {
-  apiFetchUserList,
-  apiFetchOrderList,
-  apiFetchShipmentList,
-  apiFetchUser,
-  apiFetchOrder
+  apiFetchItemList,
+  apiFetchItem
 } from './apiFeathers'
 import {
-  FETCH_USER_LIST_REQUEST,
-  FETCH_USER_LIST_SUCCESS,
-  FETCH_ORDER_LIST_REQUEST,
-  FETCH_ORDER_LIST_SUCCESS,
-  FETCH_SHIPMENT_LIST_REQUEST,
-  FETCH_SHIPMENT_LIST_SUCCESS,
-  FETCH_USER_REQUEST,
-  FETCH_USER_SUCCESS,
-  FETCH_ORDER_REQUEST,
-  FETCH_ORDER_SUCCESS
+  FETCH_ITEM_LIST_REQUEST,
+  FETCH_ITEM_LIST_SUCCESS,
+  FETCH_ITEM_REQUEST,
+  FETCH_ITEM_SUCCESS
 } from './actionTypes'
 
-export function fetchUserListRequest () {
+export function fetchItemListRequest (model) {
   return (dispatch) => {
     dispatch({
-      type: FETCH_USER_LIST_REQUEST
-    })
-    return apiFetchUserList()
-      .then(users => {
-        dispatch({
-          type: FETCH_USER_LIST_SUCCESS,
-          payload: {
-            users
-          }
-        })
-      })
-      .catch(err => console.error('Unable to fetch users', err))
-  }
-}
-export function fetchOrderListRequest () {
-  return (dispatch) => {
-    dispatch({
-      type: FETCH_ORDER_LIST_REQUEST
-    })
-    return apiFetchOrderList()
-      .then(orders => {
-        dispatch({
-          type: FETCH_ORDER_LIST_SUCCESS,
-          payload: {
-            orders
-          }
-        })
-      })
-      .catch(err => console.error('Unable to fetch orders', err))
-  }
-}
-export function fetchOrder (id) {
-  return (dispatch) => {
-    dispatch({
-      type: FETCH_ORDER_REQUEST,
+      type: FETCH_ITEM_LIST_REQUEST,
       payload: {
-        id
+        model
       }
     })
-    return apiFetchOrder(id)
-      .then(order => {
-        dispatch({
-          type: FETCH_ORDER_SUCCESS,
-          payload: {
-            id,
-            order
-          }
-        })
-      })
-      .catch(err => console.error('Unable to fetch user', err))
-  }
-}
-
-// SHIPMENT
-
-export function fetchShipmentListRequest () {
-  return (dispatch) => {
-    dispatch({
-      type: FETCH_SHIPMENT_LIST_REQUEST
-    })
-    return apiFetchShipmentList()
+    return apiFetchItemList(model)
       .then(result => {
         dispatch({
-          type: FETCH_SHIPMENT_LIST_SUCCESS,
-          payload: result // { total: N, data: [] }
-        })
-      })
-      .catch(err => console.error('Unable to fetch shipments', err))
-  }
-}
-
-// USER
-
-export function fetchUser (id) {
-  return (dispatch, getState) => {
-    const entities = getState().entities.users
-    const user = entities[id]
-    if (user && user.orders) {
-      console.log('User data already loaded!')
-    }
-    return dispatch(fetchUserRequest(id))
-  }
-}
-
-export function fetchUserRequest (id) {
-  return (dispatch) => {
-    dispatch({
-      type: FETCH_USER_REQUEST,
-      payload: {
-        id
-      }
-    })
-    return apiFetchUser(id)
-      .then(user => {
-        dispatch({
-          type: FETCH_USER_SUCCESS,
+          type: FETCH_ITEM_LIST_SUCCESS,
           payload: {
-            id,
-            user
+            ...result,
+            model
           }
         })
       })
-      .catch(err => console.error('Unable to fetch user', err))
+      .catch(err => console.error('Unable to fetch items', model, err))
+  }
+}
+
+export function fetchItem (model, id) {
+  return (dispatch) => {
+    dispatch({
+      type: FETCH_ITEM_REQUEST,
+      payload: {
+        model,
+        id
+      }
+    })
+    return apiFetchItem(model, id)
+      .then(item => {
+        dispatch({
+          type: FETCH_ITEM_SUCCESS,
+          payload: {
+            id,
+            model,
+            item
+          }
+        })
+      })
+      .catch(err => console.error('Unable to fetch item', model, id, err))
   }
 }

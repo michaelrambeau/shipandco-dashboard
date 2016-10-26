@@ -13,7 +13,7 @@ export default ({ counters }) => {
       </div>
       <div className="level-item has-text-centered">
         <p className="heading">All Orders</p>
-        <p className="title">350</p>
+        <p className="title">{counters.orders}</p>
       </div>
       <div className="level-item has-text-centered">
         <p className="heading">All shipments</p>

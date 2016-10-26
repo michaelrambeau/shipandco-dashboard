@@ -4,9 +4,28 @@ function request (url, options) {
     .then(r => r.json())
 }
 
-// const API_END_POINT = 'http://localhost:3030'
+function getEndPoint (model) {
+  const endPoints = {
+    'users': 'customers'
+  }
+  return endPoints[model] || model
+}
+
+const API_END_POINT = 'http://localhost:3030'
 // const API_END_POINT = 'https://feathers-app-ymqogedpqa.now.sh'
-const API_END_POINT = 'https://shipandco-api-pmkosuzmoe.now.sh'
+// const API_END_POINT = 'https://shipandco-api-pmkosuzmoe.now.sh'
+
+export function apiFetchItemList (model) {
+  const endPoint = getEndPoint(model)
+  const url = `${API_END_POINT}/${endPoint}?$limit=100&$sort=-createdAt`
+  return request(url)
+}
+
+export function apiFetchItem (model, id) {
+  const endPoint = getEndPoint(model)
+  const url = `${API_END_POINT}/${endPoint}/${id}?$limit=100&$sort=-createdAt`
+  return request(url)
+}
 
 export function apiFetchUserList () {
   const fields = ['createdAt', 'emails', '_id', 'profile', 'carriers']

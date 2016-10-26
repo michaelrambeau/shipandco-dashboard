@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 
 import entities from './entities'
-import shipments from './shipments'
+import lists from './lists'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     entities,
-    shipments,
+    lists,
     ...asyncReducers
   })
 }

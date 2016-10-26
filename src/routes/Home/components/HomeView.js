@@ -5,8 +5,8 @@ export const HomeView = ({ counters }) => {
   return (
     <section className="section">
       <div className="container">
-        <h3 className="title is-3">Welcome to ship&co dashboard!</h3>
-        <p className="subtitle is-5">Everything you need to know about customer activity.</p>
+        <h3 className="title is-3">Welcome to Ship&co Dashboard!</h3>
+        <p className="subtitle is-5">A complete overview of Ship&co application.</p>
         <hr />
         <Counters counters={counters} />
         <hr />

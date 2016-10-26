@@ -1,9 +1,6 @@
 import {
-  FETCH_USER_LIST_SUCCESS,
-  FETCH_ORDER_LIST_SUCCESS,
-  FETCH_SHIPMENT_LIST_SUCCESS,
-  FETCH_USER_SUCCESS,
-  FETCH_ORDER_SUCCESS
+  FETCH_ITEM_LIST_SUCCESS,
+  FETCH_ITEM_SUCCESS
 } from './actionTypes'
 
 const initialState = {
@@ -22,47 +19,23 @@ function addEntities (before, added) {
 }
 
 const ACTION_HANDLERS = {
-  [FETCH_USER_LIST_SUCCESS]: (state, action) => {
-    const users = addEntities(state.users, action.payload.users)
+  [FETCH_ITEM_LIST_SUCCESS]: (state, action) => {
+    const { model, data } = action.payload
+    const items = addEntities(state[model], data)
     return {
       ...state,
-      users
+      [model]: items
     }
   },
-  [FETCH_ORDER_LIST_SUCCESS]: (state, action) => {
-    const orders = addEntities(state.orders, action.payload.orders)
-    return {
-      ...state,
-      orders
-    }
-  },
-  [FETCH_SHIPMENT_LIST_SUCCESS]: (state, action) => {
-    const shipments = addEntities(state.shipments, action.payload.data)
-    return {
-      ...state,
-      shipments
-    }
-  },
-  [FETCH_USER_SUCCESS]: (state, action) => {
-    const { user, id } = action.payload
-    const users = {
-      ...state.users,
-      [id]: user
+  [FETCH_ITEM_SUCCESS]: (state, action) => {
+    const { item, id, model } = action.payload
+    const items = {
+      ...state[model],
+      [id]: item
     }
     return {
       ...state,
-      users
-    }
-  },
-  [FETCH_ORDER_SUCCESS]: (state, action) => {
-    const { order, id } = action.payload
-    const orders = {
-      ...state.orders,
-      [id]: order
-    }
-    return {
-      ...state,
-      orders
+      [model]: items
     }
   }
 }

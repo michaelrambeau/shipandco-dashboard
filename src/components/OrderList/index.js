@@ -21,7 +21,9 @@ export default ({ orders, count }) => {
           </tr>
         </thead>
         <tbody>
-          {orders.map(order => (
+          {orders
+            .filter(order => !!order.data)
+            .map(order => (
             <Row order={order} key={order._id} />
           ))}
         </tbody>

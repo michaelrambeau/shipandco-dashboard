@@ -2,7 +2,7 @@ import React from 'react'
 import Users from './containers/UsersContainer'
 import User from './containers/UserContainer'
 import createUserContainer from './containers/createUserContainer'
-import { fetchUser } from 'store/actionCreators'
+import { fetchItem } from 'store/actionCreators'
 
 import UserOrders from 'components/User/Orders'
 import UserProfile from 'components/User/Profile'
@@ -24,9 +24,8 @@ const UserRoute = (store) => ({
   // component: User,
   path: ':id',
   getComponent: (state, cb) => {
-    // console.log(nextState);
     const id = state.params.id
-    store.dispatch(fetchUser(id))
+    store.dispatch(fetchItem('users', id))
     cb(null, User)
   },
   indexRoute: {
