@@ -11,9 +11,9 @@ function getEndPoint (model) {
   return endPoints[model] || model
 }
 
-const API_END_POINT = 'http://localhost:3030'
-// const API_END_POINT = 'https://feathers-app-ymqogedpqa.now.sh'
+// const API_END_POINT = 'http://localhost:3030'
 // const API_END_POINT = 'https://shipandco-api-pmkosuzmoe.now.sh'
+const API_END_POINT = 'https://shipandco-api-ukcdixwumu.now.sh'
 
 export function apiFetchItemList (model) {
   const endPoint = getEndPoint(model)

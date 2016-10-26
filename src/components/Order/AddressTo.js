@@ -14,7 +14,9 @@ const To = ({ address }) => (
   <div>
     <Item label="Name">{address.name}</Item>
     <Item label="Address #1">{address.address1}</Item>
-    <Item label="Address #2">{address.address2}</Item>
+    <Item label="Address #2">
+      {address.address2 || <span className="empty">-</span>}
+    </Item>
     <Item label="City">{address.city}</Item>
     <Item label="Zip code">{address.zip}</Item>
     <Item label="Country">
