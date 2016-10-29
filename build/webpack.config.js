@@ -45,18 +45,27 @@ webpackConfig.output = {
 // ------------------------------------
 // Plugins
 // ------------------------------------
-webpackConfig.plugins = [
-  new webpack.DefinePlugin(config.globals),
-  new HtmlWebpackPlugin({
+
+// Create the plugin that will generate the html pages in the `dist` folder
+function createHtmlPlugin (filename) {
+  return new HtmlWebpackPlugin({
     template : paths.client('index.html'),
     hash     : false,
     favicon  : paths.client('static/favicon.ico'),
-    filename : 'index.html',
+    filename,
     inject   : 'body',
     minify   : {
       collapseWhitespace : true
     }
   })
+}
+
+webpackConfig.plugins = [
+  new webpack.DefinePlugin(config.globals),
+  createHtmlPlugin('index.html'),
+  // `200.html` page is required for deploys on surge.sh,
+  // to avoid errors when loading URLs such as `http://xxx.surge.sh/*` URLs
+  createHtmlPlugin('200.html')
 ]
 
 if (__DEV__) {
