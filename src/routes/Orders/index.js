@@ -1,28 +1,25 @@
-import React from 'react'
-import { fetchItem } from 'store/actionCreators'
-import Order from './containers/OrderContainer'
-import OrderList from './containers/OrderListContainer'
+import Layout from './components/Layout'
+import ListView from './components/ListView'
+import ItemView from './components/ItemView'
 
-const OrdersLayout = ({ children }) => <div>{children}</div>
+import { getListViewComponent, getItemViewComponent } from 'routes/helpers'
 
-const OrderListRoute = (store) => ({
-  component: OrderList
+const model = 'orders'
+
+const ListRoute = (store) => ({
+  getComponent: getListViewComponent(model, ListView)(store)
 })
 
-const OrderRoute = (store) => ({
+const ItemRoute = (store) => ({
   path: ':id',
-  getComponent: (state, cb) => {
-    const id = state.params.id
-    store.dispatch(fetchItem('orders', id))
-    cb(null, Order)
-  }
+  getComponent: getItemViewComponent(model, ItemView)(store)
 })
 
 export default (store) => ({
-  component : OrdersLayout,
+  component : Layout,
   path: 'orders',
-  indexRoute: OrderListRoute(store),
+  indexRoute: ListRoute(store),
   childRoutes: [
-    OrderRoute(store)
+    ItemRoute(store)
   ]
 })

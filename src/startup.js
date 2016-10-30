@@ -1,7 +1,6 @@
 import { fetchItemListRequest } from './store/actionCreators'
 
 export default function startup (store) {
-  store.dispatch(fetchItemListRequest('users'))
-  store.dispatch(fetchItemListRequest('orders'))
-  store.dispatch(fetchItemListRequest('shipments'))
+  // store.dispatch(fetchItemListRequest('users'))
+  // store.dispatch(fetchItemListRequest('orders'))
 }

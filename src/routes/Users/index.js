@@ -1,8 +1,9 @@
-import React from 'react'
-import Users from './containers/UsersContainer'
-import User from './containers/UserContainer'
-import createUserContainer from './containers/createUserContainer'
-import { fetchItem } from 'store/actionCreators'
+import Layout from './components/Layout'
+import ListView from './components/ListView'
+import ItemView from './components/ItemView'
+
+import { getListViewComponent, getItemViewComponent } from 'routes/helpers'
+import createUserContainer from './createUserContainer'
 
 import UserOrders from 'components/User/Orders'
 import UserProfile from 'components/User/Profile'
@@ -10,24 +11,15 @@ import UserCarriers from 'components/User/Carriers'
 import UserShipments from 'components/User/Shipments'
 import UserShops from 'components/User/Shops'
 
-const UsersLayout = ({ children }) => (
-  <div>
-    {children}
-  </div>
-)
+const model = 'users'
 
-const UsersRoute = (store) => ({
-  component: Users
+const ListRoute = (store) => ({
+  getComponent: getListViewComponent(model, ListView)(store)
 })
 
-const UserRoute = (store) => ({
-  // component: User,
+const ItemRoute = (store) => ({
   path: ':id',
-  getComponent: (state, cb) => {
-    const id = state.params.id
-    store.dispatch(fetchItem('users', id))
-    cb(null, User)
-  },
+  getComponent: getItemViewComponent(model, ItemView)(store),
   indexRoute: {
     component: createUserContainer(UserShops)
   },
@@ -55,12 +47,11 @@ const UserRoute = (store) => ({
   ]
 })
 
-// Sync route definition
 export default (store) => ({
-  component : UsersLayout,
+  component : Layout,
   path: 'users',
-  indexRoute: UsersRoute(store),
+  indexRoute: ListRoute(store),
   childRoutes: [
-    UserRoute(store)
+    ItemRoute(store)
   ]
 })

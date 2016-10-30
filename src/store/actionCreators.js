@@ -9,7 +9,7 @@ import {
   FETCH_ITEM_SUCCESS
 } from './actionTypes'
 
-export function fetchItemListRequest (model) {
+export function fetchItemListRequest (model, options) {
   return (dispatch) => {
     dispatch({
       type: FETCH_ITEM_LIST_REQUEST,
@@ -17,7 +17,7 @@ export function fetchItemListRequest (model) {
         model
       }
     })
-    return apiFetchItemList(model)
+    return apiFetchItemList(model, options)
       .then(result => {
         dispatch({
           type: FETCH_ITEM_LIST_SUCCESS,
