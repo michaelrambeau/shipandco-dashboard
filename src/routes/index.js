@@ -4,6 +4,7 @@ import Home from './Home'
 import CounterRoute from './Counter'
 import UsersRoute from './Users'
 import OrdersRoute from './Orders'
+import ShopsRoute from './Shops'
 import ShipmentsRoute from './Shipments'
 import About from './About'
 import About1 from './About/About1'
@@ -38,6 +39,7 @@ export const createRoutes = (store) => ({
   indexRoute  : Home,
   childRoutes : [
     UsersRoute(store),
+    ShopsRoute(store),
     OrdersRoute(store),
     ShipmentsRoute(store),
     CounterRoute(store),

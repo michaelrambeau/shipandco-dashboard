@@ -9,7 +9,8 @@ const defaultData = {
 const initialState = {
   users: defaultData,
   orders: defaultData,
-  shipments: defaultData
+  shipments: defaultData,
+  shops: defaultData
 }
 
 const ACTION_HANDLERS = {

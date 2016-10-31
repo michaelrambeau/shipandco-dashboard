@@ -6,7 +6,8 @@ import {
 const initialState = {
   users: {},
   orders: {},
-  shipments: {}
+  shipments: {},
+  shops: {}
 }
 
 function addEntities (before, added) {

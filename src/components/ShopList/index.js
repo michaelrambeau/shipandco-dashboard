@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import TimeAgo from 'timeago-react'
+import ShopIcon from 'components/utils/ShopIcon'
 
 const Table = ({ shops, count }) => {
   if (!shops || shops.length === 0) return (
@@ -37,13 +38,17 @@ export default Table
 const Row = ({ shop }) => {
   return (
     <tr>
-      <td>{shop.type}</td>
+      <td>
+        <ShopIcon type={shop.type} />
+      </td>
       <td>
         <Link to={`/shops/${shop._id}`}>
           {shop.name}
         </Link>
       </td>
-      <td><TimeAgo date={shop.created_at} /></td>
+      <td>
+        {shop.created_at ? <TimeAgo date={shop.created_at} /> : <span className="empty">-</span>}
+      </td>
       <td>
         {shop.lastSync ? <TimeAgo date={shop.lastSync} /> : <span className="empty">-</span>}
       </td>
@@ -51,5 +56,5 @@ const Row = ({ shop }) => {
 ) }
 
 Row.propTypes = {
-  shipment: PropTypes.object.isRequired
+  shop: PropTypes.object.isRequired
 }
