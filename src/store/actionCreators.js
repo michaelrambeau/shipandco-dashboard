@@ -1,12 +1,15 @@
 import {
   apiFetchItemList,
-  apiFetchItem
+  apiFetchItem,
+  apiFetchDashboad
 } from './apiFeathers'
 import {
   FETCH_ITEM_LIST_REQUEST,
   FETCH_ITEM_LIST_SUCCESS,
   FETCH_ITEM_REQUEST,
-  FETCH_ITEM_SUCCESS
+  FETCH_ITEM_SUCCESS,
+  FETCH_DASHBOARD_REQUEST,
+  FETCH_DASHBOARD_SUCCESS
 } from './actionTypes'
 
 export function fetchItemListRequest (model, options) {
@@ -52,5 +55,23 @@ export function fetchItem (model, id) {
         })
       })
       .catch(err => console.error('Unable to fetch item', model, id, err))
+  }
+}
+
+export function fetchDashboard () {
+  return (dispatch) => {
+    dispatch({
+      type: FETCH_DASHBOARD_REQUEST
+    })
+    return apiFetchDashboad()
+      .then(result => {
+        dispatch({
+          type: FETCH_DASHBOARD_SUCCESS,
+          payload: {
+            counters: result.counters
+          }
+        })
+      })
+      .catch(err => console.error('Unable to fetch dashboard', err))
   }
 }
