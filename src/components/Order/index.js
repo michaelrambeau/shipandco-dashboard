@@ -2,6 +2,8 @@ import React from 'react'
 import AddressFrom from './AddressFrom'
 import AddressTo from './AddressTo'
 import ShopIcon from 'components/utils/ShopIcon'
+import ParcelList from './ParcelList'
+import ProductList from './ProductList'
 
 const Order = ({ order }) => {
   // console.info('Order', order);
@@ -45,7 +47,7 @@ const Order = ({ order }) => {
               <div className="card-header-title">Parcels</div>
             </div>
             <div className="card-content">
-              ???
+              {order.shippingInfo && <ParcelList parcels={order.shippingInfo.parcels} />}
             </div>
           </div>
         </div>
@@ -53,10 +55,10 @@ const Order = ({ order }) => {
         <div className="column is-half">
           <div className="card is-fullwidth">
             <div className="card-header">
-              <div className="card-header-title">Options</div>
+              <div className="card-header-title">Products</div>
             </div>
             <div className="card-content">
-              ???
+              {order.shippingInfo && <ProductList products={order.shippingInfo.products} />}
             </div>
           </div>
         </div>
