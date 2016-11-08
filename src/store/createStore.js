@@ -1,12 +1,15 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
+import reduxPromiseMiddleware from 'redux-promise-middleware'
+import reduxifyAuthentication from 'feathers-reduxify-authentication'
+
 import makeRootReducer from './reducers'
 
-export default (initialState = {}) => {
+export default (initialState = {}, feathersApp) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk]
+  const middleware = [thunk, reduxPromiseMiddleware()]
 
   // ======================================================
   // Store Enhancers
@@ -19,11 +22,15 @@ export default (initialState = {}) => {
     }
   }
 
+  const feathersAuthentication = reduxifyAuthentication(feathersApp, {
+    authSelector: (state) => state.auth.user
+  })
+
   // ======================================================
   // Store Instantiation and HMR Setup
   // ======================================================
   const store = createStore(
-    makeRootReducer(),
+    makeRootReducer(null, feathersAuthentication),
     initialState,
     compose(
       applyMiddleware(...middleware),
@@ -38,6 +45,13 @@ export default (initialState = {}) => {
       store.replaceReducer(reducers(store.asyncReducers))
     })
   }
+
+  store.dispatch(feathersAuthentication.authenticate())
+    .then(result => console.log('Authentication OK', result))
+    .catch(err => {
+      console.log('authenticate catch', err) // eslint-disable-line no-console
+      return err
+    })
 
   return store
 }

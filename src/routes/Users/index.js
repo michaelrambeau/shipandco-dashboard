@@ -1,3 +1,4 @@
+import Auth from 'containers/AuthWrapper'
 import Layout from './components/Layout'
 import ListView from './components/ListView'
 import ItemView from './components/ItemView'
@@ -48,7 +49,7 @@ const ItemRoute = (store) => ({
 })
 
 export default (store) => ({
-  component : Layout,
+  component : Auth(Layout),
   path: 'users',
   indexRoute: ListRoute(store),
   childRoutes: [

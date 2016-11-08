@@ -4,14 +4,17 @@ import { browserHistory } from 'react-router'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 import startup from './startup'
+import createFeathersApp from './store/createFeathersApp'
 
 // ========================================================
 // Store and History Instantiation
 // ========================================================
 const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState)
 
-startup(store)
+const feathersApp = createFeathersApp()
+const store = createStore(initialState, feathersApp)
+
+startup(store, feathersApp)
 
 // ========================================================
 // Render Setup

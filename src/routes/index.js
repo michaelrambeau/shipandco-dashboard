@@ -6,32 +6,8 @@ import UsersRoute from './Users'
 import OrdersRoute from './Orders'
 import ShopsRoute from './Shops'
 import ShipmentsRoute from './Shipments'
-import About from './About'
-import About1 from './About/About1'
-import About2 from './About/About2'
-import React from 'react'
-
-const AboutRoute = {
-  path: 'about',
-  component: ({ children }) => <About value="my-value">{children}</About>,
-  // component: About,
-  indexRoute: {
-    component: About1
-  },
-  childRoutes: [
-    {
-      path: '1',
-      component: About1
-    },
-    {
-      path: '2',
-      component: About2
-    }
-  ]
-}
-
-/*  Note: Instead of using JSX, we recommend using react-router
-    PlainRoute objects to build route definitions.   */
+import LoginRoute from './Login'
+import Authenticated from 'containers/Authenticated'
 
 export const createRoutes = (store) => ({
   path        : '/',
@@ -43,7 +19,7 @@ export const createRoutes = (store) => ({
     OrdersRoute(store),
     ShipmentsRoute(store),
     CounterRoute(store),
-    AboutRoute
+    LoginRoute
   ]
 })
 

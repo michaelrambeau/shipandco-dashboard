@@ -1,3 +1,5 @@
+import config from './config'
+
 function request (url, options) {
   console.log('API request', url)
   return fetch(url)
@@ -13,7 +15,7 @@ function getEndPoint (model) {
 
 // const API_END_POINT = 'http://localhost:3030'
 // const API_END_POINT = 'https://shipandco-api-pmkosuzmoe.now.sh'
-const API_END_POINT = 'https://shipandco-api-mvdaypikui.now.sh'
+const API_END_POINT = config.apiBaseUrl
 
 export function apiFetchItemList (model, options = {}) {
   const endPoint = getEndPoint(model)

@@ -3,12 +3,14 @@ import { combineReducers } from 'redux'
 import entities from './entities'
 import lists from './lists'
 import dashboard from './dashboard'
+// import auth from './auth'
 
-export const makeRootReducer = (asyncReducers) => {
+export const makeRootReducer = (asyncReducers, feathersAuthentication) => {
   return combineReducers({
     entities,
     lists,
     dashboard,
+    auth: feathersAuthentication.reducer,
     ...asyncReducers
   })
 }
