@@ -2,6 +2,7 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import reduxPromiseMiddleware from 'redux-promise-middleware'
 import reduxifyAuthentication from 'feathers-reduxify-authentication'
+import { browserHistory } from 'react-router'
 
 import makeRootReducer from './reducers'
 
@@ -47,7 +48,10 @@ export default (initialState = {}, feathersApp) => {
   }
 
   store.dispatch(feathersAuthentication.authenticate())
-    .then(result => console.log('Authentication OK', result))
+    .then(result => {
+      console.log('Authentication OK', result)
+      browserHistory.push('/')
+    })
     .catch(err => {
       console.log('authenticate catch', err) // eslint-disable-line no-console
       return err
