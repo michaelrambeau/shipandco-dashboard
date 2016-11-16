@@ -13,14 +13,15 @@ import {
 } from './actionTypes'
 
 export function fetchItemListRequest (model, options) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: FETCH_ITEM_LIST_REQUEST,
       payload: {
         model
       }
     })
-    return apiFetchItemList(model, options)
+    const token = getState().auth.token
+    return apiFetchItemList(token, model, options)
       .then(result => {
         dispatch({
           type: FETCH_ITEM_LIST_SUCCESS,
@@ -35,7 +36,7 @@ export function fetchItemListRequest (model, options) {
 }
 
 export function fetchItem (model, id) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: FETCH_ITEM_REQUEST,
       payload: {
@@ -43,7 +44,8 @@ export function fetchItem (model, id) {
         id
       }
     })
-    return apiFetchItem(model, id)
+    const token = getState().auth.token
+    return apiFetchItem(token, model, id)
       .then(item => {
         dispatch({
           type: FETCH_ITEM_SUCCESS,
@@ -59,11 +61,12 @@ export function fetchItem (model, id) {
 }
 
 export function fetchDashboard () {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: FETCH_DASHBOARD_REQUEST
     })
-    return apiFetchDashboad()
+    const token = getState().auth.token
+    return apiFetchDashboad(token)
       .then(result => {
         dispatch({
           type: FETCH_DASHBOARD_SUCCESS,
