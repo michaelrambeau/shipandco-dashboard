@@ -1,5 +1,4 @@
 {
-  "parser": "babel-eslint",
   "extends": [
     "standard",
     "standard-react"
@@ -7,7 +6,7 @@
   "plugins": [
     "babel",
     "react",
-    "promise"
+    "import"
   ],
   "env": {
     "browser" : true
@@ -28,6 +27,6 @@
     "import/named": 2,
     "import/namespace": 2,
     "import/default": 2,
-    "import/export": 2,    
+    "import/export": 2,
   }
 }

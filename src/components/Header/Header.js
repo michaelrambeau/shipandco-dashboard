@@ -6,7 +6,7 @@ import logo from './logo.svg'
 // import { AppBar} from 'react-toolbox/lib/app_bar'
 // import AppBar from 'react-toolbox/lib/app_bar'
 
-export const Header = () => (
+export const Header = ({ user }) => (
   <nav className="nav has-shadow">
     <div className="container">
       <div className="nav-left">
@@ -31,6 +31,11 @@ export const Header = () => (
         {false && <Link to="/about" activeClassName="is-active" className="nav-item is-tab">
           About
         </Link>}
+      </div>
+      <div className="nav-right">
+        <div className="nav-item">
+          { user ? user.name : 'Anonymous' }
+        </div>
       </div>
     </div>
   </nav>

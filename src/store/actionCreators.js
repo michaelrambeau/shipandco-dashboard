@@ -6,10 +6,13 @@ import {
 import {
   FETCH_ITEM_LIST_REQUEST,
   FETCH_ITEM_LIST_SUCCESS,
+  FETCH_ITEM_LIST_ERROR,
   FETCH_ITEM_REQUEST,
   FETCH_ITEM_SUCCESS,
+  FETCH_ITEM_ERROR,
   FETCH_DASHBOARD_REQUEST,
-  FETCH_DASHBOARD_SUCCESS
+  FETCH_DASHBOARD_SUCCESS,
+  FETCH_DASHBOARD_ERROR
 } from './actionTypes'
 
 export function fetchItemListRequest (model, options) {
@@ -68,13 +71,19 @@ export function fetchDashboard () {
     const token = getState().auth.token
     return apiFetchDashboad(token)
       .then(result => {
-        dispatch({
+        return dispatch({
           type: FETCH_DASHBOARD_SUCCESS,
           payload: {
             counters: result.counters
           }
         })
       })
-      .catch(err => console.error('Unable to fetch dashboard', err))
+      .catch(err => {
+        return dispatch({
+          type: FETCH_DASHBOARD_ERROR,
+          error: true,
+          payload: err.message
+        })
+      })
   }
 }

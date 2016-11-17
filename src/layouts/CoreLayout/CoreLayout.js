@@ -1,10 +1,7 @@
 import React from 'react'
-import Header from '../../components/Header'
+import Header from '../../containers/HeaderContainer'
 import './CoreLayout.scss'
-// import 'bulma/sass/utilities/_all.sass'
-// import 'bulma/sass/base/_all.sass'
 import '../../styles/core.scss'
-// import 'bulma/sass/components/nav.sass'
 
 export const CoreLayout = ({ children }) => (
   <div>

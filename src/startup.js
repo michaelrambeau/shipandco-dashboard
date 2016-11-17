@@ -2,7 +2,7 @@ import { fetchDashboard } from './store/actionCreators'
 import { authLoginSuccess } from './store/auth'
 
 export default function startup (store, app) {
-  store.dispatch(fetchDashboard())
+  // store.dispatch(fetchDashboard())
   // store.dispatch(fetchItemListRequest('users'))
   // store.dispatch(fetchItemListRequest('orders'))
 
