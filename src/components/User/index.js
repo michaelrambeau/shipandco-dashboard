@@ -6,12 +6,10 @@ import Tabs from './Tabs'
 const User = ({ user, children }) => {
   if (!user) return <div>Loading...</div>
   return (
-    <section className="section">
-      <div className="container">
-        <h3 className="title is-4">{user.emails[0].address}</h3>
-        {children}
-      </div>
-    </section>
+    <div>
+      <h2 className="title is-3">{user.emails[0].address}</h2>
+      <div></div>
+    </div>
   )
 }
 
