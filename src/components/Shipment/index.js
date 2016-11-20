@@ -9,7 +9,7 @@ const Shipment = ({ shipment }) => (
     <h2 className="title is-4">
       <ShopIcon type={shipment.type} />
       {' '}
-      Shipment #{shipment.identifier}
+      Shipment {shipment.identifier}
     </h2>
     <ShipmentInfo data={shipment.shipment_infos} />
     <br />

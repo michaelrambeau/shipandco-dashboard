@@ -29,25 +29,27 @@
   </head>
   <body>
     <div>Shipandco dashboard login...</div>
-    <script src="//cdn.auth0.com/w2/auth0-6.js"></script>
     <script>
     function init() {
-      auth0 = new Auth0({
-        domain: 'shipandco.auth0.com',
-        clientID: '3w7EXmzzpZ4dkQGQuO6yhYAIRbLrQVIb',
-        callbackURL: '/',
-        callbackOnLocationHash: true
-      });
-      var result = auth0.parseHash(window.location.hash);
-      if (!result) return;
-      var id_token = result.id_token;
-      var access_token = result.access_token;
-      if (id_token) {
-        window.localStorage.setItem('feathers-jwt', id_token);
-        window.location.href = '/'
+      const token = getToken();
+      if (!token) {
+        console.error('No auth token found in the URL hash!');
       }
+      // Save the token in the local storage
+      window.localStorage.setItem('feathers-jwt', token)
+      // Redirect to the single-page application
+      window.location.href = '/'
     }
-    init();
+
+    // Read the token from the URL hash
+    function getToken() {
+      const hash = self.location.hash
+      const array = /#(.*)/.exec(hash)
+      if (!array) return
+      return array[1]
+    }
+
+    init()
     </script>
   </body>
 </html>

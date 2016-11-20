@@ -7,8 +7,11 @@ import { getListViewComponent, getItemViewComponent } from 'routes/helpers'
 
 const model = 'shipments'
 
+const options = {
+  $sort: '-date'
+}
 const ListRoute = (store) => ({
-  getComponent: getListViewComponent(model, ListView)(store)
+  getComponent: getListViewComponent(model, ListView, options)(store)
 })
 
 const ItemRoute = (store) => ({

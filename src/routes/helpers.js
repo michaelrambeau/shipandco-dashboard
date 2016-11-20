@@ -4,7 +4,7 @@ import createItemViewContainer from 'containers/createItemViewContainer'
 
 // Return a `getComponent()` function used in routes to dynamically load components
 // Used for 'list of items' routes (with pagination) `/<model>/`
-export const getListViewComponent = (model, View) => store => (state, cb) => {
+export const getListViewComponent = (model, View, { $sort } = {}) => store => (state, cb) => {
   const query = state.location.query
   const page = query.page
   const pageNumber = page && !isNaN(page) ? parseInt(page, 0) : 1
@@ -12,7 +12,7 @@ export const getListViewComponent = (model, View) => store => (state, cb) => {
   const pageSize = 20
   const $skip = page ? pageIndex * pageSize : 0
   const $limit = pageSize
-  store.dispatch(fetchItemListRequest(model, { $skip, $limit }))
+  store.dispatch(fetchItemListRequest(model, { $skip, $limit, $sort }))
   const Container = createListViewContainer(model, View, { pageNumber, pageSize })
   cb(null, Container)
 }

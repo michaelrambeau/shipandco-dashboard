@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default ({ value, currency }) => {
+  if (!value) return <span className="empty">-</span>
   const number = parseFloat(value)
   const symbol = currency === 'JPY' ? '¥' : currency
   const decimals = currency === 'JPY' ? 0 : 2

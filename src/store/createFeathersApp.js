@@ -1,8 +1,9 @@
 import feathers from 'feathers-client'
+import config from './config'
 
 export default () => {
   const app = feathers()
-  const host = 'http://localhost:3030'
+  const host = config.apiBaseUrl
   app
     .configure(feathers.rest(host).fetch(window.fetch))
     .configure(feathers.hooks())
