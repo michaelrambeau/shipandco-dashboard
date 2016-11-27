@@ -12,7 +12,7 @@ export default () => (
           <p>Please login using your <b>bentoandco.com</b> Google account.</p>
           <br />
           <div style={{ textAlign: 'center' }}>
-            <a className="button is-primary is-large" href={url} styleXX={{ display: 'block' }}>
+            <a className="button is-primary is-large" href={url}>
               <span className="icon">
                 <i className="fa fa-google is-large" />
               </span>

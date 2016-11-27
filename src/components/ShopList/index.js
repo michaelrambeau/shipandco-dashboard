@@ -36,6 +36,7 @@ Table.propTypes = {
 export default Table
 
 const Row = ({ shop }) => {
+  const date = shop.createdAt || shop.created_at
   return (
     <tr>
       <td>
@@ -47,7 +48,7 @@ const Row = ({ shop }) => {
         </Link>
       </td>
       <td>
-        {shop.created_at ? <TimeAgo date={shop.created_at} /> : <span className="empty">-</span>}
+        {date ? <TimeAgo date={date} /> : <span className="empty">-</span>}
       </td>
       <td>
         {shop.lastSync ? <TimeAgo date={shop.lastSync} /> : <span className="empty">-</span>}

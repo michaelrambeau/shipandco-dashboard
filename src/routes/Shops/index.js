@@ -6,9 +6,12 @@ import ItemView from './components/ItemView'
 import { getListViewComponent, getItemViewComponent } from 'routes/helpers'
 
 const model = 'shops'
+const options = {
+  $sort: '-createdAt'
+}
 
 const ListRoute = (store) => ({
-  getComponent: getListViewComponent(model, ListView)(store)
+  getComponent: getListViewComponent(model, ListView, options)(store)
 })
 
 const ItemRoute = (store) => ({

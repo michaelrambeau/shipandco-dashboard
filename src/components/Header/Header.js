@@ -6,31 +6,50 @@ import logo from './logo.svg'
 // import { AppBar} from 'react-toolbox/lib/app_bar'
 // import AppBar from 'react-toolbox/lib/app_bar'
 
-export const Header = ({ user }) => (
+const items = [
+  {
+    path: '/',
+    text: 'Dashboard',
+    isIndex: true
+  },
+  {
+    path: '/users',
+    text: 'Customers'
+  },
+  {
+    path: '/shops',
+    text: 'Shops'
+  },
+  {
+    path: '/orders',
+    text: 'Orders'
+  },
+  {
+    path: '/shipments',
+    text: 'Shipments'
+  }
+]
+
+const Item = (props) => {
+  const Component = isIndex ? IndexLink : Link
+  // const { router } = this.context
+  const isActive = true //router.isActive(path)
+  const { path, text, isIndex } = props.navItem
+  console.info(props);
+  return (
+    <Component to={path} className={`nav-item is-tab${isActive ? ' is-active' : ''}`}>
+      {text}
+    </Component>
+  )
+}
+
+export const Header = ({ user, router }) => (
   <nav className="nav has-shadow">
     <div className="container">
       <div className="nav-left">
-        <IndexLink to="/" className="nav-item is-brand" style={{ paddingTop: 0, paddingBottom: 0 }}>
-          <img src={logo} alt="logo" width="120" height="44" style={{ maxHeight: 44, transform: 'translateY(-7px)' }} />
-        </IndexLink>
-        <IndexLink to="/" activeClassName="is-active" className="nav-item is-tab">
-          Dashboard
-        </IndexLink>
-        <Link to="/users" activeClassName="is-active" className="nav-item is-tab">
-          Customers
-        </Link>
-        <Link to="/shops" activeClassName="is-active" className="nav-item is-tab">
-          Shops
-        </Link>
-        <Link to="/orders" activeClassName="is-active" className="nav-item is-tab">
-          Orders
-        </Link>
-        <Link to="/shipments" activeClassName="is-active" className="nav-item is-tab">
-          Shipments
-        </Link>
-        {false && <Link to="/about" activeClassName="is-active" className="nav-item is-tab">
-          About
-        </Link>}
+        {items.map(item => (
+          <Item key={item.path} navItem={item} router={router} />
+        ))}
       </div>
       <div className="nav-right">
         <div className="nav-item">
