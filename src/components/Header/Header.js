@@ -10,7 +10,7 @@ const items = [
   {
     path: '/',
     text: 'Dashboard',
-    isIndex: true
+    isIndex: false
   },
   {
     path: '/users',
@@ -32,10 +32,10 @@ const items = [
 
 const Item = (props) => {
   const Component = isIndex ? IndexLink : Link
-  // const { router } = this.context
-  const isActive = true //router.isActive(path)
-  const { path, text, isIndex } = props.navItem
-  console.info(props);
+  const { router, navItem } = props
+  const { path, text, isIndex } = navItem
+  const isActive = router.isActive(path)
+  console.info(path, isActive);
   return (
     <Component to={path} className={`nav-item is-tab${isActive ? ' is-active' : ''}`}>
       {text}
@@ -47,6 +47,9 @@ export const Header = ({ user, router }) => (
   <nav className="nav has-shadow">
     <div className="container">
       <div className="nav-left">
+        <IndexLink to="/" className="nav-item is-brand" style={{ paddingTop: 0, paddingBottom: 0 }}>
+          <img src={logo} alt="logo" width="120" height="44" style={{ maxHeight: 44, transform: 'translateY(-7px)' }} />
+        </IndexLink>
         {items.map(item => (
           <Item key={item.path} navItem={item} router={router} />
         ))}
@@ -59,10 +62,5 @@ export const Header = ({ user, router }) => (
     </div>
   </nav>
 )
-// export const Header = () => (
-//   <AppBar fixed flat title="Ship&co dashboard">
-//     <a href="/home">React Toolbox Docs</a>
-//   </AppBar>
-// )
 
 export default Header
