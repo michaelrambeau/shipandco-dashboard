@@ -36,7 +36,8 @@ Table.propTypes = {
 export default Table
 
 const Row = ({ shop }) => {
-  const date = shop.createdAt || shop.created_at
+  const date = shop.data && shop.data.created_at || shop.createdAt || shop.created_at
+  console.log(shop.name, date);
   return (
     <tr>
       <td>
@@ -48,10 +49,10 @@ const Row = ({ shop }) => {
         </Link>
       </td>
       <td>
-        {date ? <TimeAgo date={date} /> : <span className="empty">-</span>}
+        {date ? <TimeAgo datetime={date} /> : <span className="empty">-</span>}
       </td>
       <td>
-        {shop.lastSync ? <TimeAgo date={shop.lastSync} /> : <span className="empty">-</span>}
+        {shop.lastSync ? <TimeAgo datetime={shop.lastSync} /> : <span className="empty">-</span>}
       </td>
     </tr>
 ) }

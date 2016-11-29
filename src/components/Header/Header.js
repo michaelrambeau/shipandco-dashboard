@@ -34,7 +34,7 @@ const Item = (props) => {
   const Component = isIndex ? IndexLink : Link
   const { router, navItem } = props
   const { path, text, isIndex } = navItem
-  const isActive = router.isActive(path)
+  const isActive = router.isActive(path, true)
   console.info(path, isActive);
   return (
     <Component to={path} className={`nav-item is-tab${isActive ? ' is-active' : ''}`}>
