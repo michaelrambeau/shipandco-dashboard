@@ -42,9 +42,10 @@ const Row = ({ user }) => {
         )}
       </td>
       <td><ShopList shops={user.shops} /></td>
-      <td><TimeAgo date={user.createdAt} /></td>
+      <td><TimeAgo datetime={user.createdAt} /></td>
     </tr>
-) }
+  )
+}
 
 const CarrierList = ({ carriers }) => {
   const keys = Object.keys(carriers)

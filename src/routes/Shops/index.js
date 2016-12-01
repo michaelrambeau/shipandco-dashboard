@@ -7,7 +7,8 @@ import { getListViewComponent, getItemViewComponent } from 'routes/helpers'
 
 const model = 'shops'
 const options = {
-  $sort: '-createdAt'
+  $sort: 'name',
+  $limit: 100
 }
 
 const ListRoute = (store) => ({

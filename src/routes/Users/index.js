@@ -13,9 +13,13 @@ import UserShipments from 'components/User/Shipments'
 import UserShops from 'components/User/Shops'
 
 const model = 'users'
+const options = {
+  $sort: 'profile.name',
+  $limit: 100
+}
 
 const ListRoute = (store) => ({
-  getComponent: getListViewComponent(model, ListView)(store)
+  getComponent: getListViewComponent(model, ListView, options)(store)
 })
 
 const ItemRoute = (store) => ({

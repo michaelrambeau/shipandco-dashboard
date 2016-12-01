@@ -53,6 +53,6 @@ const Row = ({ order }) => {
       <td>
         <Amount value={order.data.total_price} currency={order.data.currency} />
       </td>
-      <td><TimeAgo date={order.date} /></td>
+      <td><TimeAgo datetime={order.date} /></td>
     </tr>
 ) }

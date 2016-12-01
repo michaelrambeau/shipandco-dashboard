@@ -67,9 +67,10 @@ const Row = ({ shipment }) => {
       <td>
         <Amount value={shipment.shipping_paid} currency={shipment.currency} />
       </td>
-      <td><TimeAgo date={shipment.date} /></td>
+      <td><TimeAgo datetime={shipment.date} /></td>
     </tr>
-) }
+  )
+}
 
 Row.propTypes = {
   shipment: PropTypes.object.isRequired

@@ -37,7 +37,6 @@ export default Table
 
 const Row = ({ shop }) => {
   const date = shop.data && shop.data.created_at || shop.createdAt || shop.created_at
-  console.log(shop.name, date);
   return (
     <tr>
       <td>
