@@ -20,10 +20,8 @@ function getIcon (shopType) {
       return prestashop
     case 'base':
       return base
-    case 'amazon':
-    case 'amazonfr':
-      return amazon
   }
+  if (/amazon/.test(shopType)) return amazon
   return manual
 }
 
