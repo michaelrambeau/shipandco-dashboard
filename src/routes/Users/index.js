@@ -15,7 +15,7 @@ import UserShops from 'components/User/Shops'
 const model = 'users'
 const options = {
   $sort: 'profile.name',
-  $limit: 100
+  $limit: 200
 }
 
 const ListRoute = (store) => ({
