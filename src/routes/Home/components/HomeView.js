@@ -9,8 +9,8 @@ export const HomeView = ({ counters }) => {
         <p className="subtitle is-5">A complete overview of Ship&co application.</p>
         <hr />
         <Counters counters={counters} />
-        <hr />
-        <div className="columns" style={{ width: '100%' }}>
+
+        {false && <div className="columns" style={{ width: '100%' }}>
           <div className="column is-half">
             <h4 className="title is-4">Today's shipments</h4>
             <p>Coming soon</p>
@@ -19,7 +19,7 @@ export const HomeView = ({ counters }) => {
             <h4 className="title is-4">Today's errors</h4>
             <p>Coming soon</p>
           </div>
-        </div>
+        </div>}
         <hr />
       </div>
     </section>

@@ -47,10 +47,11 @@ export default (initialState = {}, feathersApp) => {
     })
   }
 
+  const path = self.location.pathname // `/users` for example
   store.dispatch(feathersAuthentication.authenticate())
     .then(result => {
       console.log('Authentication OK', result)
-      browserHistory.push('/')
+      browserHistory.push(path)
     })
     .catch(err => {
       console.log('authenticate catch', err) // eslint-disable-line no-console

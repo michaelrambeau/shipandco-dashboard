@@ -14,7 +14,7 @@ const initialState = window.___INITIAL_STATE__
 const feathersApp = createFeathersApp()
 const store = createStore(initialState, feathersApp)
 
-startup(store, feathersApp)
+// startup(store, feathersApp)
 
 // ========================================================
 // Render Setup
