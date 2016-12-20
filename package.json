@@ -20,7 +20,8 @@
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
     "codecov": "cat coverage/*/lcov.info | codecov",
-    "surge": "surge ./dist"
+    "surge": "surge ./dist",
+    "surge:prod": "surge ./dist staff.shipandco.com"
   },
   "betterScripts": {
     "compile": {

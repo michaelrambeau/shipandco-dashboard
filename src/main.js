@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import { browserHistory } from 'react-router'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
-import startup from './startup'
 import createFeathersApp from './store/createFeathersApp'
 
 // ========================================================
