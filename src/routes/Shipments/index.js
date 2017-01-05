@@ -6,10 +6,11 @@ import ItemView from './components/ItemView'
 import { getListViewComponent, getItemViewComponent } from 'routes/helpers'
 
 const model = 'shipments'
-
 const options = {
+  $limit: 50,
   $sort: '-date'
 }
+
 const ListRoute = (store) => ({
   getComponent: getListViewComponent(model, ListView, options)(store)
 })
