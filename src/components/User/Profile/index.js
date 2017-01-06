@@ -12,6 +12,7 @@ const ProfileView = ({ profile }) => (
 export default ({ user }) => (
   <div>
     <Tabs
+      user={user}
       userId={user._id}
       activeTab="profile"
     />

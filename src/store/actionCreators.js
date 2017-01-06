@@ -20,7 +20,8 @@ export function fetchItemListRequest (model, options) {
     dispatch({
       type: FETCH_ITEM_LIST_REQUEST,
       payload: {
-        model
+        model,
+        options
       }
     })
     const token = getState().auth.token

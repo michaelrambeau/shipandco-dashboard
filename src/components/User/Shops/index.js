@@ -7,6 +7,7 @@ export default ({ user }) => {
   return (
     <div>
       <Tabs
+        user={user}
         userId={user._id}
         activeTab="shops"
       />

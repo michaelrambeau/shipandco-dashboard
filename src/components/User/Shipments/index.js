@@ -9,6 +9,7 @@ export default ({ user }) => {
       <Tabs
         userId={user._id}
         activeTab="shipments"
+        user={user}
       />
       <ShipmentList
         shipments={user.shipments}

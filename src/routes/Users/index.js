@@ -35,7 +35,8 @@ const ItemRoute = (store) => ({
     },
     {
       path: 'orders',
-      component: createUserContainer(UserOrders)
+      // component: createUserContainer(UserOrders)
+      getComponent: getListViewComponent('orders', createUserContainer(UserOrders), {})(store)
     },
     {
       path: 'carriers',

@@ -37,17 +37,20 @@ function getEndPoint (model) {
 // const API_END_POINT = 'https://shipandco-api-pmkosuzmoe.now.sh'
 const API_END_POINT = config.apiBaseUrl
 
-export function apiFetchItemList (token, model, options = {}) {
+export function apiFetchItemList (token, model, { $limit, $sort, $skip, query }) {
   const endPoint = getEndPoint(model)
   const defaultParams = {
     $limit: 10,
     $sort: '-createdAt',
     $skip: 0
   }
-  const params = {
-    ...defaultParams,
-    ...options
-  }
+  const params = Object.assign({}, defaultParams, {
+    $limit,
+    $skip,
+    $sort,
+    ...query
+  })
+  console.log('params', params);
   const urlParams = Object.keys(params)
     .map(key => `${key}=${params[key]}`)
     .join('&')

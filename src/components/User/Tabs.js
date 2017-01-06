@@ -4,45 +4,48 @@ import { Link } from 'react-router'
 const items = [
   {
     name: 'shops',
-    text: 'Shops',
+    text: ({ user }) => <span>Shops ({user.shops.length})</span>,
     icon: 'shopping-bag'
   },
   {
     name: 'orders',
-    text: 'Orders',
+    text: ({user}) => <span>Orders ({user.orderCount})</span>,
     icon: 'file'
   },
   {
     name: 'shipments',
-    text: 'Shipments',
+    text: ({ user }) => <span>Orders ({user.shipmentCount})</span>,
     icon: 'cubes'
   },
   {
     name: 'carriers',
-    text: 'Carriers',
+    text: ({ user }) => <span>Carriers</span>,
     icon: 'truck'
   },
   {
     name: 'profile',
-    text: 'Profile',
+    text: ({ user }) => <span>Profile</span>,
     icon: 'user'
   }
 ]
 
-export default ({ userId, activeTab = 'profile' }) => (
+export default ({ userId, activeTab = 'profile', user }) => (
   <div className="tabs">
     <ul>
-      {items.map(item => (
-        <li
-          key={item.name}
-          className={activeTab === item.name ? 'is-active' : ''}
-        >
-          <Link to={`/users/${userId}/${item.name}`}>
-            <i className={`fa fa-${item.icon}`} style={{ marginRight: '0.5rem' }} />
-            {item.text}
-          </Link>
-        </li>
-      ))}
+      {items.map(item => {
+        const Text = item.text
+        return (
+          <li
+            key={item.name}
+            className={activeTab === item.name ? 'is-active' : ''}
+          >
+            <Link to={`/users/${userId}/${item.name}`}>
+              <i className={`fa fa-${item.icon}`} style={{ marginRight: '0.5rem' }} />
+              <Text user={user} />
+            </Link>
+          </li>
+        )
+      })}
     </ul>
   </div>
 )

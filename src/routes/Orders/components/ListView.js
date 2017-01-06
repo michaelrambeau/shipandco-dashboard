@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
 import OrderList from 'components/OrderList'
 import paginate from 'components/utils/Pagination/paginate'
+import Loading from 'components/utils/Loading'
 
-const ListView = ({ items, total, pageNumber, pageSize }) => {
+const ListView = ({ items, total, pageNumber, pageSize, loading }) => {
   const options = {
     url: '/orders',
     pageNumber,
@@ -13,8 +14,12 @@ const ListView = ({ items, total, pageNumber, pageSize }) => {
   return (
     <section className="section">
       <div className="container">
-        <h2 className="title is-4">All orders ({total})</h2>
-        <List orders={items} count={total} />
+        {loading ? (
+          <Loading />
+        ) : ([
+          <h2 key="title" className="title is-4">All orders ({total})</h2>,
+          <List key="list" orders={items} count={total} />
+        ])}
       </div>
     </section>
   )
@@ -24,7 +29,8 @@ ListView.propTypes = {
   items: PropTypes.array.isRequired,
   total: PropTypes.number.isRequired,
   pageNumber: PropTypes.number.isRequired,
-  pageSize: PropTypes.number.isRequired
+  pageSize: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired
 }
 
 export default ListView

@@ -1,9 +1,11 @@
 import {
+  FETCH_ITEM_LIST_REQUEST,
   FETCH_ITEM_LIST_SUCCESS,
   FETCH_ITEM_SUCCESS
 } from './actionTypes'
 
 const initialState = {
+  loading: false,
   users: {},
   orders: {},
   shipments: {},
