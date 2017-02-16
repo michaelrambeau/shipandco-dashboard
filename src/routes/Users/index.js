@@ -14,7 +14,7 @@ import UserShops from 'components/User/Shops'
 
 const model = 'users'
 const options = {
-  $sort: 'profile.name',
+  $sort: '-createdAt',
   $limit: 200
 }
 
