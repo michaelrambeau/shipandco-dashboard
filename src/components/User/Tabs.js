@@ -14,7 +14,7 @@ const items = [
   },
   {
     name: 'shipments',
-    text: ({ user }) => <span>Orders ({user.shipmentCount})</span>,
+    text: ({ user }) => <span>Shipments ({user.shipmentCount})</span>,
     icon: 'cubes'
   },
   {

@@ -53,11 +53,11 @@ export const Header = ({ user, router }) => (
           <Item key={item.path} navItem={item} router={router} />
         ))}
       </div>
-      <div className="nav-right">
+      {false && <div className="nav-right">
         <div className="nav-item">
           { user ? user.name : 'Anonymous' }
         </div>
-      </div>
+      </div>}
     </div>
   </nav>
 )

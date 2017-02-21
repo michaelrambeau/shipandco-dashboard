@@ -4,20 +4,28 @@ export default ({ counters }) => {
   return (
     <nav className="level">
       <div className="level-item has-text-centered">
-        <p className="heading">All customers</p>
-        <p className="title">{counters.users}</p>
+        <div>
+          <p className="heading">All customers</p>
+          <p className="title">{counters.users}</p>
+        </div>
       </div>
       <div className="level-item has-text-centered">
-        <p className="heading">All shops</p>
-        <p className="title">{counters.shops}</p>
+        <div>
+          <p className="heading">All shops</p>
+          <p className="title">{counters.shops}</p>
+        </div>
       </div>
       <div className="level-item has-text-centered">
-        <p className="heading">All Orders</p>
-        <p className="title">{counters.orders}</p>
+        <div>
+          <p className="heading">All Orders</p>
+          <p className="title">{counters.orders}</p>
+        </div>
       </div>
       <div className="level-item has-text-centered">
-        <p className="heading">All shipments</p>
-        <p className="title">{counters.shipments}</p>
+        <div>
+          <p className="heading">All shipments</p>
+          <p className="title">{counters.shipments}</p>
+        </div>
       </div>
     </nav>
   )

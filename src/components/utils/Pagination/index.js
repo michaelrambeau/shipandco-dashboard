@@ -139,7 +139,7 @@ const Pagination = React.createClass({
       )
     }
     return ( // override bulma marginTop (small screens)
-      <ul className="Pagination__list" style={{ marginTop: 0 }}>
+      <ul className="pagination-list" style={{ marginTop: 0 }}>
         {pages}
       </ul>
 		)
