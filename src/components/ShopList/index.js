@@ -36,7 +36,7 @@ Table.propTypes = {
 export default Table
 
 const Row = ({ shop }) => {
-  const date = shop.data && shop.data.created_at || shop.createdAt || shop.created_at
+  const date = shop.createdAt || shop.created_at
   return (
     <tr>
       <td>
@@ -54,7 +54,8 @@ const Row = ({ shop }) => {
         {shop.lastSync ? <TimeAgo datetime={shop.lastSync} /> : <span className="empty">-</span>}
       </td>
     </tr>
-) }
+  )
+}
 
 Row.propTypes = {
   shop: PropTypes.object.isRequired
