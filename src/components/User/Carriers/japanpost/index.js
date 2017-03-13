@@ -3,7 +3,7 @@ import logo from 'components/utils/CarrierIcon/japanpost.svg'
 import CarrierBox from '../CarrierBox'
 
 const carrier = {
-  name: 'JapanPost',
+  name: 'Japan Post International',
   logo
 }
 

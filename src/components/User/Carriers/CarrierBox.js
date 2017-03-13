@@ -2,7 +2,7 @@ import React from 'react'
 
 export default ({ carrier, children }) => (
   <div className="column is-half-tablet">
-    <div className="box">
+    <div className="box" style={{ height: '100%' }}>
       <div className="media">
         <div className="media-left">
           <img src={carrier.logo} width="64" height="64" />

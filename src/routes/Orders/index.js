@@ -8,11 +8,7 @@ import { getListViewComponent, getItemViewComponent } from 'routes/helpers'
 const model = 'orders'
 const options = {
   $limit: 50,
-  // query: {
-  //   userId: '22RZftp2TrkkAmYkT'
-  // }
 }
-console.log('Options', options);
 const ListRoute = (store) => ({
   getComponent: getListViewComponent(model, ListView, options)(store)
 })
