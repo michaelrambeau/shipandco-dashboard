@@ -7,6 +7,9 @@ import rakuten from './rakuten.svg'
 import ebay from './ebay.svg'
 import prestashop from './prestashop.svg'
 import base from './base.svg'
+import nextengine from './nextengine.svg'
+import magento1 from './magento1.svg'
+import magento2 from './magento2.svg'
 
 function getIcon (shopType) {
   switch (shopType) {
@@ -16,12 +19,19 @@ function getIcon (shopType) {
       return rakuten
     case 'ebay':
       return ebay
+    case 'amazon':
+      return amazon
     case 'prestashop15':
       return prestashop
     case 'base':
       return base
+    case 'nextengine':
+      return nextengine
+    case 'magento1':
+      return magento1
+    case 'magento2':
+      return magento2
   }
-  if (/amazon/.test(shopType)) return amazon
   return manual
 }
 
