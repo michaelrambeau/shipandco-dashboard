@@ -14,7 +14,7 @@ const ItemView = ({ item }) => (
 )
 
 ItemView.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.object
 }
 
 export default ItemView

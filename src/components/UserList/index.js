@@ -59,6 +59,13 @@ const Row = ({ user }) => {
   )
 }
 
+function isJapanPostCustomer (japanpostSettings) {
+  const numbers = japanpostSettings.customerNumbers
+  if (!numbers) return false
+  if (!Array.isArray(numbers)) return false
+  return numbers.filter(x => !!x).length > 0
+}
+
 const CarrierList = ({ carriers }) => {
   const keys = Object.keys(carriers)
   if (keys.length === 0) return <span className="empty">No carrier</span>
@@ -67,11 +74,7 @@ const CarrierList = ({ carriers }) => {
       {keys
         .filter(key => !!carriers[key])
         .filter(key => {
-          if (key === 'japanpost') {
-            const numbers = carriers[key].customerNumbers
-            return !!numbers && Array.isArray(numbers)
-          }
-          return true
+          return key !== 'japanpost' || isJapanPostCustomer(carriers[key])
         })
         .map(key => {
           return (
@@ -101,3 +104,10 @@ const ShopList = ({ shops }) => {
     </div>
   )
 }
+
+// function userLastShipment(user) {
+//   if (!user.shipments) return false;
+//   const lastShipment = user.shipments
+//     .slice(0, 0)
+//    return lastShipment 
+// }

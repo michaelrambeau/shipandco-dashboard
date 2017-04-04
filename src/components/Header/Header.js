@@ -10,7 +10,7 @@ const items = [
   {
     path: '/',
     text: 'Dashboard',
-    isIndex: false
+    isIndex: true
   },
   {
     path: '/users',
@@ -34,7 +34,8 @@ const Item = (props) => {
   const Component = isIndex ? IndexLink : Link
   const { router, navItem } = props
   const { path, text, isIndex } = navItem
-  const isActive = router.isActive(path, true)
+  const isActive = router.isActive(path, isIndex)
+
   return (
     <Component to={path} className={`nav-item is-tab${isActive ? ' is-active' : ''}`}>
       {text}
