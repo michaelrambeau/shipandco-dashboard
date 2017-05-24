@@ -4,8 +4,8 @@ const Table = ({ products }) => (
   <table className="table">
     <thead>
       <tr>
+        <th>Name</th>
         <th>HS Code</th>
-        <th>HS Description</th>
         <th>Country</th>
       </tr>
     </thead>
@@ -19,9 +19,12 @@ const Table = ({ products }) => (
 
 const Row = ({ product }) => (
   <tr>
-    <td>{product.hsCode}</td>
-    <td>{product.hsDescription}</td>
-    <td>{product.countryCode}</td>
+    <td>{product.name || product.name}</td>
+    <td>
+      {product.hsCode || product.hs_code}<br />
+      {product.hsDescription || product.hs_description}
+    </td>
+    <td>{product.countryCode || product.origin_country}</td>
   </tr>
 )
 

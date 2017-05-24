@@ -9,7 +9,9 @@ const carrier = {
 
 const Fedex = ({ settings }) => {
   const { accountNumber, meterNumber } = settings.live
-  if (!accountNumber && !meterNumber) return <div>No Fedex settings</div>
+  if (!accountNumber && !meterNumber) return (
+    <CarrierBox carrier={carrier}>No FedEx settings</CarrierBox>
+  )
   return (
     <CarrierBox carrier={carrier}>
       <div>{accountNumber}</div>

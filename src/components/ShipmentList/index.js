@@ -6,7 +6,11 @@ import CarrierIcon from 'components/utils/CarrierIcon'
 import ShopIcon from 'components/utils/ShopIcon'
 import Amount from 'components/utils/Amount'
 
-const Table = ({ shipments, count }) => {
+const defaultOptions = {
+  showIcon: true
+}
+
+const Table = ({ shipments, count, options = defaultOptions }) => {
   if (!shipments || shipments.length === 0) return (
     <div>No shipment!</div>
   )
@@ -16,7 +20,7 @@ const Table = ({ shipments, count }) => {
       <table className="table is-striped">
         <thead>
           <tr>
-            <th />
+            {options.showIcon && <th />}
             <th>Customer</th>
             <th>Tracking #</th>
             <th>Rate</th>
@@ -25,7 +29,7 @@ const Table = ({ shipments, count }) => {
         </thead>
         <tbody>
           {shipments.map(shipment => (
-            <Row shipment={shipment} key={shipment._id} />
+            <Row shipment={shipment} key={shipment._id} options={options} />
           ))}
         </tbody>
       </table>
@@ -39,12 +43,12 @@ Table.propTypes = {
 }
 export default Table
 
-const Row = ({ shipment }) => {
+const Row = ({ shipment, options }) => {
   return (
     <tr>
-      <td width="52">
+      {options.showIcon && <td width="52">
         <ShopIcon type={shipment.type} />
-      </td>
+      </td>}
       <td>
         <Link to={`/shipments/${shipment._id}`}>
           {shipment.customer_name}
@@ -65,7 +69,10 @@ const Row = ({ shipment }) => {
         </div>}
       </td>
       <td>
-        <Amount value={shipment.shipping_paid} currency={shipment.currency} />
+        <Amount
+          value={shipment.shipment_infos.amount}
+          currency={shipment.shipment_infos.currency}
+        />
       </td>
       <td><TimeAgo datetime={shipment.date} /></td>
     </tr>

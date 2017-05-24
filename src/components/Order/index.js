@@ -1,4 +1,6 @@
 import React from 'react'
+import get from 'lodash.get'
+
 import AddressFrom from './AddressFrom'
 import AddressTo from './AddressTo'
 import ShopIcon from 'components/utils/ShopIcon'
@@ -7,12 +9,13 @@ import ProductList from './ProductList'
 
 const Order = ({ order }) => {
   // console.info('Order', order);
+  const products = get(order, 'order.shippingInfo.products') || order.products
   return (
     <div>
       <h2 className="title is-4">
         <ShopIcon type={order.type} />
         {' '}
-        Order #{order && order.identifier}
+        Order {order && order.identifier}
       </h2>
       <div className="columns">
         {order.data && order.data.sender_address && (
@@ -58,7 +61,7 @@ const Order = ({ order }) => {
               <div className="card-header-title">Products</div>
             </div>
             <div className="card-content">
-              {order.shippingInfo && <ProductList products={order.shippingInfo.products} />}
+              <ProductList products={products || []} />
             </div>
           </div>
         </div>

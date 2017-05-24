@@ -6,8 +6,11 @@ import OrderList from 'components/OrderList'
 import ShipmentList from 'components/ShipmentList'
 import Settings from './Settings'
 
+const viewOptions = {
+  showOptions: false
+}
+
 const Shop = ({ shop }) => {
-  console.log('Shop', shop.settings)
   const users = [shop.user]
   const orders = get(shop, 'orders.data') || []
   const orderCount = get(shop, 'orders.total') || 0
@@ -23,19 +26,45 @@ const Shop = ({ shop }) => {
 
       <Settings shop={shop} />
 
-      <div className="box">
-        <h3 className="title is-5">Customer</h3>
-        {shop.user && users.length > 0 && <UserList users={users} />}
+      <br />
+
+      <div className="card">
+        <div className="card-header">
+          <h3 className="card-header-title">Customer</h3>
+        </div>
+        <div className="card-content">
+          {shop.user && users.length > 0 && <UserList users={users} />}
+        </div>
       </div>
 
-      <div className="box">
-        <h3 className="title is-5">Orders</h3>
-        <OrderList orders={orders} count={orderCount} />
+      <br />
+
+      <div className="card">
+        <header className="card-header">
+          <h3 className="card-header-title">Orders ({orderCount})</h3>
+        </header>
+        <div className="card-content">
+          <OrderList
+            orders={orders}
+            count={orderCount}
+            options={viewOptions} 
+          />
+        </div>
       </div>
 
-      <div className="box">
-        <h3 className="title is-5">Shipments</h3>
-        <ShipmentList shipments={shipments} count={shipmentCount} />
+      <br />
+
+      <div className="card">
+        <header className="card-header">
+          <h3 className="card-header-title">Shipments ({shipmentCount})</h3>
+        </header>
+        <div className="card-content">
+          <ShipmentList
+            shipments={shipments}
+            count={shipmentCount}
+            options={viewOptions}
+          />
+        </div>
       </div>      
     </div>
     )

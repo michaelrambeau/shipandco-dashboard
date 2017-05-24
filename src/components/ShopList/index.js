@@ -9,7 +9,6 @@ const Table = ({ shops, count }) => {
   )
   return (
     <div>
-      {false && <h4 className="title is-5">Shops ({count})</h4>}
       <table className="table">
         <thead>
           <tr>

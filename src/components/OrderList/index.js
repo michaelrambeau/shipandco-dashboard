@@ -5,7 +5,11 @@ import Flag from 'components/utils/Flag'
 import Amount from 'components/utils/Amount'
 import ShopIcon from 'components/utils/ShopIcon'
 
-export default ({ orders, count }) => {
+const defaultOptions = {
+  showIcon: true
+}
+
+export default ({ orders, count, options = defaultOptions }) => {
   if (!orders || orders.length === 0) return (
     <div>No order!</div>
   )
@@ -14,7 +18,7 @@ export default ({ orders, count }) => {
       <table className="table is-striped">
         <thead>
           <tr>
-            <th />
+            {options.showIcon && <th />}
             <th>Customer</th>
             <th>Total</th>
             <th>Date</th>
@@ -24,7 +28,11 @@ export default ({ orders, count }) => {
           {orders
             .filter(order => !!order.data)
             .map(order => (
-            <Row order={order} key={order._id} />
+            <Row
+              order={order}
+              key={order._id}
+              options={options}
+            />
           ))}
         </tbody>
       </table>
@@ -32,12 +40,14 @@ export default ({ orders, count }) => {
   )
 }
 
-const Row = ({ order }) => {
+const Row = ({ order, options }) => {
   return (
     <tr>
-      <td width="52">
-        <ShopIcon type={order.type} />
-      </td>
+      {options.showIcon && (
+        <td width="52">
+          <ShopIcon type={order.type} />
+        </td>
+      )}
       <td>
         <Link to={`/orders/${order._id}`}>
           {order.customerName}

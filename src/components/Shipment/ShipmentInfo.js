@@ -1,5 +1,13 @@
 import React from 'react'
 import CarrierIcon from 'components/utils/CarrierIcon'
+import Amount from 'components/utils/Amount'
+
+const methodName = data => {
+  const { carrier, method } = data
+  if (carrier === 'japanpost') return method.toUpperCase()
+  if (carrier === 'yamato') return 'Yamato (C2)'
+  return method
+}
 
 const Info = ({ data }) => (
   <div className="card is-fullwidth">
@@ -8,9 +16,15 @@ const Info = ({ data }) => (
         <CarrierIcon carrier={data.carrier} size={64} />
       </div>
       <div className="media-content">
-        <p>{data.tracking_number}</p>
-        <div>{data.service} {data.method}</div>
-        <div>{data.amount} {data.currency}</div>
+        <div className="content">
+          <p>Tracking Number: {data.tracking_number || 'N/A'}</p>
+          {data.method && <div>{methodName(data)}</div>}
+          {!!data.amount && (
+            <div>
+              <Amount value={data.amount} currency={data.currency} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   </div>

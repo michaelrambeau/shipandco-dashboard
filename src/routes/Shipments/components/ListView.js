@@ -16,10 +16,12 @@ const ListView = ({ items, total, pageNumber, pageSize, loading }) => {
       <div className="container">
         {loading ? (
           <Loading />
-        ) : ([
-          <h2 className="title is-4">All shipments ({total})</h2>,
-          <List shipments={items} count={total} />
-        ])}
+        ) : (
+          <div>
+            <h2 className="title is-4">All shipments ({total})</h2>
+            <List shipments={items} count={total} />
+          </div>
+        )}
       </div>
     </section>
   )

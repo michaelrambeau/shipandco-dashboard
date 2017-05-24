@@ -2,10 +2,19 @@ import React from 'react'
 import Tabs from '../Tabs'
 
 const ProfileView = ({ profile }) => (
-  <div>
-    Name: {profile.name}
-    <br />
-    Language: {profile.language}
+  <div className="box">
+    <div className="field">
+      <label className="label">Name</label>
+      <p className="control">
+        {profile.name}
+      </p>
+    </div>
+    <div className="field">
+      <label className="label">Language</label>
+      <p className="control">
+        {profile.language}
+      </p>
+    </div>
   </div>
 )
 

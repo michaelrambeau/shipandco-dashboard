@@ -35,7 +35,9 @@ export function fetchItemListRequest (model, options) {
           }
         })
       })
-      .catch(err => console.error('Unable to fetch items', model, err))
+      .catch(err => {
+        console.error('Unable to fetch items', model, err)
+      })
   }
 }
 
@@ -60,7 +62,16 @@ export function fetchItem (model, id) {
           }
         })
       })
-      .catch(err => console.error('Unable to fetch item', model, id, err))
+      .catch(err => {
+        console.error('Unable to fetch item', model, id, err)
+        dispatch({
+          type: FETCH_ITEM_ERROR,
+          payload: {
+            id,
+            model
+          }
+        })
+      })
   }
 }
 

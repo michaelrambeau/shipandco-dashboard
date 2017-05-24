@@ -1,7 +1,7 @@
 import {
-  FETCH_ITEM_LIST_REQUEST,
   FETCH_ITEM_LIST_SUCCESS,
-  FETCH_ITEM_SUCCESS
+  FETCH_ITEM_SUCCESS,
+  FETCH_ITEM_ERROR
 } from './actionTypes'
 
 const initialState = {
@@ -35,6 +35,17 @@ const ACTION_HANDLERS = {
     const items = {
       ...state[model],
       [id]: item
+    }
+    return {
+      ...state,
+      [model]: items
+    }
+  },
+  [FETCH_ITEM_ERROR]: (state, action) => {
+    const { id, model } = action.payload
+    const items = {
+      ...state[model],
+      [id]: 'ERROR'
     }
     return {
       ...state,

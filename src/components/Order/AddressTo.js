@@ -10,15 +10,21 @@ const Item = ({ label, children }) => (
   </div>
 )
 
+const Empty = () => <span className="empty">-</span>
+
 const To = ({ address }) => (
   <div>
     <Item label="Name">{address.name}</Item>
     <Item label="Address #1">{address.address1}</Item>
     <Item label="Address #2">
-      {address.address2 || <span className="empty">-</span>}
+      {address.address2 || <Empty />}
     </Item>
-    <Item label="City">{address.city}</Item>
-    <Item label="Zip code">{address.zip}</Item>
+    <Item label="City">
+      {address.city}
+    </Item>
+    <Item label="Zip code">
+      {address.zip || <Empty /> }
+    </Item>
     <Item label="Country">
       <Flag countryCode={address.country_code} />
       {' '}
