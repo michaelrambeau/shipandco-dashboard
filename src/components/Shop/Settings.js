@@ -9,6 +9,7 @@ const Settings = ({ shop }) => (
     </header>
     <div className="card-content">
       {shop && <KeyValueHash hash={shop.settings} />}
+      {shop && shop.type === 'amazon' && <KeyValueHash hash={shop.data} />}
       {shop && <KeyValueHash hash={shop} keys={settingsKeys} />}
     </div>
   </div>
@@ -16,6 +17,7 @@ const Settings = ({ shop }) => (
 
 const KeyValueHash = ({ hash, keys }) => {
   const allKeys = keys || Object.keys(hash)
+  if (allKeys.length === 0) return null
   return (
     <ul>
       {allKeys

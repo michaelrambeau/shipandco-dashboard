@@ -7,13 +7,18 @@ const carrier = {
   logo
 }
 
-const JapanPost = ({ settings }) => {
-  const numbers = settings.customerNumbers
+const Numbers = ({ numbers }) => {
   if (!numbers) return <div>No numbers</div>
   if (!Array.isArray(numbers)) return <div>Invalid numbers!</div>
+  if (numbers.every(number => number === '')) return <div className="empty">No numbers</div>
+  return <div>{numbers.join(' - ')}</div>
+}
+
+const JapanPost = ({ settings }) => {
+  const numbers = settings.customerNumbers
   return (
     <CarrierBox carrier={carrier}>
-      {numbers.join(' - ')}
+      <Numbers numbers={numbers} />
     </CarrierBox>
   )
 }

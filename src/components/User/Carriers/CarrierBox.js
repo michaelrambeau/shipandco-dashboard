@@ -8,7 +8,7 @@ export default ({ carrier, children }) => (
           <img src={carrier.logo} width="64" height="64" />
         </div>
         <div className="media-content">
-          <strong>{carrier.name}</strong>
+          <h4 className="title is-4">{carrier.name}</h4>
           <div>
           {children}
           </div>

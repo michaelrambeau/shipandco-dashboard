@@ -10,6 +10,8 @@ const defaultOptions = {
   showIcon: true
 }
 
+const goToShipment = shop => () => history.push(`/shipment/${shipment._id}`)
+
 const Table = ({ shipments, count, options = defaultOptions }) => {
   if (!shipments || shipments.length === 0) return (
     <div>No shipment!</div>
@@ -17,7 +19,7 @@ const Table = ({ shipments, count, options = defaultOptions }) => {
   return (
     <div>
       {false && <h4 className="title is-4">Shipments ({count})</h4>}
-      <table className="table is-striped">
+      <table className="table is-striped clickable">
         <thead>
           <tr>
             {options.showIcon && <th />}
@@ -45,14 +47,12 @@ export default Table
 
 const Row = ({ shipment, options }) => {
   return (
-    <tr>
+    <tr onClick={goToShipment(shipment)}>
       {options.showIcon && <td width="52">
         <ShopIcon type={shipment.type} />
       </td>}
       <td>
-        <Link to={`/shipments/${shipment._id}`}>
-          {shipment.customer_name}
-        </Link>
+        {shipment.customer_name}
         <br />
         <Flag countryCode={shipment.shipping_address.country_code} />
         {' '}

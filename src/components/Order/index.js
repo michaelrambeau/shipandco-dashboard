@@ -8,7 +8,6 @@ import ParcelList from './ParcelList'
 import ProductList from './ProductList'
 
 const Order = ({ order }) => {
-  // console.info('Order', order);
   const products = get(order, 'order.shippingInfo.products') || order.products
   return (
     <div>

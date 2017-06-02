@@ -5,16 +5,18 @@ function paginate (View, { url, pageNumber = 1, pageSize = 10, total }) {
   return (props) => {
     return (
       <div>
-        <Pagination
-          currentPage={pageNumber}
-          total={total}
-          limit={10}
-          pageSize={pageSize}
-          url={url}
-          singular={'item'}
-          plural={'items'}
-          style={{ paddingBottom: '1rem' }}
-        />
+        {total > pageSize && (
+          <Pagination
+            currentPage={pageNumber}
+            total={total}
+            limit={10}
+            pageSize={pageSize}
+            url={url}
+            singular={'item'}
+            plural={'items'}
+            style={{ paddingBottom: '1rem' }}
+          />
+        )}
         <View {...props} />
       </div>
     )

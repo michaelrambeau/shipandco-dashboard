@@ -6,13 +6,21 @@ const ProfileView = ({ profile }) => (
     <div className="field">
       <label className="label">Name</label>
       <p className="control">
-        {profile.name}
+        {profile.name ? (
+          <span>{profile.name}</span>
+          ) : (
+            <span className="empty">(Empty)</span>
+        )}
       </p>
     </div>
     <div className="field">
       <label className="label">Language</label>
       <p className="control">
-        {profile.language}
+        {profile.name ? (
+          <span>{profile.language}</span>
+          ) : (
+          <span className="empty">(Empty)</span>
+        )}
       </p>
     </div>
   </div>

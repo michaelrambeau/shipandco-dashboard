@@ -11,6 +11,8 @@ import UserProfile from 'components/User/Profile'
 import UserCarriers from 'components/User/Carriers'
 import UserShipments from 'components/User/Shipments'
 import UserShops from 'components/User/Shops'
+import ShipmentListView from './components/ShipmentListView'
+import OrderListView from './components/OrderListView'
 
 const model = 'users'
 const options = {
@@ -35,8 +37,11 @@ const ItemRoute = (store) => ({
     },
     {
       path: 'orders',
-      // component: createUserContainer(UserOrders)
-      getComponent: getListViewComponent('orders', createUserContainer(UserOrders), {})(store)
+      getComponent: getListViewComponent(
+        'orders',
+        createUserContainer(OrderListView),
+        { $limit: 20, $sort: '-date' }
+      )(store)
     },
     {
       path: 'carriers',
@@ -44,7 +49,11 @@ const ItemRoute = (store) => ({
     },
     {
       path: 'shipments',
-      component: createUserContainer(UserShipments)
+      getComponent: getListViewComponent(
+        'shipments',
+        createUserContainer(ShipmentListView),
+        { $limit: 20, $sort: '-date' }
+      )(store)
     },
     {
       path: 'shops',

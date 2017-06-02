@@ -12,7 +12,12 @@ const Dhl = ({ settings }) => {
   if (!accountNumber) return <div>No DHL settings</div>
   return (
     <CarrierBox carrier={carrier}>
-      <div>{accountNumber}</div>
+      <div className="field">
+        <label className="label">DHL Express Account Number</label>
+        <p className="control">
+          {accountNumber}
+        </p>
+      </div>
     </CarrierBox>
   )
 }

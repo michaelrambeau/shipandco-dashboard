@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { browserHistory as history } from 'react-router'
 import TimeAgo from 'timeago-react'
 import Flag from 'components/utils/Flag'
 import Amount from 'components/utils/Amount'
@@ -15,7 +15,7 @@ export default ({ orders, count, options = defaultOptions }) => {
   )
   return (
     <div>
-      <table className="table is-striped">
+      <table className="table is-striped clickable">
         <thead>
           <tr>
             {options.showIcon && <th />}
@@ -28,11 +28,11 @@ export default ({ orders, count, options = defaultOptions }) => {
           {orders
             .filter(order => !!order.data)
             .map(order => (
-            <Row
-              order={order}
-              key={order._id}
-              options={options}
-            />
+              <Row
+                order={order}
+                key={order._id}
+                options={options}
+              />
           ))}
         </tbody>
       </table>
@@ -40,18 +40,18 @@ export default ({ orders, count, options = defaultOptions }) => {
   )
 }
 
+const goToOrder = order => () => history.push(`/orders/${order._id}`)
+
 const Row = ({ order, options }) => {
   return (
-    <tr>
+    <tr onClick={goToOrder(order)}>
       {options.showIcon && (
         <td width="52">
           <ShopIcon type={order.type} />
         </td>
       )}
       <td>
-        <Link to={`/orders/${order._id}`}>
-          {order.customerName}
-        </Link>
+        {order.customerName}
         <br />
         <Flag countryCode={order.data.shipping_address.country_code} />
         {' '}

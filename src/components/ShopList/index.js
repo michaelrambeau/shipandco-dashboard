@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
+import { browserHistory as history } from 'react-router'
 import TimeAgo from 'timeago-react'
 import ShopIcon from 'components/utils/ShopIcon'
 
@@ -9,7 +9,7 @@ const Table = ({ shops, count }) => {
   )
   return (
     <div>
-      <table className="table">
+      <table className="table clickable is-striped">
         <thead>
           <tr>
             <th>Type</th>
@@ -34,17 +34,17 @@ Table.propTypes = {
 }
 export default Table
 
+const goToShop = shop => () => history.push(`/shops/${shop._id}`)
+
 const Row = ({ shop }) => {
   const date = shop.createdAt || shop.created_at
   return (
-    <tr>
+    <tr onClick={goToShop(shop)}>
       <td>
         <ShopIcon type={shop.type} />
       </td>
       <td>
-        <Link to={`/shops/${shop._id}`}>
-          {shop.name}
-        </Link>
+        {shop.name}
       </td>
       <td>
         {date ? <TimeAgo datetime={date} /> : <span className="empty">-</span>}

@@ -3,7 +3,7 @@ import logo from 'components/utils/CarrierIcon/fedex.svg'
 import CarrierBox from '../CarrierBox'
 
 const carrier = {
-  name: 'Fedex',
+  name: 'FedEx',
   logo
 }
 
@@ -14,8 +14,18 @@ const Fedex = ({ settings }) => {
   )
   return (
     <CarrierBox carrier={carrier}>
-      <div>{accountNumber}</div>
-      <div>{meterNumber}</div>
+      <div className="field">
+        <label className="label">Account Number</label>
+        <p className="control">
+          {accountNumber}
+        </p>
+      </div>
+      <div className="field">
+        <label className="label">Metric Number</label>
+        <p className="control">
+          {meterNumber}
+        </p>
+      </div>
     </CarrierBox>
   )
 }

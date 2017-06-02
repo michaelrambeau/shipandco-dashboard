@@ -7,7 +7,6 @@ function Authenticated (Component) {
   const Wrap = Component => {
     class MyComp extends Component {
       render () {
-        console.log('Render!');
         return super.render()
       }
     }

@@ -8,7 +8,7 @@ import './styles.scss'
 
 export default ({ users }) => {
   return (
-    <table className={`table is-striped UserList`}>
+    <table className={`table is-striped clickable`}>
       <thead>
         <tr>
           <th>email / name</th>
@@ -27,9 +27,13 @@ export default ({ users }) => {
   )
 }
 
+function goToUser (user) {
+  return () => history.push(`/users/${user._id}`);
+}
+
 const Row = ({ user }) => {
   return (
-    <tr onClick={() => history.push(`/users/${user._id}`)}>
+    <tr onClick={goToUser(user)}>
       <td> 
         {user.emails[0].address}
         {!user.emails[0].verified && <span style={{ marginLeft: 5, color: '#ff3860' }}>
