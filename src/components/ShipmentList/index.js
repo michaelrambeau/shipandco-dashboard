@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
-import TimeAgo from 'timeago-react'
+import { browserHistory as history } from 'react-router'
+
+import TimeAgo from 'components/utils/TimeAgo'
 import Flag from 'components/utils/Flag'
 import CarrierIcon from 'components/utils/CarrierIcon'
 import ShopIcon from 'components/utils/ShopIcon'
@@ -10,7 +11,7 @@ const defaultOptions = {
   showIcon: true
 }
 
-const goToShipment = shop => () => history.push(`/shipment/${shipment._id}`)
+const goToShipment = shipment => () => history.push(`/shipments/${shipment._id}`)
 
 const Table = ({ shipments, count, options = defaultOptions }) => {
   if (!shipments || shipments.length === 0) return (

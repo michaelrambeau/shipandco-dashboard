@@ -3,7 +3,9 @@ import Layout from './components/Layout'
 import ListView from './components/ListView'
 import ItemView from './components/ItemView'
 
-import { getListViewComponent, getItemViewComponent } from 'routes/helpers'
+// import { getListViewComponent, getItemViewComponent } from 'routes/helpers'
+import createListViewContainer from 'containers/createListViewContainer'
+import createItemViewContainer from 'containers/createItemViewContainer'
 
 const model = 'shops'
 const options = {
@@ -11,19 +13,23 @@ const options = {
   $limit: 100
 }
 
-const ListRoute = (store) => ({
-  getComponent: getListViewComponent(model, ListView, options)(store)
-})
+const ListRoute = {
+  component: Auth(createListViewContainer(
+    model,
+    ListView,
+    options
+  ))
+}
 
 const ItemRoute = (store) => ({
   path: ':id',
-  getComponent: getItemViewComponent(model, ItemView)(store)
+  component: Auth(createItemViewContainer(model, ItemView))
 })
 
 export default (store) => ({
-  component : Auth(Layout),
+  component : Layout,
   path: 'shops',
-  indexRoute: ListRoute(store),
+  indexRoute: ListRoute,
   childRoutes: [
     ItemRoute(store)
   ]

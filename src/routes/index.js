@@ -7,12 +7,11 @@ import OrdersRoute from './Orders'
 import ShopsRoute from './Shops'
 import ShipmentsRoute from './Shipments'
 import LoginRoute from './Login'
-import Authenticated from 'containers/Authenticated'
 
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
-  indexRoute  : HomeRoute(store),
+  indexRoute  : HomeRoute,
   childRoutes : [
     UsersRoute(store),
     ShopsRoute(store),

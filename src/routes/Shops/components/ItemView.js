@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import Shop from 'components/Shop'
+import Loading from 'components/utils/Loading'
 
 const ItemView = ({ item }) => (
   <section className="section">
@@ -7,7 +8,7 @@ const ItemView = ({ item }) => (
       {item ? (
         <Shop shop={item} />
       ) : (
-        <div>Loading</div>
+        <Loading />
       )}
     </div>
   </section>

@@ -3,26 +3,32 @@ import Layout from './components/Layout'
 import ListView from './components/ListView'
 import ItemView from './components/ItemView'
 
-import { getListViewComponent, getItemViewComponent } from 'routes/helpers'
+import createListViewContainer from 'containers/createListViewContainer'
+import createItemViewContainer from 'containers/createItemViewContainer'
 
 const model = 'orders'
 const options = {
-  $limit: 50,
+  $limit: 50
 }
-const ListRoute = (store) => ({
-  getComponent: getListViewComponent(model, ListView, options)(store)
-})
 
-const ItemRoute = (store) => ({
+const ListRoute = {
+  component: Auth(createListViewContainer(
+    model,
+    ListView,
+    options
+  ))
+}
+
+const ItemRoute = {
   path: ':id',
-  getComponent: getItemViewComponent(model, ItemView)(store)
-})
+  component: Auth(createItemViewContainer(model, ItemView))
+}
 
 export default (store) => ({
-  component : Auth(Layout),
+  component : Layout,
   path: 'orders',
-  indexRoute: ListRoute(store),
+  indexRoute: ListRoute,
   childRoutes: [
-    ItemRoute(store)
+    ItemRoute
   ]
 })

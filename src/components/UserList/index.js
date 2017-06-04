@@ -1,6 +1,6 @@
 import React from 'react'
 import { browserHistory as history } from 'react-router'
-import TimeAgo from 'timeago-react'
+import TimeAgo from 'components/utils/TimeAgo'
 import ShopIcon from 'components/utils/ShopIcon'
 import CarrierIcon from 'components/utils/CarrierIcon'
 import './styles.scss'
@@ -28,16 +28,17 @@ export default ({ users }) => {
 }
 
 function goToUser (user) {
-  return () => history.push(`/users/${user._id}`);
+  return () => history.push(`/users/${user._id}`)
 }
 
 const Row = ({ user }) => {
   return (
     <tr onClick={goToUser(user)}>
-      <td> 
+      <td>
         {user.emails[0].address}
-        {!user.emails[0].verified && <span style={{ marginLeft: 5, color: '#ff3860' }}>
-          Not verified
+        {!user.emails[0].verified &&
+          <span style={{ marginLeft: 5, color: '#ff3860' }}>
+            Not verified
           </span>
         }
         <br />
@@ -113,5 +114,5 @@ const ShopList = ({ shops }) => {
 //   if (!user.shipments) return false;
 //   const lastShipment = user.shipments
 //     .slice(0, 0)
-//    return lastShipment 
+//    return lastShipment
 // }

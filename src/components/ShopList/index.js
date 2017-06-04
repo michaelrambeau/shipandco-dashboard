@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { browserHistory as history } from 'react-router'
-import TimeAgo from 'timeago-react'
+import TimeAgo from 'components/utils/TimeAgo'
 import ShopIcon from 'components/utils/ShopIcon'
 
 const Table = ({ shops, count }) => {

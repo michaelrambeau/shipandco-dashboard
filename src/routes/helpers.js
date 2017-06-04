@@ -25,7 +25,7 @@ export const getListViewComponent = (model, View, { $sort, $limit = 100 }) => st
       userId: id
     }
   }
-  store.dispatch(fetchItemListRequest(model, options))
+  // store.dispatch(fetchItemListRequest(model, options))
   const Container = createListViewContainer(model, View, { pageNumber, pageSize, userId: id })
   cb(null, Container)
 }

@@ -16,6 +16,7 @@ const Settings = ({ shop }) => (
 )
 
 const KeyValueHash = ({ hash, keys }) => {
+  if (!hash) return null
   const allKeys = keys || Object.keys(hash)
   if (allKeys.length === 0) return null
   return (

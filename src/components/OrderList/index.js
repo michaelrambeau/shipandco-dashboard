@@ -1,6 +1,7 @@
 import React from 'react'
 import { browserHistory as history } from 'react-router'
-import TimeAgo from 'timeago-react'
+
+import TimeAgo from 'components/utils/TimeAgo'
 import Flag from 'components/utils/Flag'
 import Amount from 'components/utils/Amount'
 import ShopIcon from 'components/utils/ShopIcon'

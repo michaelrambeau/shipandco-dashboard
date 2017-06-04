@@ -1,4 +1,7 @@
+import React from 'react'
 import { connect } from 'react-redux'
+
+import { fetchItem } from 'store/actionCreators'
 
 const mapStateToProps = model => (state, props) => {
   const id = props.params.id
@@ -8,4 +11,33 @@ const mapStateToProps = model => (state, props) => {
   }
 }
 
-export default (model, View) => connect(mapStateToProps(model))(View)
+const mapDispatchToProps = (model) => dispatch => ({
+  fetchData: (id) => dispatch(fetchItem(model, id))
+})
+
+function createContainer (View, options) {
+  return class Container extends React.Component {
+    componentWillMount () {
+      const id = this.props.params.id
+      this.props.fetchData(id)
+    }
+    // componentWillReceiveProps (nextProps) {
+    //   const pageNumber = getPageNumber(this.props)
+    //   const nextPageNumber = getPageNumber(nextProps)
+    //   if (pageNumber !== nextPageNumber) {
+    //     const paginationOptions = getPaginationOptions(nextProps, options)
+    //     this.props.fetchData(id)
+    //   }
+    // }
+    render () {
+      console.log('Render', this.props);
+      return <View {...this.props} />
+    }
+  }
+}
+
+export default (model, View) =>
+  connect(
+    mapStateToProps(model),
+    mapDispatchToProps(model)
+  )(createContainer(View))
