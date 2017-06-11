@@ -1,11 +1,9 @@
 import config from './config'
 
 function request (url, options) {
-  console.log('API request', url)
   return fetch(url, options)
     .then(response => {
       if (response.status >= 400) {
-        console.log('Request error!')
         throw new Error(`Bad response (${response.status}) from server ${url}`)
       }
       return response.json()
@@ -50,7 +48,6 @@ export function apiFetchItemList (token, model, { $limit, $sort, $skip, query })
     $sort,
     ...query
   })
-  console.log('params', params);
   const urlParams = Object.keys(params)
     .map(key => `${key}=${params[key]}`)
     .join('&')

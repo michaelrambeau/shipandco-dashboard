@@ -2,7 +2,6 @@ import React from 'react'
 import Pagination from 'components/utils/Pagination'
 
 function paginate (View, { url, pageNumber = 1, pageSize = 10, total, query }) {
-  console.log('Query?', query);
   return (props) => {
     return (
       <div>

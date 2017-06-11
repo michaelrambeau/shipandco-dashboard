@@ -12,7 +12,6 @@ const NotFound = () => (
 )
 
 function getComponent (item) {
-  console.log('Item', item);
   if (!item) return <Loading />
   if (item === 'ERROR') return <NotFound />
   if (item.state === 'shipped') return <AlreadyShipped item={item} />

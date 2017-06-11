@@ -21,16 +21,7 @@ function createContainer (View, options) {
       const id = this.props.params.id
       this.props.fetchData(id)
     }
-    // componentWillReceiveProps (nextProps) {
-    //   const pageNumber = getPageNumber(this.props)
-    //   const nextPageNumber = getPageNumber(nextProps)
-    //   if (pageNumber !== nextPageNumber) {
-    //     const paginationOptions = getPaginationOptions(nextProps, options)
-    //     this.props.fetchData(id)
-    //   }
-    // }
     render () {
-      console.log('Render', this.props);
       return <View {...this.props} />
     }
   }

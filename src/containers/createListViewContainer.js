@@ -61,7 +61,6 @@ function getPaginationOptions (props, options) {
     query.userId = id
   }
   paginationOptions.query = query
-  console.log('paginationOptions', paginationOptions);
   return paginationOptions
 }
 
@@ -76,14 +75,12 @@ function createContainer (View, options) {
       const query = getQuery(this.props)
       const nextPageNumber = getPageNumber(nextProps)
       const nextQuery = getQuery(nextProps)
-      console.log('Query', nextQuery);
       if (pageNumber !== nextPageNumber || nextQuery.carrier !== query.carrier) {
         const paginationOptions = getPaginationOptions(nextProps, options)
         this.props.fetchData(paginationOptions)
       }
     }
     render () {
-      console.log('Render', this.props);
       return <View {...this.props} />
     }
   }

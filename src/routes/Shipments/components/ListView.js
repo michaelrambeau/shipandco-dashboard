@@ -21,7 +21,6 @@ const ListView = ({ items, total, pageNumber, pageSize, loading, query }) => {
   }
   const List = paginate(ShipmentList, options)
   const carrier = query.carrier
-  console.log('carrier', carrier);
   return (
     <section className="section">
       <div className="container">

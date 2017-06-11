@@ -52,7 +52,12 @@ const Row = ({ user }) => {
         )}
       </td>
       <td><ShopList shops={user.shops} /></td>
-      <td><TimeAgo datetime={user.createdAt} /></td>
+      <td>
+        <TimeAgo datetime={user.createdAt} />
+        {user.freeShipments && (
+          <div>{user.freeShipments} free shipments</div>
+        )}
+      </td>
       <td>
         {user.lastLogin ? (
           <TimeAgo datetime={user.lastLogin} />

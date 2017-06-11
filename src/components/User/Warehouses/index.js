@@ -4,7 +4,6 @@ import Tabs from '../Tabs'
 
 export default ({ user }) => {
   if (!user) return <div>No user!</div>
-  console.log('User=', user);
   const warehouses = user.warehouses
   const defaultWarehouseId = user.settings.defaultWarehouse
   return (

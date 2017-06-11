@@ -10,7 +10,7 @@ const User = ({ user }) => {
       <h2 className="title is-3">{user.emails[0].address}</h2>
       {user.freeShipments && user.freeShipments > 0 && (
         <div className="notification is-primary">
-          <b>{user.freeShipments}</b> free shipments
+          <b>{user.freeShipments}</b> free shipments remaining
         </div>
       )}
     </div>
