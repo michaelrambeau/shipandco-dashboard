@@ -11,25 +11,29 @@ const Page = React.createClass({
     onSelect: React.PropTypes.func,
     page: React.PropTypes.number,
     selected: React.PropTypes.bool,
-    url:  React.PropTypes.string.isRequired
+    url:  React.PropTypes.string.isRequired,
+    query: React.PropTypes.object
   },
   onSelect () {
     this.props.onSelect(this.props.page)
   },
   render () {
-    const { children, selected, url, page } = this.props
-    const className = classNames('button Pagination__list__item', {
-      'is-primary': selected
-      // 'is-white': !selected
+    const { children, selected, url, page, query } = this.props
+    const className = classNames('pagination-link', {
+      'is-current': selected
     })
-    const fullUrl = `${url}?page=${page}`
+    const urlParams = { ...query, page }
+    const queryString = Object.keys(urlParams)
+      .map(key => `${key}=${urlParams[key]}`)
+      .join(`&`)
+    const fullUrl = `${url}?${queryString}`
     return (
       <li>
         <Link className={className} to={fullUrl}>
           {children}
         </Link>
       </li>
-		)
+    )
   }
 })
 
@@ -105,6 +109,7 @@ const Pagination = React.createClass({
           onSelect={this.onPageSelect}
           page={1}
           url={this.props.url}
+          query={this.props.query}
         >
           ...
         </Page>
@@ -120,6 +125,7 @@ const Pagination = React.createClass({
           onSelect={this.onPageSelect}
           page={page}
           url={this.props.url}
+          query={this.props.query}
         >
           {page}
         </Page>

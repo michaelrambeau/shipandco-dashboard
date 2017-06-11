@@ -1,8 +1,10 @@
 @import 'node_modules/bulma/sass/utilities/functions';
-@import 'node_modules/bulma/sass/utilities/variables';
+@import 'node_modules/bulma/sass/utilities/initial-variables';
 $primary: #f4402e;
 $link: #f4402e;
 $size-normal: 16px;
+
+@import 'node_modules/bulma/sass/utilities/variables';
 @import 'node_modules/bulma/sass/utilities/controls';
 @import 'node_modules/bulma/sass/utilities/mixins';
 
@@ -30,12 +32,6 @@ $nav-height: 64px;
 @import 'node_modules/bulma/sass/elements/icon';
 @import 'node_modules/bulma/sass/elements/notification';
 @import 'node_modules/bulma/sass/elements/tag';
-.button.is-primary {
-  background-color: $primary;
-  &:hover{
-    background-color: $primary;
-  }
-}
 
 .table {
   td {

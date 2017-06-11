@@ -1,13 +1,15 @@
 import React from 'react'
 import Pagination from 'components/utils/Pagination'
 
-function paginate (View, { url, pageNumber = 1, pageSize = 10, total }) {
+function paginate (View, { url, pageNumber = 1, pageSize = 10, total, query }) {
+  console.log('Query?', query);
   return (props) => {
     return (
       <div>
         {total > pageSize && (
           <Pagination
             currentPage={pageNumber}
+            query={query}
             total={total}
             limit={10}
             pageSize={pageSize}
@@ -18,6 +20,19 @@ function paginate (View, { url, pageNumber = 1, pageSize = 10, total }) {
           />
         )}
         <View {...props} />
+        {total > pageSize && (
+          <Pagination
+            currentPage={pageNumber}
+            query={query}
+            total={total}
+            limit={10}
+            pageSize={pageSize}
+            url={url}
+            singular={'item'}
+            plural={'items'}
+            style={{ paddingBottom: '1rem' }}
+          />
+        )}
       </div>
     )
   }

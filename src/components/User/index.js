@@ -6,13 +6,13 @@ import Tabs from './Tabs'
 const User = ({ user }) => {
   if (!user) return <div>Loading...</div>
   return (
-    <div>
+    <div style={{ marginBottom: '1rem' }}>
       <h2 className="title is-3">{user.emails[0].address}</h2>
-      <div className="notification is-success" style={{ marginBottom: '2rem' }}>
-        <span className="fa fa-gift" />
-        {' '}
-        <b>{user.freeShipments}</b> free shipments
-      </div>
+      {user.freeShipments && user.freeShipments > 0 && (
+        <div className="notification is-primary">
+          <b>{user.freeShipments}</b> free shipments
+        </div>
+      )}
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { fetchItemListRequest } from 'store/actionCreators'
 
 const mapStateToProps = (model, options) => (state, props) => {
   const pageNumber = getPageNumber(props)
+  const query = getQuery(props)
   const paginationOptions = getPaginationOptions(props, options)
   const data = state.lists[model]
   const loading = state.ui.loading
@@ -16,7 +17,8 @@ const mapStateToProps = (model, options) => (state, props) => {
     pageNumber,
     pageSize: paginationOptions.$limit,
     loading,
-    userId: props.params.id
+    userId: props.params.id,
+    query
   }
 }
 
@@ -28,6 +30,10 @@ function getPageNumber (props) {
   const page = get(props, 'location.query.page') || '1'
   const pageNumber = !isNaN(page) ? parseInt(page, 0) : 1
   return pageNumber
+}
+
+function getQuery (props) {
+  return get(props, 'location.query') || {}
 }
 
 function getPaginationOptions (props, options) {
@@ -46,11 +52,15 @@ function getPaginationOptions (props, options) {
     $limit,
     $skip
   })
-  if (id) {
-    paginationOptions.query = {
-      userId: id
-    }
+  const carrier = get(props, 'location.query.carrier')
+  const query = {}
+  if (carrier) {
+    query['shipment_infos.carrier'] = carrier
   }
+  if (id) {
+    query.userId = id
+  }
+  paginationOptions.query = query
   console.log('paginationOptions', paginationOptions);
   return paginationOptions
 }
@@ -63,8 +73,11 @@ function createContainer (View, options) {
     }
     componentWillReceiveProps (nextProps) {
       const pageNumber = getPageNumber(this.props)
+      const query = getQuery(this.props)
       const nextPageNumber = getPageNumber(nextProps)
-      if (pageNumber !== nextPageNumber) {
+      const nextQuery = getQuery(nextProps)
+      console.log('Query', nextQuery);
+      if (pageNumber !== nextPageNumber || nextQuery.carrier !== query.carrier) {
         const paginationOptions = getPaginationOptions(nextProps, options)
         this.props.fetchData(paginationOptions)
       }
