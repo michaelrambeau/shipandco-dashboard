@@ -1,30 +1,8 @@
 import React from 'react'
 import Tabs from '../Tabs'
 
-const ProfileView = ({ profile }) => (
-  <div className="box">
-    <div className="field">
-      <label className="label">Name</label>
-      <p className="control">
-        {profile.name ? (
-          <span>{profile.name}</span>
-          ) : (
-            <span className="empty">(Empty)</span>
-        )}
-      </p>
-    </div>
-    <div className="field">
-      <label className="label">Language</label>
-      <p className="control">
-        {profile.name ? (
-          <span>{profile.language}</span>
-          ) : (
-          <span className="empty">(Empty)</span>
-        )}
-      </p>
-    </div>
-  </div>
-)
+import ProfileView from './UserProfile'
+import GoodCategories from './GoodCategories'
 
 export default ({ user }) => (
   <div>
@@ -33,6 +11,13 @@ export default ({ user }) => (
       userId={user._id}
       activeTab="profile"
     />
-    <ProfileView profile={user.profile} />
+    <div className="columns">
+      <div className="column is-half-tablet">
+        <ProfileView user={user} profile={user.profile} />
+      </div>
+      <div className="column is-half-tablet">
+        <GoodCategories categories={user.settings.goodsCategories} />
+      </div>
+    </div>
   </div>
 )

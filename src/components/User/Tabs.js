@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router'
+import get from 'lodash.get'
 
 const Counter = ({ count }) => {
   const value = count === undefined ? 'Loading...' : count
   if (count === 0) return null
   return (
     <span className="tag is-grey">{value}</span>
-  )    
+  )
 }
 
 const items = [
@@ -49,6 +50,17 @@ const items = [
         )
     },
     icon: 'truck'
+  },
+  {
+    name: 'warehouses',
+    text: ({ user }) => {
+      const warehouses = get(user, 'warehouses') || []
+      return (
+        <span>
+          Warehouses　<Counter count={warehouses.length} />
+        </span>
+    )},
+    icon: 'building'
   },
   {
     name: 'profile',

@@ -11,6 +11,7 @@ import UserOrders from 'components/User/Orders'
 import UserProfile from 'components/User/Profile'
 import UserCarriers from 'components/User/Carriers'
 import UserShipments from 'components/User/Shipments'
+import UserWarehouses from 'components/User/Warehouses'
 import UserShops from 'components/User/Shops'
 import ShipmentListView from './components/ShipmentListView'
 import OrderListView from './components/OrderListView'
@@ -53,6 +54,10 @@ const ItemRoute = (store) => ({
     {
       path: 'carriers',
       component: createUserContainer(UserCarriers)
+    },
+    {
+      path: 'warehouses',
+      component: createUserContainer(UserWarehouses)
     },
     {
       path: 'shipments',
