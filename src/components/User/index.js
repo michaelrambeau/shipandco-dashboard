@@ -8,8 +8,8 @@ const User = ({ user }) => {
   return (
     <div style={{ marginBottom: '1rem' }}>
       <h2 className="title is-3">{user.emails[0].address}</h2>
-      {user.freeShipments && user.freeShipments > 0 && (
-        <div className="notification is-primary">
+      {user.freeShipments > 0 && (
+        <div className={`notification ${user.freeShipments === 10 ? '' : 'is-info'}`}>
           <b>{user.freeShipments}</b> free shipments remaining
         </div>
       )}

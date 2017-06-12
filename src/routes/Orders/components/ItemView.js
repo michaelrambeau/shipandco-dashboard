@@ -5,9 +5,9 @@ import AlreadyShipped from 'components/Order/AlreadyShipped'
 import Loading from 'components/utils/Loading'
 
 const NotFound = () => (
-  <div className="notification is-danger">
+  <div className="notification is-warning">
     Order not found!<br />
-    It may have been shipped from outside Ship&co.
+    It may have been shipped outside Ship&co.
   </div>
 )
 

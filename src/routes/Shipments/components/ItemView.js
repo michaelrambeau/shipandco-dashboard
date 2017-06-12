@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react'
+
 import Shipment from 'components/Shipment'
+import Loading from 'components/utils/Loading'
 
 const Item = ({ item }) => {
-  if (!item) return <div>Loading</div>
+  if (!item) return <Loading />
   if (item === 'ERROR') return (
     <div className="notification is-warning">
       <p>This shipment does not exist (anymore).</p>

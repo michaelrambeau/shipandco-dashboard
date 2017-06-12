@@ -3,6 +3,7 @@ import { browserHistory as history } from 'react-router'
 import TimeAgo from 'components/utils/TimeAgo'
 import ShopIcon from 'components/utils/ShopIcon'
 import CarrierIcon from 'components/utils/CarrierIcon'
+import FreeShipments from './FreeShipments'
 import './styles.scss'
 
 
@@ -54,9 +55,8 @@ const Row = ({ user }) => {
       <td><ShopList shops={user.shops} /></td>
       <td>
         <TimeAgo datetime={user.createdAt} />
-        {user.freeShipments && (
-          <div>{user.freeShipments} free shipments</div>
-        )}
+        <br />
+        <FreeShipments count={user.freeShipments} />
       </td>
       <td>
         {user.lastLogin ? (
@@ -80,20 +80,13 @@ const CarrierList = ({ carriers }) => {
   const keys = Object.keys(carriers)
   if (keys.length === 0) return <span className="empty">No carrier</span>
   return (
-    <div>
+    <div className="text-center1">
       {keys
         .filter(key => !!carriers[key])
         .filter(key => {
           return key !== 'japanpost' || isJapanPostCustomer(carriers[key])
         })
-        .map(key => {
-          return (
-            <div key={key}>
-              <CarrierIcon carrier={key} size={20} />
-              {' '}
-              {key}
-            </div>)
-        })
+        .map(key => <CarrierIcon carrier={key} size={40} key={key} />)
       }
     </div>
   )

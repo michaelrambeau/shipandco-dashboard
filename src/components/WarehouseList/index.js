@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
 // import { browserHistory as history } from 'react-router'
 
-import AddressFrom from 'components/AddressFromCompact'
+import AddressRomaji from 'components/AddressFromCompact'
+import AddressKanji from 'components/AddressFromCompact/AddressKanji'
 
 const Table = ({ warehouses, count, defaultWarehouseId }) => {
   if (!warehouses || warehouses.length === 0) return (
@@ -14,7 +15,8 @@ const Table = ({ warehouses, count, defaultWarehouseId }) => {
           <tr>
             <th>Name</th>
             <th>Company</th>
-            <th>Address</th>
+            <th>Address (romaji)</th>
+            <th>Address (kanji)</th>
           </tr>
         </thead>
         <tbody>
@@ -45,10 +47,15 @@ const Row = ({ warehouse, isDefault }) => {
       </td>
       <td>
         {warehouse.address.company}<br />
-        {warehouse.address.phone}
+        {warehouse.address.company_kanji}<br />
+        {warehouse.address.phone}<br />
+        {warehouse.address.email}<br />
       </td>
       <td>
-        <AddressFrom address={warehouse.address} />
+        <AddressRomaji address={warehouse.address} />
+      </td>
+      <td>
+        <AddressKanji address={warehouse.address} />
       </td>
     </tr>
   )

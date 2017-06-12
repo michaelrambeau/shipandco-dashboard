@@ -4,7 +4,7 @@ import TimeAgo from 'timeago-react'
 const Time = ({ datetime }) => {
   if (!datetime) return null
   return (
-    <TimeAgo date={new Date(datetime)} />
+    <TimeAgo datetime={new Date(datetime)} />
   )
 }
 

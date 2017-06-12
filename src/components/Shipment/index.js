@@ -3,6 +3,7 @@ import ShopIcon from 'components/utils/ShopIcon'
 import ShipmentInfo from './ShipmentInfo'
 import AddressFrom from 'components/Order/AddressFrom'
 import AddressTo from 'components/Order/AddressTo'
+import OrderShipmentButtons from 'components/utils/OrderShipmentButtons'
 
 const Shipment = ({ shipment }) => (
   <div>
@@ -18,7 +19,7 @@ const Shipment = ({ shipment }) => (
         <div className="column is-half">
           <div className="card is-fullwidth">
             <div className="card-header">
-              <div className="card-header-title">From</div>
+              <div className="card-header-title">Sender Address</div>
             </div>
             <div className="card-content">
               <AddressFrom address={shipment.sender_address} />
@@ -29,7 +30,7 @@ const Shipment = ({ shipment }) => (
       <div className="column is-half">
         <div className="card is-fullwidth">
           <div className="card-header">
-            <div className="card-header-title">To</div>
+            <div className="card-header-title">Shipping Address</div>
           </div>
           <div className="card-content">
             <AddressTo address={shipment.shipping_address} />
@@ -37,6 +38,7 @@ const Shipment = ({ shipment }) => (
         </div>
       </div>
     </div>
+    <OrderShipmentButtons record={shipment} model="shipments" />
   </div>
 )
 
