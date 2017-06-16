@@ -1,56 +1,113 @@
 import React from 'react'
 import debounce from 'lodash.debounce'
 
-function filterUser (textFilter) {
-  return function (user) {
-    const name = user.profile && user.profile.name
-    const email = user.emails && user.emails[0].address
-    const re = new RegExp(textFilter, 'gi')
-    if (name && re.test(name)) return true
-    if (email && re.test(email)) return true
-    return false
-  }
-}
+import filterUser from './filter'
+import SearchModule from './SearchModule'
 
 // Higher order component to add a filter text field above the User list
-const filterList = (Component) => {
+const filterList = Component => {
   return class List extends React.Component {
-    constructor (props) {
+    constructor(props) {
       super(props)
       this.state = {
-        textFilter: ''
+        textValue: '',
+        textFilter: '',
+        status: '*',
+        shop: '*',
+        carrier: '*'
       }
-      this.onChange = this.onChange.bind(this)
+      this.onChangeText = this.onChangeText.bind(this)
+      this.onChangeStatus = this.onChangeStatus.bind(this)
+      this.onChangeShop = this.onChangeShop.bind(this)
+      this.onChangeCarrier = this.onChangeCarrier.bind(this)
+      this.onClickReset = this.onClickReset.bind(this)
       this.emitChangeDelayed = debounce(this.emitChange, 300)
     }
-    emitChange (textFilter) {
+    emitChange(textFilter) {
       this.setState({
         textFilter
       })
     }
-    onChange (e) {
-      const textFilter = e.target.value
-      this.emitChangeDelayed(textFilter)
+    onChangeStatus(e) {
+      const comboBox = e.target
+      const status = comboBox.options[comboBox.selectedIndex].value
+      this.setState({
+        status
+      })
     }
-    render () {
+    onChangeCarrier(e) {
+      const comboBox = e.target
+      const carrier = comboBox.options[comboBox.selectedIndex].value
+      this.setState({
+        carrier
+      })
+    }
+    onChangeShop(e) {
+      const comboBox = e.target
+      const shop = comboBox.options[comboBox.selectedIndex].value
+      this.setState({
+        shop
+      })
+    }
+    onChangeText(e) {
+      const textValue = e.target.value
+      this.setState({
+        textValue
+      })
+      this.emitChangeDelayed(textValue)
+    }
+    onClickReset(e) {
+      const textValue = ''
+      const textFilter = ''
+      const status = '*'
+      const shop = '*'
+      const carrier = '*'
+      this.setState({
+        status,
+        textValue,
+        textFilter,
+        shop
+      })
+    }
+    render() {
       const { users } = this.props
-      const { textFilter } = this.state
-      const filteredItems = textFilter ? users.filter(filterUser(textFilter)) : users
+      const { textValue, textFilter, status, shop, carrier } = this.state
+      const isFiltered =
+        textFilter || status !== '*' || shop !== '*' || carrier !== '*'
+      const filteredItems = isFiltered
+        ? users.filter(filterUser({ textFilter, status, shop, carrier }))
+        : users
       return (
         <form>
-          <div style={{ marginBottom: '1rem' }}>
-            <p className="control has-icon">
-              <input
-                className="input"
-                type="text"
-                onChange={this.onChange}
-                placeholder="Filter by name or by email"
-              />
-              <span className="icon is-small">
-                <i className="fa fa-search" />
-              </span>
-            </p>
-          </div>
+          <SearchModule
+            onChangeText={this.onChangeText}
+            onChangeStatus={this.onChangeStatus}
+            onChangeShop={this.onChangeShop}
+            onChangeCarrier={this.onChangeCarrier}
+            carrier={carrier}
+            textValue={textValue}
+            textFilter={textFilter}
+            status={status}
+            shop={shop}
+          />
+          {isFiltered &&
+            <div
+              className={`notification${filteredItems.length === 0
+                ? ' is-warning'
+                : ''}`}
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
+              {filteredItems.length > 0
+                ? <span>Filter results: {filteredItems.length} customers</span>
+                : <span>No results!</span>}
+              <button
+                className="button"
+                onClick={this.onClickReset}
+                style={{ marginLeft: '1rem' }}
+              >
+                Reset
+              </button>
+            </div>}
           <Component users={filteredItems} />
         </form>
       )
