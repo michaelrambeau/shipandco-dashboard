@@ -66,7 +66,8 @@ const filterList = Component => {
         status,
         textValue,
         textFilter,
-        shop
+        shop,
+        carrier
       })
     }
     render() {
@@ -102,6 +103,7 @@ const filterList = Component => {
                 : <span>No results!</span>}
               <button
                 className="button"
+                type="button"
                 onClick={this.onClickReset}
                 style={{ marginLeft: '1rem' }}
               >

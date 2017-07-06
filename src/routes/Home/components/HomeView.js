@@ -6,14 +6,12 @@ export const HomeView = ({ counters, loading }) => {
   return (
     <section className="section">
       <div className="container">
-        <h3 className="title is-3">Welcome to Ship&co Dashboard!</h3>
-        <p className="subtitle is-5">A complete overview of Ship&co application.</p>
+        <h3 className="title is-3">Welcome to SHIP&CO Staff Dashboard!</h3>
+        <p className="subtitle is-5">
+          A complete overview of SHIP&CO application.
+        </p>
         <hr />
-        {loading ? (
-          <Loading />
-        ) : (
-          <Counters counters={counters} />
-        )}
+        {loading ? <Loading /> : <Counters counters={counters} />}
         <hr />
       </div>
     </section>

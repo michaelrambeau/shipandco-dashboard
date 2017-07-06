@@ -13,7 +13,7 @@ const Info = ({ data }) => (
   <div className="card is-fullwidth">
     <div className="card-content media">
       <div className="media-left">
-        <CarrierIcon carrier={data.carrier} size={64} />
+        <CarrierIcon carrier={data.carrier} size={48} />
       </div>
       <div className="media-content">
         <div className="content">
