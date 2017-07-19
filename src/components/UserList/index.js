@@ -6,29 +6,33 @@ import CarrierIcon from 'components/utils/CarrierIcon'
 import FreeShipments from './FreeShipments'
 import './styles.scss'
 
+const defaultOptions = {
+  showHeader: true,
+}
 
-export default ({ users }) => {
+export default ({ users, options = defaultOptions }) => {
   return (
     <table className={`table is-striped clickable`}>
-      <thead>
-        <tr>
-          <th>email / name</th>
-          <th>Carriers</th>
-          <th>Shops</th>
-          <th>Registration</th>
-          <th>Last Login</th>
-        </tr>
-      </thead>
+      {options.header &&
+        <thead>
+          <tr>
+            <th>email / name</th>
+            <th>Carriers</th>
+            <th>Shops</th>
+            <th>Registration</th>
+            <th>Last Login</th>
+          </tr>
+        </thead>}
       <tbody>
-        {users.map(user => (
-          <Row user={user} key={user._id} />
-        ))}
+        {users.map(user =>
+          <Row user={user} key={user._id} options={options} />
+        )}
       </tbody>
     </table>
   )
 }
 
-function goToUser (user) {
+function goToUser(user) {
   return () => history.push(`/users/${user._id}`)
 }
 
@@ -38,38 +42,34 @@ const Row = ({ user }) => {
       <td>
         {user.emails[0].address}
         {!user.emails[0].verified &&
-          <span style={{ marginLeft: 5, color: '#ff3860' }}>
-            Not verified
-          </span>
-        }
+          <span style={{ marginLeft: 5, color: '#ff3860' }}>Not verified</span>}
         <br />
-        {user.profile && user.profile.name || <span className="empty">(no name)</span>}
+        {(user.profile && user.profile.name) ||
+          <span className="empty">(no name)</span>}
       </td>
       <td>
-        {user.carriers ? (
-          <CarrierList carriers={user.carriers} />
-        ) : (
-          <span className="empty">No settings</span>
-        )}
+        {user.carriers
+          ? <CarrierList carriers={user.carriers} />
+          : <span className="empty">No settings</span>}
       </td>
-      <td><ShopList shops={user.shops} /></td>
+      <td>
+        <ShopList shops={user.shops} />
+      </td>
       <td>
         <TimeAgo datetime={user.createdAt} />
         <br />
         <FreeShipments count={user.freeShipments} />
       </td>
       <td>
-        {user.lastLogin ? (
-          <TimeAgo datetime={user.lastLogin} />
-        ) : (
-          <span className="empty">No login</span>
-        )}
+        {user.lastLogin
+          ? <TimeAgo datetime={user.lastLogin} />
+          : <span className="empty">No login</span>}
       </td>
     </tr>
   )
 }
 
-function isJapanPostCustomer (japanpostSettings) {
+function isJapanPostCustomer(japanpostSettings) {
   const numbers = japanpostSettings.customerNumbers
   if (!numbers) return false
   if (!Array.isArray(numbers)) return false
@@ -86,8 +86,7 @@ const CarrierList = ({ carriers }) => {
         .filter(key => {
           return key !== 'japanpost' || isJapanPostCustomer(carriers[key])
         })
-        .map(key => <CarrierIcon carrier={key} size={40} key={key} />)
-      }
+        .map(key => <CarrierIcon carrier={key} size={40} key={key} />)}
     </div>
   )
 }
@@ -98,9 +97,7 @@ const ShopList = ({ shops }) => {
       {shops.map(shop => {
         return (
           <div key={shop._id}>
-            <ShopIcon type={shop.type} size={24} />
-            {' '}
-            {shop.name}
+            <ShopIcon type={shop.type} size={24} /> {shop.name}
           </div>
         )
       })}

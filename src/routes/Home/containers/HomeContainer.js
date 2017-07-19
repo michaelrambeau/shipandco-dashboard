@@ -4,24 +4,27 @@ import React from 'react'
 import HomeView from '../components/HomeView'
 import { fetchDashboard } from 'store/actionCreators'
 
-const mapStateToProps = (state) => {
-  const { counters } = state.dashboard
+const mapStateToProps = state => {
+  const { counters, topUsers, lastShipments } = state.dashboard
   const { loading } = state.ui
   return {
     counters,
-    loading
+    topUsers,
+    loading,
+    lastShipments,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchData: () => dispatch(fetchDashboard())
+  fetchData: () => dispatch(fetchDashboard()),
+  onRefresh: () => dispatch(fetchDashboard()),
 })
 
 class Container extends React.Component {
-  componentWillMount () {
+  componentWillMount() {
     this.props.fetchData()
   }
-  render () {
+  render() {
     return <HomeView {...this.props} />
   }
 }

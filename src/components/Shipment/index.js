@@ -12,7 +12,7 @@ const Shipment = ({ shipment }) =>
       record={shipment}
       title={`Shipment ${shipment && shipment.identifier}`}
     />
-    <ShipmentInfo data={shipment.shipment_infos} />
+    <ShipmentInfo data={shipment.shipment_infos} shipment={shipment} />
     <br />
     <div className="columns">
       {shipment.sender_address &&

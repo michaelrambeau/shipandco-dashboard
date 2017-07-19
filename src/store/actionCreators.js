@@ -1,8 +1,4 @@
-import {
-  apiFetchItemList,
-  apiFetchItem,
-  apiFetchDashboad
-} from './apiFeathers'
+import { apiFetchItemList, apiFetchItem, apiFetchDashboad } from './apiFeathers'
 import {
   FETCH_ITEM_LIST_REQUEST,
   FETCH_ITEM_LIST_SUCCESS,
@@ -12,17 +8,17 @@ import {
   FETCH_ITEM_ERROR,
   FETCH_DASHBOARD_REQUEST,
   FETCH_DASHBOARD_SUCCESS,
-  FETCH_DASHBOARD_ERROR
+  FETCH_DASHBOARD_ERROR,
 } from './actionTypes'
 
-export function fetchItemListRequest (model, options) {
+export function fetchItemListRequest(model, options) {
   return (dispatch, getState) => {
     dispatch({
       type: FETCH_ITEM_LIST_REQUEST,
       payload: {
         model,
-        options
-      }
+        options,
+      },
     })
     const token = getState().auth.token
     return apiFetchItemList(token, model, options)
@@ -31,8 +27,8 @@ export function fetchItemListRequest (model, options) {
           type: FETCH_ITEM_LIST_SUCCESS,
           payload: {
             ...result,
-            model
-          }
+            model,
+          },
         })
       })
       .catch(err => {
@@ -41,14 +37,14 @@ export function fetchItemListRequest (model, options) {
   }
 }
 
-export function fetchItem (model, id) {
+export function fetchItem(model, id) {
   return (dispatch, getState) => {
     dispatch({
       type: FETCH_ITEM_REQUEST,
       payload: {
         model,
-        id
-      }
+        id,
+      },
     })
     const token = getState().auth.token
     return apiFetchItem(token, model, id)
@@ -58,8 +54,8 @@ export function fetchItem (model, id) {
           payload: {
             id,
             model,
-            item
-          }
+            item,
+          },
         })
       })
       .catch(err => {
@@ -68,33 +64,31 @@ export function fetchItem (model, id) {
           type: FETCH_ITEM_ERROR,
           payload: {
             id,
-            model
-          }
+            model,
+          },
         })
       })
   }
 }
 
-export function fetchDashboard () {
+export function fetchDashboard() {
   return (dispatch, getState) => {
     dispatch({
-      type: FETCH_DASHBOARD_REQUEST
+      type: FETCH_DASHBOARD_REQUEST,
     })
     const token = getState().auth.token
     return apiFetchDashboad(token)
       .then(result => {
         return dispatch({
           type: FETCH_DASHBOARD_SUCCESS,
-          payload: {
-            counters: result.counters
-          }
+          payload: result,
         })
       })
       .catch(err => {
         return dispatch({
           type: FETCH_DASHBOARD_ERROR,
           error: true,
-          payload: err.message
+          payload: err.message,
         })
       })
   }
