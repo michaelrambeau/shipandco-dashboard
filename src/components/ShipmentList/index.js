@@ -56,7 +56,8 @@ Table.propTypes = {
 export default Table
 
 const Row = ({ shipment, options }) => {
-  const method = get(shipment, 'shipment_infos.method') || ''
+  const method = (get(shipment, 'shipment_infos.method') || '').toUpperCase()
+  const trackingNumber = get(shipment, 'shipment_infos.tracking_number') || ''
   return (
     <tr onClick={goToShipment(shipment)}>
       {options.showIcon &&
@@ -78,7 +79,9 @@ const Row = ({ shipment, options }) => {
               {method}
             </span>
             <br />
-            <span>shipment.shipment_infos.tracking_number</span>
+            <span>
+              {trackingNumber}
+            </span>
           </div>}
       </td>
       {options.showRate &&

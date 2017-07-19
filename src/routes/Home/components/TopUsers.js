@@ -38,7 +38,7 @@ const Row = ({ user, ranking }) =>
       {user.email}
     </td>
     <td>
-      {numeral(user.count).format('0a')}
+      {numeral(user.count).format('0,0')}
     </td>
   </tr>
 

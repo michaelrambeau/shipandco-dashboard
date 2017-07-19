@@ -2,7 +2,7 @@ import React from 'react'
 import numeral from 'numeral'
 
 function formatCounter(count) {
-  return numeral(count).format('0a')
+  return numeral(count).format('0,0')
 }
 
 export default ({ counters }) => {
