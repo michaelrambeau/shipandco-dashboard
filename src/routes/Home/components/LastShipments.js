@@ -6,6 +6,7 @@ const options = {
   showRate: false,
   showIcon: true,
   showHeader: false,
+  showLabelStatus: true,
   compact: true,
 }
 

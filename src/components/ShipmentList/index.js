@@ -8,6 +8,7 @@ import Flag from 'components/utils/Flag'
 import CarrierIcon from 'components/utils/CarrierIcon'
 import ShopIcon from 'components/utils/ShopIcon'
 import Amount from 'components/utils/Amount'
+import LabelStatus from './LabelStatus'
 
 const template = tinytime('{MM} {DD} {H}:{mm}', {
   padMonth: true,
@@ -19,6 +20,7 @@ const defaultOptions = {
   showRate: true,
   showHeader: true,
   compact: false,
+  showLabelStatus: true,
 }
 
 const goToShipment = shipment => () =>
@@ -35,6 +37,7 @@ const Table = ({ shipments, count, options = defaultOptions }) => {
               {options.showIcon && <th />}
               <th>Customer</th>
               <th>Tracking #</th>
+              {options.showLabelStatus && <th />}
               {options.showRate && <th>Rate</th>}
               <th>Date</th>
             </tr>
@@ -84,6 +87,10 @@ const Row = ({ shipment, options }) => {
             </span>
           </div>}
       </td>
+      {options.showLabelStatus &&
+        <td>
+          <LabelStatus shipment={shipment} />
+        </td>}
       {options.showRate &&
         <td>
           <Amount
@@ -92,8 +99,10 @@ const Row = ({ shipment, options }) => {
           />
         </td>}
       <td>
-        <TimeAgo datetime={shipment.date} />
-        <br />
+        {!options.compact &&
+          <div>
+            <TimeAgo datetime={shipment.date} />
+          </div>}
         {template.render(new Date(shipment.date))}
       </td>
     </tr>
