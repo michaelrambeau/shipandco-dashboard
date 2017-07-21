@@ -14,10 +14,12 @@ const labels = {
 }
 
 const LabelStatus = ({ shipment, options }) => {
+  const shipmentState = shipment.state
   const status = get(shipment, 'label.status') || ''
   const method = get(shipment, 'shipment_infos.method') || ''
+  if (shipmentState === 'void') return <div className="tag is-danger">VOID</div>
   if (status === 'removed')
-    return <i className="fa fa-trash-o" aria-hidden="true" />
+    return <i className="fa fa-trash-o light-text" aria-hidden="true" />
   if (status === 'error')
     return <i className="fa fa-database error-icon" aria-hidden="true" />
   if (status === 'no-label') {
@@ -33,7 +35,7 @@ const LabelStatus = ({ shipment, options }) => {
   if (status === 'uploaded')
     return (
       <span>
-        <i className="fa fa-cloud-upload success-icon" aria-hidden="true" />
+        <i className="fa fa-cloud-download success-icon" aria-hidden="true" />
       </span>
     )
   return <i className="fa fa-database success-icon" aria-hidden="true" />

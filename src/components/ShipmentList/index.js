@@ -88,7 +88,7 @@ const Row = ({ shipment, options }) => {
           </div>}
       </td>
       {options.showLabelStatus &&
-        <td>
+        <td className="cell-icon-only">
           <LabelStatus shipment={shipment} />
         </td>}
       {options.showRate &&

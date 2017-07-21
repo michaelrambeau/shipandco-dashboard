@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import numeral from 'numeral'
 import { browserHistory as history } from 'react-router'
 
@@ -25,6 +26,9 @@ const TopUsers = ({ users }) => {
           )}
         </tbody>
       </table>
+      <div style={{ textAlign: 'center' }}>
+        <Link to="/users">View all users</Link>
+      </div>
     </div>
   )
 }

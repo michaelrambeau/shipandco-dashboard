@@ -1,7 +1,7 @@
 import React from 'react'
 import CarrierIcon from 'components/utils/CarrierIcon'
 import Amount from 'components/utils/Amount'
-import { getLabelUrl } from 'helpers/labels'
+import LabelArea from './LabelArea'
 
 const methodName = data => {
   const { carrier, method } = data
@@ -11,8 +11,6 @@ const methodName = data => {
 }
 
 const Info = ({ data, shipment }) => {
-  const url = getLabelUrl(shipment)
-  console.log('URL', url)
   return (
     <div className="card is-fullwidth">
       <div className="card-content media">
@@ -33,6 +31,9 @@ const Info = ({ data, shipment }) => {
                 <Amount value={data.amount} currency={data.currency} />
               </div>}
           </div>
+        </div>
+        <div className="media-right">
+          {shipment && <LabelArea shipment={shipment} />}
         </div>
       </div>
     </div>
