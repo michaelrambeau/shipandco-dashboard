@@ -16,12 +16,14 @@ const count = 10
 
 const LastShipments = ({ shipments, onRefresh }) =>
   <div className="box">
-    <div className="title is-4">
-      <span style={{ marginRight: '1rem' }}>
+    <div style={{ display: 'flex' }}>
+      <h4 className="title is-4" style={{ flexGrow: '1' }}>
         Last {count} shipments
-      </span>
-      <button className="button is-small" type="button" onClick={onRefresh}>
-        Refresh
+      </h4>
+      <button className="button" type="button" onClick={onRefresh}>
+        <span className="icon">
+          <i className="fa fa-refresh light-text" />
+        </span>
       </button>
     </div>
     <ShipmentList shipments={shipments} options={options} count={count} />

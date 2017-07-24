@@ -42,7 +42,9 @@ const Table = ({ shipments, count, options = defaultOptions }) => {
               <th>Date</th>
             </tr>
           </thead>}
-        <tbody>
+        <tbody
+          style={{ borderTop: options.showHeader ? '' : '1px solid #dbdbdb' }}
+        >
           {shipments.map(shipment =>
             <Row shipment={shipment} key={shipment._id} options={options} />
           )}
