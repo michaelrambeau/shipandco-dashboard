@@ -7,7 +7,6 @@ import LastShipments from './LastShipments'
 const Dashboard = ({ counters, topUsers, lastShipments, onRefresh }) =>
   <div>
     <Counters counters={counters} />
-    <hr />
     <div className="columns">
       <div className="column">
         {topUsers.length > 0 && <TopUsers users={topUsers} />}

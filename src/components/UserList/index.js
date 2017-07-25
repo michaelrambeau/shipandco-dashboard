@@ -11,16 +11,17 @@ const defaultOptions = {
 }
 
 export default ({ users, options = defaultOptions }) => {
+  console.info(options)
   return (
     <table className={`table is-striped clickable`}>
-      {options.header &&
+      {options.showHeader &&
         <thead>
           <tr>
             <th>email / name</th>
             <th>Carriers</th>
             <th>Shops</th>
             <th>Registration</th>
-            <th>Last Login</th>
+            <th>Login</th>
           </tr>
         </thead>}
       <tbody>

@@ -19,7 +19,11 @@ const OnBoarding = ({ onBoardingFlags }) => {
     .filter(item => !!item.text)
   return (
     <div className="box">
-      <h4 className="title is-4">Onboarding</h4>
+      <h4 className="title is-4">
+        Onboarding{' '}
+        {onBoardingFlags.mode &&
+          <div className="tag is-medium">Still in onbarding mode</div>}
+      </h4>
       {flags.map(flag =>
         <Flag key={flag.key} text={flag.text(flag.value)} value={flag.value} />
       )}

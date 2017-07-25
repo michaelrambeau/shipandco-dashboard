@@ -12,15 +12,16 @@ const User = ({ user }) => {
     <div style={{ marginBottom: '1rem' }}>
       <h2 className="title is-3">
         {user.emails[0].address}
+        {user.freeShipments > 0 &&
+          <div
+            className={`tag is-large${user.freeShipments === 10
+              ? ''
+              : 'is-info'}`}
+            style={{ marginLeft: '.5rem' }}
+          >
+            {user.freeShipments} free shipments remaining
+          </div>}
       </h2>
-      {user.freeShipments > 0 &&
-        <div
-          className={`notification ${user.freeShipments === 10
-            ? ''
-            : 'is-info'}`}
-        >
-          <b>{user.freeShipments}</b> free shipments remaining!
-        </div>}
     </div>
   )
 }
