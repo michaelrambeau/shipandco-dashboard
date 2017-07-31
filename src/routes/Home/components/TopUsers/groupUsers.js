@@ -5,16 +5,23 @@ const findGroup = user => groups.find(group => group.members.includes(user._id))
 const findUser = (id, users) => users.find(user => user._id === id)
 
 const populatedGroups = users =>
-  groups.map(group => {
-    const members = group.members.map(id => findUser(id, users))
-    return { ...group, members }
-  })
+  groups
+    .map(group => {
+      const members = group.members
+        .map(id => findUser(id, users))
+        .filter(item => !!item)
+      return { ...group, members }
+    })
+    .filter(item => item.members.length > 0)
 
 const usersWithoutGroup = users =>
-  users.filter(user => !findGroup(user)).map(user => ({
-    key: user.email,
-    members: [user],
-  }))
+  users
+    .filter(user => !findGroup(user))
+    .filter(item => item.email !== '?')
+    .map(user => ({
+      key: user.email,
+      members: [user],
+    }))
 
 const sum = group => group.members.reduce((acc, item) => acc + item.count, 0)
 

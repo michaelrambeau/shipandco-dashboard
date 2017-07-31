@@ -14,7 +14,7 @@ const TopUsers = ({ users }) => {
   return (
     <div className="box">
       <div className="title is-4">Top 10 Customers</div>
-      <div className="subtitle">By number of shipment</div>
+      <div className="subtitle is-6">By number of shipment</div>
       <hr />
       <UserGroupList groups={groups} />
       <div style={{ textAlign: 'center' }}>

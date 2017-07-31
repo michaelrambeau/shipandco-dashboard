@@ -4,9 +4,9 @@ const FreeShipments = ({ count }) => {
   if (count === 0) {
     return <div className="tag is-success">Trial completed!</div>
   }
-  return (    
+  return (
     <div className={count === 10 ? 'empty' : 'tag is-info'}>
-      {count} free shipments remaining
+      {count} free shipments
     </div>
   )
 }

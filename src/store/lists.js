@@ -1,16 +1,15 @@
-import {
-  FETCH_ITEM_LIST_SUCCESS
-} from './actionTypes'
+import { FETCH_ITEM_LIST_SUCCESS } from './actionTypes'
 
 const defaultData = {
   total: 0,
-  items: []
+  items: [],
 }
 const initialState = {
   users: defaultData,
   orders: defaultData,
   shipments: defaultData,
-  shops: defaultData
+  shops: defaultData,
+  addresses: defaultData,
 }
 
 const ACTION_HANDLERS = {
@@ -20,13 +19,13 @@ const ACTION_HANDLERS = {
       ...state,
       [model]: {
         total,
-        items: data
-      }
+        items: data,
+      },
     }
-  }
+  },
 }
 
-export default function reducer (state = initialState, action) {
+export default function reducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }

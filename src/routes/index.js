@@ -7,19 +7,21 @@ import OrdersRoute from './Orders'
 import ShopsRoute from './Shops'
 import ShipmentsRoute from './Shipments'
 import LoginRoute from './Login'
+import AddressesRoute from './Addresses'
 
-export const createRoutes = (store) => ({
-  path        : '/',
-  component   : CoreLayout,
-  indexRoute  : HomeRoute,
-  childRoutes : [
+export const createRoutes = store => ({
+  path: '/',
+  component: CoreLayout,
+  indexRoute: HomeRoute,
+  childRoutes: [
     UsersRoute(store),
     ShopsRoute(store),
     OrdersRoute(store),
     ShipmentsRoute(store),
     CounterRoute(store),
-    LoginRoute
-  ]
+    AddressesRoute(store),
+    LoginRoute,
+  ],
 })
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically

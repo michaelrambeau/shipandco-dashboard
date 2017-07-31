@@ -1,17 +1,18 @@
 import React from 'react'
-import { browserHistory as history } from 'react-router'
+
 import TimeAgo from 'components/utils/TimeAgo'
 import ShopIcon from 'components/utils/ShopIcon'
 import CarrierIcon from 'components/utils/CarrierIcon'
 import FreeShipments from './FreeShipments'
 import './styles.scss'
+import goToUser from './goToUser'
+import LastLogin from './columns/LastLogin'
 
 const defaultOptions = {
   showHeader: true,
 }
 
 export default ({ users, options = defaultOptions }) => {
-  console.info(options)
   return (
     <table className={`table is-striped clickable`}>
       {options.showHeader &&
@@ -31,10 +32,6 @@ export default ({ users, options = defaultOptions }) => {
       </tbody>
     </table>
   )
-}
-
-function goToUser(user) {
-  return () => history.push(`/users/${user._id}`)
 }
 
 const Row = ({ user }) => {
@@ -62,9 +59,7 @@ const Row = ({ user }) => {
         <FreeShipments count={user.freeShipments} />
       </td>
       <td>
-        {user.lastLogin
-          ? <TimeAgo datetime={user.lastLogin} />
-          : <span className="empty">No login</span>}
+        <LastLogin user={user} />
       </td>
     </tr>
   )
