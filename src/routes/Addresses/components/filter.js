@@ -1,9 +1,10 @@
 import get from 'lodash.get'
 
+import getArea from './getArea'
+
 const filterByArea = area => user => {
   if (area === '*') return true
-  const address = get(user, 'settings.defaultWarehouse.address')
-  const userArea = address.province
+  const userArea = getArea(user)
   return userArea === area
 }
 

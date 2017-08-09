@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import numeral from 'numeral'
 import { browserHistory as history } from 'react-router'
 
+import TimeAgo from 'components/utils/TimeAgo'
 import groupUsers from './groupUsers'
 
 function goToUser(user) {
@@ -44,7 +45,7 @@ const UserGroup = ({ group, ranking }) =>
       </span>
       {group.members.length > 1 &&
         <span className="empty">
-          {numeral(group.total).format('0,0')}
+          {`Total: ${numeral(group.total).format('0,0')}`}
         </span>}
     </div>
     <UserTable users={group.members} />
@@ -63,6 +64,9 @@ const UserTableRow = ({ user, ranking }) =>
   <tr onClick={goToUser(user)}>
     <td>
       {user.email}
+      <div className="light-text">
+        Last shipment: <TimeAgo datetime={user.lastShipment} />
+      </div>
     </td>
     <td width="80" style={{ textAlign: 'right' }}>
       {numeral(user.count).format('0,0')}

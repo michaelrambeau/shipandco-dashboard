@@ -39,10 +39,11 @@ const Row = ({ user, activeDate }) => {
   const warehouse = user.settings.defaultWarehouse || { address: {} }
   const contactInfo = [
     warehouse.address.company,
+    warehouse.address.name,
     warehouse.address.company_kanji,
     warehouse.address.email || user.emails[0].address,
     warehouse.address.phone,
-  ].filter(item => !!item)
+  ].filter(item => !!item && item.trim())
   return (
     <tr onClick={goToUser(user)}>
       <td>

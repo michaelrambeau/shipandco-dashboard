@@ -5,9 +5,7 @@ import AddressRomaji from 'components/AddressFromCompact'
 import AddressKanji from 'components/AddressFromCompact/AddressKanji'
 
 const Table = ({ warehouses, count, defaultWarehouseId }) => {
-  if (!warehouses || warehouses.length === 0) return (
-    <div>No warehouse!</div>
-  )
+  if (!warehouses || warehouses.length === 0) return <div>No warehouse!</div>
   return (
     <div>
       <table className="table clickable is-striped">
@@ -20,9 +18,13 @@ const Table = ({ warehouses, count, defaultWarehouseId }) => {
           </tr>
         </thead>
         <tbody>
-          {warehouses.map(wh => (
-            <Row warehouse={wh} key={wh._id} isDefault={wh._id === defaultWarehouseId} />
-          ))}
+          {warehouses.map(wh =>
+            <Row
+              warehouse={wh}
+              key={wh._id}
+              isDefault={wh._id === defaultWarehouseId}
+            />
+          )}
         </tbody>
       </table>
     </div>
@@ -32,7 +34,7 @@ const Table = ({ warehouses, count, defaultWarehouseId }) => {
 Table.propTypes = {
   warehouses: PropTypes.array.isRequired,
   count: PropTypes.number.isRequired,
-  defaultWarehouseId: PropTypes.string
+  defaultWarehouseId: PropTypes.string,
 }
 export default Table
 
@@ -40,16 +42,22 @@ export default Table
 
 const Row = ({ warehouse, isDefault }) => {
   return (
-    <tr>
+    <tr className={isDefault ? 'is-active-row' : ''}>
       <td>
-        <div className="is-primary">{warehouse.name}</div>
-        {isDefault && <span className="is-small">(default)</span>}
+        <div className="is-primary">
+          {warehouse.name}
+        </div>
+        {isDefault && <span className="empty">Default warehouse</span>}
       </td>
       <td>
-        {warehouse.address.company}<br />
-        {warehouse.address.company_kanji}<br />
-        {warehouse.address.phone}<br />
-        {warehouse.address.email}<br />
+        {warehouse.address.company}
+        <br />
+        {warehouse.address.company_kanji}
+        <br />
+        {warehouse.address.phone}
+        <br />
+        {warehouse.address.email}
+        <br />
       </td>
       <td>
         <AddressRomaji address={warehouse.address} />
@@ -63,5 +71,5 @@ const Row = ({ warehouse, isDefault }) => {
 
 Row.propTypes = {
   warehouse: PropTypes.object.isRequired,
-  isDefault: PropTypes.bool.isRequired
+  isDefault: PropTypes.bool.isRequired,
 }

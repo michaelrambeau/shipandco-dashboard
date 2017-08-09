@@ -65,11 +65,13 @@ const ProfileView = ({ user, profile }) =>
     <Item label="Email">
       {user.emails[0].address}
     </Item>
-    {profile.name &&
+    {profile &&
+      profile.name &&
       <Item label="Name">
         {profile.name}
       </Item>}
-    {profile.language &&
+    {profile &&
+      profile.language &&
       <Item label="Language">
         <Language languageKey={profile.language} />
       </Item>}

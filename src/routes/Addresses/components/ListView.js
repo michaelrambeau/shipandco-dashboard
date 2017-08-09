@@ -6,10 +6,16 @@ import uniq from 'lodash.uniq'
 import Loading from 'components/utils/Loading'
 import UserListAddress from 'components/UserList/UserListWithAddress'
 import filterList from './filterAddressList'
+import getArea from './getArea'
 
 const getEmail = user => user.emails[0].address.toLowerCase()
-const getCompany = user =>
-  get(user, 'settings.defaultWarehouse.address.company')
+const getCompany = user => {
+  const names = [
+    get(user, 'settings.defaultWarehouse.address.company') || '',
+    get(user, 'settings.defaultWarehouse.address.name') || '',
+  ].filter(item => !!item.trim())
+  return Array.isArray(names) ? names[0] : ''
+}
 
 // Exclude shipandco test shops fromt the list
 const excludedIds = [
@@ -27,10 +33,8 @@ const ListView = ({ items, total, pageNumber, pageSize, loading }) => {
         getCompany(a).toLowerCase() > getCompany(b).toLowerCase() ? 1 : -1
     )
   const areas = uniq(
-    users
-      .map(user => get(user, 'settings.defaultWarehouse.address.province'))
-      .sort((a, b) => (a > b ? 1 : -1))
-  ).map(area => ({ text: area || 'Overseas', value: area }))
+    users.map(getArea).sort((a, b) => (a > b ? 1 : -1))
+  ).map(area => ({ text: area || '(Empty)', value: area }))
 
   const UserList = filterList(UserListAddress, { areas })
   return (

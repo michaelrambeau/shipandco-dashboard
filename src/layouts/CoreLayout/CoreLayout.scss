@@ -44,6 +44,10 @@ $nav-height: 64px;
   }
 }
 
+.is-active-row td:first-child {
+  border-left: 3px solid #f4402e
+}
+
 .text-center {
   text-align: center;
 }

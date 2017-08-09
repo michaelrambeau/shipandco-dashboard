@@ -1,11 +1,5 @@
 import React from 'react'
 
-// const areas = [
-//   { text: 'KYOTO', value: 'KYOTO' },
-//   { text: 'OSAKA', value: 'OSAKA' },
-//   { text: 'KOMATSU', value: 'KOMATSU' },
-// ]
-
 const SearchAddress = ({
   areas,
   textValue,
@@ -36,7 +30,9 @@ const SearchAddress = ({
               <option value="*">All areas</option>
               {areas.map(area =>
                 <option key={area.value} value={area.value}>
-                  {area.text}
+                  {area.text === 'overseas'
+                    ? '*** Rest of the World ***'
+                    : area.text}
                 </option>
               )}
             </select>

@@ -16,7 +16,11 @@ const Item = ({ label, children }) =>
 const From = ({ address }) =>
   <div>
     <Item label="Name">
-      {address.name || address.company}
+      {[address.name, address.company].filter(item => !!item).map(item =>
+        <div>
+          {item}
+        </div>
+      )}
     </Item>
     <Item label="Address #1">
       {address.address1 || <Empty />}
