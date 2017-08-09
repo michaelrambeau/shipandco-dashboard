@@ -6,8 +6,9 @@ import ups from './ups.svg'
 import japanpost from './japanpost.svg'
 import yuupack from './yuupack.svg'
 import yamato from './yamato.svg'
+import sagawa from './sagawa.svg'
 
-function getIcon (carrier) {
+function getIcon(carrier) {
   switch (carrier) {
     case 'dhl':
       return dhl
@@ -21,14 +22,26 @@ function getIcon (carrier) {
       return yuupack
     case 'yamato':
       return yamato
+    case 'sagawa':
+      return sagawa
   }
   return null
 }
 
 export default ({ carrier, size = 32 }) => {
   const icon = getIcon(carrier)
-  if (!icon) return <span>{carrier}</span>
+  if (!icon)
+    return (
+      <span>
+        {carrier}
+      </span>
+    )
   return (
-    <img src={icon} width={size} height={size} style={{ verticalAlign: 'middle', marginRight: '.5rem' }} />
+    <img
+      src={icon}
+      width={size}
+      height={size}
+      style={{ verticalAlign: 'middle', marginRight: '.5rem' }}
+    />
   )
 }
