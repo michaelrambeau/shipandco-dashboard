@@ -1,23 +1,26 @@
 const carriers = {
-  dhl: {
-    name: 'DHL'
-  },
   japanpost: {
     name: 'JapanPost (International)',
-    shortName: 'JPost'
+    shortName: 'JPost',
   },
-  fedex: {
-    name: 'FedEx'
+  dhl: {
+    name: 'DHL',
   },
   ups: {
-    name: 'UPS'
+    name: 'UPS',
+  },
+  fedex: {
+    name: 'FedEx',
   },
   yuupack: {
-    name: 'Yuupack'
+    name: 'Yuupack',
   },
   yamato: {
-    name: 'Yamato'
-  }
+    name: 'Yamato',
+  },
+  sagawa: {
+    name: 'Sagawa',
+  },
 }
 
 export default carriers

@@ -10,10 +10,21 @@ import ShopIcon from 'components/utils/ShopIcon'
 import Amount from 'components/utils/Amount'
 import LabelStatus from './LabelStatus'
 
-const template = tinytime('{MM} {DD} {H}:{mm}', {
-  padMonth: true,
-  padDays: true,
-})
+const templates = {
+  full: tinytime('{MM} {DD} {H}:{mm}', {
+    padMonth: true,
+    padDays: true,
+  }),
+  timeOnly: tinytime('{H}:{mm}'),
+}
+
+function shipmentDate(date) {
+  const today = new Date()
+  const sameDay =
+    today.getDay() === date.getDay() && today.getMonth() === date.getMonth()
+  const template = sameDay ? templates.timeOnly : templates.full
+  return template.render(date)
+}
 
 const defaultOptions = {
   showIcon: true,
@@ -105,7 +116,7 @@ const Row = ({ shipment, options }) => {
           <div>
             <TimeAgo datetime={shipment.date} />
           </div>}
-        {template.render(new Date(shipment.date))}
+        {shipmentDate(new Date(shipment.date))}
       </td>
     </tr>
   )
