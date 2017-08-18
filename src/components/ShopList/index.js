@@ -2,11 +2,10 @@ import React, { PropTypes } from 'react'
 import { browserHistory as history } from 'react-router'
 import TimeAgo from 'components/utils/TimeAgo'
 import ShopIcon from 'components/utils/ShopIcon'
+import get from 'lodash.get'
 
 const Table = ({ shops, count }) => {
-  if (!shops || shops.length === 0) return (
-    <div>No shop!</div>
-  )
+  if (!shops || shops.length === 0) return <div>No shop!</div>
   return (
     <div>
       <table className="table clickable is-striped">
@@ -14,14 +13,13 @@ const Table = ({ shops, count }) => {
           <tr>
             <th>Type</th>
             <th>Name</th>
+            <th>Settings</th>
             <th>Created</th>
             <th>Last sync.</th>
           </tr>
         </thead>
         <tbody>
-          {shops.map(shop => (
-            <Row shop={shop} key={shop._id} />
-          ))}
+          {shops.map(shop => <Row shop={shop} key={shop._id} />)}
         </tbody>
       </table>
     </div>
@@ -30,14 +28,26 @@ const Table = ({ shops, count }) => {
 
 Table.propTypes = {
   shops: PropTypes.array.isRequired,
-  count: PropTypes.number.isRequired
+  count: PropTypes.number.isRequired,
 }
 export default Table
 
 const goToShop = shop => () => history.push(`/shops/${shop._id}`)
 
+const Autofulfill = ({ shop }) => {
+  const enabled = get(shop, 'settings.autofulfill')
+  if (!enabled) return null
+  return (
+    <span>
+      <span className="fa fa-check-circle" />
+      {' Auto-fulfill'}
+    </span>
+  )
+}
+
 const Row = ({ shop }) => {
   const date = shop.createdAt || shop.created_at
+
   return (
     <tr onClick={goToShop(shop)}>
       <td>
@@ -47,15 +57,20 @@ const Row = ({ shop }) => {
         {shop.name}
       </td>
       <td>
+        <Autofulfill shop={shop} />
+      </td>
+      <td>
         {date ? <TimeAgo datetime={date} /> : <span className="empty">-</span>}
       </td>
       <td>
-        {shop.lastSync ? <TimeAgo datetime={shop.lastSync} /> : <span className="empty">-</span>}
+        {shop.lastSync
+          ? <TimeAgo datetime={shop.lastSync} />
+          : <span className="empty">-</span>}
       </td>
     </tr>
   )
 }
 
 Row.propTypes = {
-  shop: PropTypes.object.isRequired
+  shop: PropTypes.object.isRequired,
 }
