@@ -1,13 +1,14 @@
+$shipandco-base-color: #f43d2e;
+$primary: $shipandco-base-color;
+$link: $shipandco-base-color;
+
 @import 'node_modules/bulma/sass/utilities/functions';
 @import 'node_modules/bulma/sass/utilities/initial-variables';
-$primary: #f4402e;
-$link: #f4402e;
-$size-normal: 16px;
+@import 'node_modules/bulma/sass/utilities/derived-variables';
 
 @import 'node_modules/bulma/sass/utilities/variables';
 @import 'node_modules/bulma/sass/utilities/controls';
 @import 'node_modules/bulma/sass/utilities/mixins';
-
 
 @import 'node_modules/bulma/sass/base/all';
 @import 'node_modules/bulma/sass/layout/all';
@@ -32,8 +33,11 @@ $nav-height: 64px;
 @import 'node_modules/bulma/sass/elements/icon';
 @import 'node_modules/bulma/sass/elements/notification';
 @import 'node_modules/bulma/sass/elements/tag';
+@import 'node_modules/bulma/sass/elements/container';
+@import 'node_modules/bulma/sass/elements/content';
 
 .table {
+  width: 100%;
   td {
     vertical-align: middle;
   }
@@ -45,7 +49,7 @@ $nav-height: 64px;
 }
 
 .is-active-row td:first-child {
-  border-left: 3px solid #f4402e
+  border-left: 3px solid $shipandco-base-color
 }
 
 .text-center {

@@ -2,7 +2,7 @@ import React from 'react'
 
 const settingsKeys = ['licenseKey']
 
-const Settings = ({ shop }) => (
+const Settings = ({ shop }) =>
   <div className="card">
     <header className="card-header">
       <h4 className="card-header-title">Settings</h4>
@@ -13,7 +13,6 @@ const Settings = ({ shop }) => (
       {shop && <KeyValueHash hash={shop} keys={settingsKeys} />}
     </div>
   </div>
-)
 
 const KeyValueHash = ({ hash, keys }) => {
   if (!hash) return null
@@ -21,12 +20,11 @@ const KeyValueHash = ({ hash, keys }) => {
   if (allKeys.length === 0) return null
   return (
     <ul>
-      {allKeys
-        .filter(key => hash[key] !== undefined)
-        .map(key => (
-          <li key={key}>{key}: {JSON.stringify(hash[key])}</li>
-        ))
-      }
+      {allKeys.filter(key => hash[key] !== undefined).map(key =>
+        <li key={key}>
+          {key}: {JSON.stringify(hash[key])}
+        </li>
+      )}
     </ul>
   )
 }

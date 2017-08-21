@@ -5,9 +5,10 @@ import UserList from 'components/UserList'
 import OrderList from 'components/OrderList'
 import ShipmentList from 'components/ShipmentList'
 import Settings from './Settings'
+import SubShops from './SubShops'
 
 const viewOptions = {
-  showOptions: false
+  showOptions: false,
 }
 
 const Shop = ({ shop }) => {
@@ -19,12 +20,12 @@ const Shop = ({ shop }) => {
   return (
     <div>
       <h2 className="title is-4">
-        <ShopIcon type={shop.type} />
-        {' '}
-        Shop {shop.name}
+        <ShopIcon type={shop.type} /> Shop {shop.name}
       </h2>
 
       <Settings shop={shop} />
+
+      {shop.shops && <SubShops shops={shop.shops} />}
 
       <br />
 
@@ -41,14 +42,12 @@ const Shop = ({ shop }) => {
 
       <div className="card">
         <header className="card-header">
-          <h3 className="card-header-title">Orders ({orderCount})</h3>
+          <h3 className="card-header-title">
+            Orders ({orderCount})
+          </h3>
         </header>
         <div className="card-content">
-          <OrderList
-            orders={orders}
-            count={orderCount}
-            options={viewOptions} 
-          />
+          <OrderList orders={orders} count={orderCount} options={viewOptions} />
         </div>
       </div>
 
@@ -56,7 +55,9 @@ const Shop = ({ shop }) => {
 
       <div className="card">
         <header className="card-header">
-          <h3 className="card-header-title">Shipments ({shipmentCount})</h3>
+          <h3 className="card-header-title">
+            Shipments ({shipmentCount})
+          </h3>
         </header>
         <div className="card-content">
           <ShipmentList
@@ -65,9 +66,9 @@ const Shop = ({ shop }) => {
             options={viewOptions}
           />
         </div>
-      </div>      
+      </div>
     </div>
-    )
+  )
 }
 
 export default Shop
