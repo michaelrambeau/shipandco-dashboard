@@ -67,6 +67,11 @@ const items = [
     text: ({ user }) => <span>Profile</span>,
     icon: 'user',
   },
+  {
+    name: 'billing',
+    text: ({ user }) => <span>Billing</span>,
+    icon: 'money',
+  },
 ]
 
 export default ({ userId, activeTab = 'profile', user }) =>
