@@ -1,6 +1,6 @@
 import React from 'react'
 
-const From = ({ address }) => {
+const AddressKanji = ({ address }) => {
   const values = [
     address.address1_kanji,
     address.address2_kanji,
@@ -20,4 +20,4 @@ const From = ({ address }) => {
   )
 }
 
-export default From
+export default AddressKanji

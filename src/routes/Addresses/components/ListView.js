@@ -14,7 +14,7 @@ const getCompany = user => {
     get(user, 'settings.defaultWarehouse.address.company') || '',
     get(user, 'settings.defaultWarehouse.address.name') || '',
   ].filter(item => !!item.trim())
-  return Array.isArray(names) ? names[0] : ''
+  return Array.isArray(names) ? names[0] || '' : ''
 }
 
 // Exclude shipandco test shops fromt the list

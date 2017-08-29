@@ -1,3 +1,5 @@
+import get from 'lodash.get'
+
 const filterByText = textFilter => user => {
   const name = user.profile && user.profile.name
   const email = user.emails && user.emails[0].address
@@ -12,6 +14,7 @@ const getStatus = user => {
   const freeShipments = user.freeShipments
   if (freeShipments === 10) return 'trial-not-started'
   if (freeShipments > 0) return 'trial-started'
+  if (get(user, 'billing.customer_id')) return 'billing' // customers with valid billing data
   return 'trial-completed'
 }
 

@@ -16,6 +16,10 @@ const templates = {
     padDays: true,
   }),
   timeOnly: tinytime('{H}:{mm}'),
+  invoiceDate: tinytime('{MM} {DD}', {
+    padMonth: true,
+    padDays: true,
+  }),
 }
 
 function shipmentDate(date) {
@@ -32,6 +36,7 @@ const defaultOptions = {
   showHeader: true,
   compact: false,
   showLabelStatus: true,
+  showBillingStatus: true,
 }
 
 const goToShipment = shipment => () =>
@@ -48,7 +53,8 @@ const Table = ({ shipments, count, options = defaultOptions }) => {
               {options.showIcon && <th />}
               <th>Customer</th>
               <th>Tracking #</th>
-              {options.showLabelStatus && <th />}
+              {options.showLabelStatus && <th>Label</th>}
+              {options.showBillingStatus && <th>Invoice</th>}
               {options.showRate && <th>Rate</th>}
               <th>Date</th>
             </tr>
@@ -101,8 +107,12 @@ const Row = ({ shipment, options }) => {
           </div>}
       </td>
       {options.showLabelStatus &&
-        <td className="cell-icon-only">
+        <td>
           <LabelStatus shipment={shipment} />
+        </td>}
+      {options.showBillingStatus &&
+        <td>
+          <BillingIcon shipment={shipment} />
         </td>}
       {options.showRate &&
         <td>
@@ -120,6 +130,26 @@ const Row = ({ shipment, options }) => {
       </td>
     </tr>
   )
+}
+
+const BillingIcon = ({ shipment }) => {
+  const { meta } = shipment
+  if (!meta) return null
+  const { invoiced_at, free } = meta
+  if (invoiced_at)
+    return (
+      <div>
+        <span className="fa fa-check-square light-text" />{' '}
+        {templates.invoiceDate.render(new Date(invoiced_at))}
+      </div>
+    )
+  if (free)
+    return (
+      <div>
+        <span className="fa fa-gift light-text" /> Free!
+      </div>
+    )
+  return null
 }
 
 Row.propTypes = {

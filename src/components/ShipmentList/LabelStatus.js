@@ -35,10 +35,10 @@ const LabelStatus = ({ shipment, options }) => {
   if (status === 'uploaded')
     return (
       <span>
-        <i className="fa fa-cloud-download success-icon" aria-hidden="true" />
+        <i className="fa fa-cloud-download light-text" aria-hidden="true" />
       </span>
     )
-  return <i className="fa fa-database success-icon" aria-hidden="true" />
+  return <i className="fa fa-database light-text" aria-hidden="true" />
 }
 
 export default LabelStatus

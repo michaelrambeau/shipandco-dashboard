@@ -1,8 +1,10 @@
 import React from 'react'
+import get from 'lodash.get'
 
 import TimeAgo from 'components/utils/TimeAgo'
 import ShopIcon from 'components/utils/ShopIcon'
 import CarrierIcon from 'components/utils/CarrierIcon'
+import CreditCardIcon from 'components/utils/CreditCardIcon'
 import FreeShipments from './FreeShipments'
 import './styles.scss'
 import goToUser from './goToUser'
@@ -18,10 +20,11 @@ export default ({ users, options = defaultOptions }) => {
       {options.showHeader &&
         <thead>
           <tr>
-            <th>email / name</th>
+            <th>Email / Name</th>
             <th>Carriers</th>
             <th>Shops</th>
             <th>Registration</th>
+            <th>Card</th>
             <th>Login</th>
           </tr>
         </thead>}
@@ -57,6 +60,9 @@ const Row = ({ user }) => {
         <TimeAgo datetime={user.createdAt} />
         <br />
         <FreeShipments count={user.freeShipments} />
+      </td>
+      <td>
+        <Billing user={user} />
       </td>
       <td>
         <LastLogin user={user} />
@@ -101,9 +107,13 @@ const ShopList = ({ shops }) => {
   )
 }
 
-// function userLastShipment(user) {
-//   if (!user.shipments) return false;
-//   const lastShipment = user.shipments
-//     .slice(0, 0)
-//    return lastShipment
-// }
+const Billing = ({ user }) => {
+  const { billing } = user
+  const brand = get(billing, 'card.brand')
+  if (!brand) return <div className="empty">No CC</div>
+  return (
+    <div>
+      <CreditCardIcon brand={brand} />
+    </div>
+  )
+}

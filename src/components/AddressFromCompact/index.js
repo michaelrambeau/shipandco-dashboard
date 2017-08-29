@@ -2,7 +2,7 @@ import React from 'react'
 
 import Flag from 'components/utils/Flag'
 
-const From = ({ address }) => {
+const AddressFromCompact = ({ address }) => {
   const values = [address.address1, address.address2, address.city, address.zip]
   return (
     <div>
@@ -24,4 +24,4 @@ const From = ({ address }) => {
   )
 }
 
-export default From
+export default AddressFromCompact

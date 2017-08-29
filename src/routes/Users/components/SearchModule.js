@@ -4,7 +4,7 @@ import carriersByKey from 'data/carriers'
 
 const carriers = Object.keys(carriersByKey).map(key => ({
   value: key,
-  text: carriersByKey[key].shortName || carriersByKey[key].name
+  text: carriersByKey[key].shortName || carriersByKey[key].name,
 }))
 
 const shops = [
@@ -15,7 +15,7 @@ const shops = [
   { value: 'nextengine', text: 'NextEngine' },
   { value: 'prestashop15', text: 'Prestashop' },
   { value: 'rakuten', text: 'Rakuten' },
-  { value: 'shopify', text: 'Shopify' }
+  { value: 'shopify', text: 'Shopify' },
 ]
 
 const SearchModule = ({
@@ -26,7 +26,7 @@ const SearchModule = ({
   onChangeCarrier,
   status,
   carrier,
-  shop
+  shop,
 }) => {
   return (
     <div className="field-body" style={{ marginBottom: '2rem' }}>
@@ -49,8 +49,9 @@ const SearchModule = ({
           <div className="select is-fullwidth">
             <select onChange={onChangeStatus} value={status}>
               <option value="*">All statuses</option>
+              <option value="billing">With billing information</option>
               <option value="trial-completed">
-                Trial completed (no more free label)
+                Trial completed (no more free label, no billing information)
               </option>
               <option value="trial-started">
                 Trial started (&lt;10 free labels remaining)
@@ -69,7 +70,9 @@ const SearchModule = ({
             <select onChange={onChangeCarrier} value={carrier}>
               <option value="*">All carriers</option>
               {carriers.map(c =>
-                <option key={c.value} value={c.value}>{c.text}</option>
+                <option key={c.value} value={c.value}>
+                  {c.text}
+                </option>
               )}
             </select>
           </div>
@@ -81,7 +84,9 @@ const SearchModule = ({
             <select onChange={onChangeShop} value={shop}>
               <option value="*">All shops</option>
               {shops.map(s =>
-                <option key={s.value} value={s.value}>{s.text}</option>
+                <option key={s.value} value={s.value}>
+                  {s.text}
+                </option>
               )}
             </select>
           </div>

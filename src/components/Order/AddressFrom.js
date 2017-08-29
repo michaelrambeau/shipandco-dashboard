@@ -8,16 +8,16 @@ const Item = ({ label, children }) =>
     <label className="label">
       {label}
     </label>
-    <p className="control">
+    <div className="control">
       {children}
-    </p>
+    </div>
   </div>
 
-const From = ({ address }) =>
+const AddressFrom = ({ address }) =>
   <div>
     <Item label="Name">
-      {[address.name, address.company].filter(item => !!item).map(item =>
-        <div>
+      {[address.name, address.company].filter(item => !!item).map((item, i) =>
+        <div key={i}>
           {item}
         </div>
       )}
@@ -39,4 +39,4 @@ const From = ({ address }) =>
     </Item>
   </div>
 
-export default From
+export default AddressFrom
