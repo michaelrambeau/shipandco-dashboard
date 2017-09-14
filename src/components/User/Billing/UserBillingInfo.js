@@ -60,13 +60,13 @@ const CreditCard = ({ card }) => {
   return (
     <div>
       <span>
-        <CreditCardIcon brand={brand} /> {brand}
+        <CreditCardIcon brand={brand} />
       </span>
       <span>
-        {` **** **** **** ${last_four}`}
+        {`···· ···· ···· ${last_four}`}
       </span>
       <span>
-        {` Valid until ${expiration}`}
+        {` - Valid until ${expiration}`}
       </span>
     </div>
   )

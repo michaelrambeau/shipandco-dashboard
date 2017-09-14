@@ -14,6 +14,11 @@ const Counter = ({ count }) => {
 
 const items = [
   {
+    name: 'profile',
+    text: ({ user }) => <span>Profile</span>,
+    icon: 'user',
+  },
+  {
     name: 'shops',
     text: ({ user }) =>
       <span>
@@ -36,36 +41,6 @@ const items = [
         Shipments <Counter count={user.shipmentCount} />
       </span>,
     icon: 'cubes',
-  },
-  {
-    name: 'carriers',
-    text: ({ user }) => {
-      const carrierCount = Object.values(user.carriers).filter(item => !!item)
-        .length
-      return (
-        <span>
-          Carriers <Counter count={carrierCount} />
-        </span>
-      )
-    },
-    icon: 'truck',
-  },
-  {
-    name: 'warehouses',
-    text: ({ user }) => {
-      const warehouses = get(user, 'warehouses') || []
-      return (
-        <span>
-          Warehouses　<Counter count={warehouses.length} />
-        </span>
-      )
-    },
-    icon: 'building',
-  },
-  {
-    name: 'profile',
-    text: ({ user }) => <span>Profile</span>,
-    icon: 'user',
   },
   {
     name: 'billing',

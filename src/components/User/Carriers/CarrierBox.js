@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ({ carrier, children }) => (
+export default ({ carrier, children }) =>
   <div className="column is-half-tablet">
     <div className="box" style={{ height: '100%' }}>
       <div className="media">
@@ -8,12 +8,13 @@ export default ({ carrier, children }) => (
           <img src={carrier.logo} width="64" height="64" />
         </div>
         <div className="media-content">
-          <h4 className="title is-4">{carrier.name}</h4>
+          <h4 className="title is-5">
+            {carrier.name}
+          </h4>
           <div>
-          {children}
+            {children}
           </div>
         </div>
       </div>
     </div>
   </div>
-)

@@ -10,6 +10,7 @@ const initialState = {
   shipments: defaultData,
   shops: defaultData,
   addresses: defaultData,
+  payments: defaultData,
 }
 
 const ACTION_HANDLERS = {

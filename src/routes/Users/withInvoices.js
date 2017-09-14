@@ -7,6 +7,7 @@ const withInvoices = WrappedComponent => props => {
   console.log('Fetch invoices...', props)
   return <WrappedComponent invoices={invoices} {...props} />
 }
+export default withInvoices
 
 // function fetchInvoices() {}
 

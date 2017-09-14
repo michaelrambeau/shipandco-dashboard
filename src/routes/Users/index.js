@@ -16,6 +16,7 @@ import UserShops from 'components/User/Shops'
 import UserBilling from 'components/User/Billing'
 import ShipmentListView from './components/ShipmentListView'
 import OrderListView from './components/OrderListView'
+import InvoiceListView from './components/InvoiceListView'
 import withInvoices from './withInvoices'
 
 import Auth from 'containers/AuthWrapper'
@@ -34,7 +35,7 @@ const ItemRoute = store => ({
   path: ':id',
   component: Auth(createItemViewContainer(model, ItemView)),
   indexRoute: {
-    component: createUserContainer(UserShops),
+    component: createUserContainer(UserProfile),
   },
   childRoutes: [
     {
@@ -60,7 +61,14 @@ const ItemRoute = store => ({
     },
     {
       path: 'billing',
-      component: createUserContainer(withInvoices(UserBilling)),
+      // component: createUserContainer(withInvoices(UserBilling)),
+      component: Auth(
+        createListViewContainer(
+          'payments',
+          createUserContainer(InvoiceListView),
+          { $limit: 20, $sort: '-date' }
+        )
+      ),
     },
     {
       path: 'shipments',

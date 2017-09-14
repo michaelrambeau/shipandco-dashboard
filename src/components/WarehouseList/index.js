@@ -5,7 +5,7 @@ import AddressRomaji from 'components/AddressFromCompact'
 import AddressKanji from 'components/AddressFromCompact/AddressKanji'
 
 const Table = ({ warehouses, count, defaultWarehouseId }) => {
-  if (!warehouses || warehouses.length === 0) return <div>No warehouse!</div>
+  if (!warehouses || warehouses.length === 0) return <div>No warehouse</div>
   return (
     <div>
       <table className="table clickable is-striped">

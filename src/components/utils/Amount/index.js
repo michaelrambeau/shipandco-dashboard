@@ -1,8 +1,8 @@
 import React from 'react'
 import numeral from 'numeral'
 
-export default ({ value, currency }) => {
-  const isYen = ['JPY', 'JYE'].includes(currency)
+const Amount = ({ value, currency = 'JPY' }) => {
+  const isYen = ['JPY', 'JYE'].includes(currency.toUpperCase())
   if (!value) return <span className="empty">-</span>
   const number = parseFloat(value)
   const symbol = isYen ? '¥' : currency
@@ -15,3 +15,5 @@ export default ({ value, currency }) => {
     </span>
   )
 }
+
+export default Amount

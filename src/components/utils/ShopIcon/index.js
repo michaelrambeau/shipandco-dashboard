@@ -10,8 +10,10 @@ import base from './base.svg'
 import nextengine from './nextengine.svg'
 import magento1 from './magento1.svg'
 import magento2 from './magento2.svg'
+import stripe from './stripe.svg'
+import woocommerce from './woocommerce.svg'
 
-function getIcon (shopType) {
+function getIcon(shopType) {
   switch (shopType) {
     case 'shopify':
       return shopify
@@ -31,6 +33,10 @@ function getIcon (shopType) {
       return magento1
     case 'magento2':
       return magento2
+    case 'stripe':
+      return stripe
+    case 'woocommerce':
+      return woocommerce
   }
   return manual
 }
@@ -38,9 +44,7 @@ function getIcon (shopType) {
 export default ({ type, size = 32 }) => {
   const icon = getIcon(type)
   const style = {
-    verticalAlign: 'middle'
+    verticalAlign: 'middle',
   }
-  return (
-    <img src={icon} width={size} height={size} style={style} />
-  )
+  return <img src={icon} width={size} height={size} style={style} />
 }
