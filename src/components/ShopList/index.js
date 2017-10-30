@@ -45,6 +45,18 @@ const Autofulfill = ({ shop }) => {
   )
 }
 
+const ShopState = ({ shop }) => {
+  const {state} = shop
+  if (!state) return null
+  const mapping = {
+    'pending': 'is-warning'
+  }
+  const className = mapping[state] || 'is-success'
+  return <div>
+    <span className={`tag ${className}`}>{state}</span>
+  </div>
+}
+
 const Row = ({ shop }) => {
   const date = shop.createdAt || shop.created_at
 
@@ -58,6 +70,7 @@ const Row = ({ shop }) => {
       </td>
       <td>
         <Autofulfill shop={shop} />
+        <ShopState shop={shop} />
       </td>
       <td>
         {date ? <TimeAgo datetime={date} /> : <span className="empty">-</span>}
@@ -66,6 +79,9 @@ const Row = ({ shop }) => {
         {shop.lastSync
           ? <TimeAgo datetime={shop.lastSync} />
           : <span className="empty">-</span>}
+          {shop.tokenExpiration && <div style={{ color: '#999'}}>
+            Token expires <TimeAgo datetime={shop.tokenExpiration} />
+            </div>}
       </td>
     </tr>
   )
