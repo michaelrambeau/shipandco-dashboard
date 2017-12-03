@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import entities from './entities'
 import lists from './lists'
 import dashboard from './dashboard'
+import kpi from './kpi'
 import ui from './ui'
 
 export const makeRootReducer = (asyncReducers, feathersAuthentication) => {
@@ -10,6 +11,7 @@ export const makeRootReducer = (asyncReducers, feathersAuthentication) => {
     entities,
     lists,
     dashboard,
+    kpi,
     auth: feathersAuthentication.reducer,
     ui,
     ...asyncReducers

@@ -11,28 +11,32 @@ const items = [
     path: '/',
     text: 'Dashboard',
     isIndex: true,
-    icon: 'home',
+    icon: 'home'
   },
   {
     path: '/users',
-    text: 'Customers',
+    text: 'Customers'
   },
   {
     path: '/addresses',
-    text: 'Address Book',
+    text: 'Address Book'
   },
   {
     path: '/shops',
-    text: 'Shops',
+    text: 'Shops'
   },
   {
     path: '/orders',
-    text: 'Orders',
+    text: 'Orders'
   },
   {
     path: '/shipments',
-    text: 'Shipments',
+    text: 'Shipments'
   },
+  {
+    path: '/kpi',
+    text: 'KPI'
+  }
 ].filter(item => !item.disabled)
 
 const Item = props => {
@@ -40,7 +44,6 @@ const Item = props => {
   const { router, navItem } = props
   const { path, text, isIndex, icon } = navItem
   const isActive = router.isActive(path, isIndex)
-
   return (
     <Component
       to={path}

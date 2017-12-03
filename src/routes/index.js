@@ -8,6 +8,7 @@ import ShopsRoute from './Shops'
 import ShipmentsRoute from './Shipments'
 import LoginRoute from './Login'
 import AddressesRoute from './Addresses'
+import KPIRoute from './KPI'
 
 export const createRoutes = store => ({
   path: '/',
@@ -21,7 +22,8 @@ export const createRoutes = store => ({
     CounterRoute(store),
     AddressesRoute(store),
     LoginRoute,
-  ],
+    KPIRoute
+  ]
 })
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
