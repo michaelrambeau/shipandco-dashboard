@@ -13,11 +13,11 @@ function requestWithToken(token) {
   return function(url, options = {}) {
     const headers = {
       ...options.headers,
-      authorization: token
+      authorization: token,
     }
     const reqOptions = {
       ...options,
-      headers
+      headers,
     }
     return request(url, reqOptions)
   }
@@ -25,7 +25,7 @@ function requestWithToken(token) {
 
 function getEndPoint(model) {
   const endPoints = {
-    users: 'customers'
+    users: 'customers',
   }
   return endPoints[model] || model
 }
@@ -43,13 +43,13 @@ export function apiFetchItemList(
   const defaultParams = {
     $limit: 10,
     $sort: '-createdAt',
-    $skip: 0
+    $skip: 0,
   }
   const params = Object.assign({}, defaultParams, {
     $limit,
     $skip,
     $sort,
-    ...query
+    ...query,
   })
   const urlParams = Object.keys(params)
     .map(key => `${key}=${params[key]}`)
@@ -66,8 +66,9 @@ export function apiFetchItem(token, model, id) {
 
 export function apiFetchData({ token, key, query }) {
   const url = `${API_BASE_URL}/${key}`
-  const qs = Object.keys(query).map(k => `${k}=${query[k]}`).join('&')
+  const qs = Object.keys(query)
+    .map(k => `${k}=${query[k]}`)
+    .join('&')
   const fullUrl = qs ? `${url}?${qs}` : url
-  console.log('Req', fullUrl)
   return requestWithToken(token)(fullUrl)
 }

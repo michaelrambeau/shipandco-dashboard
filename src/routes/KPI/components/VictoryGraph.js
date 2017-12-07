@@ -5,7 +5,7 @@ import {
   VictoryLine,
   VictoryTooltip,
   VictoryTheme,
-  VictoryAxis
+  VictoryAxis,
 } from 'victory'
 
 const times = require('lodash.times')
@@ -26,17 +26,17 @@ function convert(data) {
     return {
       x: date,
       y: count,
-      label: `${date.toISOString().slice(0, 7)}: ${count} shipments`
+      label: `${date.toISOString().slice(0, 7)}: ${count} shipments`,
     }
   })
 }
 
-const Graph = ({ data }) =>
+const Graph = ({ data }) => (
   <div>
     <VictoryChart
       scale={{ x: 'time' }}
       theme={VictoryTheme.material}
-      padding={{ top: 0, bottom: 32, left: 32, right: 32 }}
+      padding={{ top: 0, bottom: 32, left: 50, right: 32 }}
     >
       <VictoryAxis tickFormat={formatMonth} tickCount={12} />
       <VictoryAxis dependentAxis />
@@ -44,10 +44,11 @@ const Graph = ({ data }) =>
         data={convert(data)}
         labelComponent={<VictoryTooltip />}
         style={{
-          data: { fill: 'tomato', widthX: 20 }
+          data: { fill: '#f43d2e', widthX: 20 },
         }}
       />
     </VictoryChart>
   </div>
+)
 
 export default Graph

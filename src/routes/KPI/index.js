@@ -1,13 +1,12 @@
 import React from 'react'
-import KPIPage from './containers/KPIContainer'
 
-const Layout = ({ children }) =>
-  <div>
-    {children}
-  </div>
+import KPIPage from './containers/KPIContainer'
+import Auth from 'containers/AuthWrapper'
+
+const Layout = ({ children }) => <div>{children}</div>
 
 export default {
   path: 'kpi',
-  component: Layout,
-  indexRoute: { component: KPIPage }
+  component: Auth(Layout),
+  indexRoute: { component: KPIPage },
 }

@@ -104,7 +104,6 @@
     "lodash.get": "^4.4.2",
     "lodash.times": "^4.3.2",
     "lodash.uniq": "^4.5.0",
-    "nivo": "^0.30.0",
     "node-sass": "^4.5.3",
     "normalize.css": "^4.1.1",
     "numeral": "^2.0.6",
