@@ -1,22 +1,12 @@
 import React from 'react'
 
 import carriersByKey from 'data/carriers'
+import shops from 'data/shops'
 
 const carriers = Object.keys(carriersByKey).map(key => ({
   value: key,
   text: carriersByKey[key].shortName || carriersByKey[key].name,
 }))
-
-const shops = [
-  { value: 'amazon', text: 'Amazon' },
-  { value: 'base', text: 'The Base' },
-  { value: 'ebay', text: 'eBay' },
-  { value: 'magento', text: 'Magento' },
-  { value: 'nextengine', text: 'NextEngine' },
-  { value: 'prestashop15', text: 'Prestashop' },
-  { value: 'rakuten', text: 'Rakuten' },
-  { value: 'shopify', text: 'Shopify' },
-]
 
 const SearchModule = ({
   textValue,
@@ -69,11 +59,11 @@ const SearchModule = ({
           <div className="select is-fullwidth">
             <select onChange={onChangeCarrier} value={carrier}>
               <option value="*">All carriers</option>
-              {carriers.map(c =>
+              {carriers.map(c => (
                 <option key={c.value} value={c.value}>
                   {c.text}
                 </option>
-              )}
+              ))}
             </select>
           </div>
         </div>
@@ -83,11 +73,11 @@ const SearchModule = ({
           <div className="select is-fullwidth">
             <select onChange={onChangeShop} value={shop}>
               <option value="*">All shops</option>
-              {shops.map(s =>
+              {shops.map(s => (
                 <option key={s.value} value={s.value}>
                   {s.text}
                 </option>
-              )}
+              ))}
             </select>
           </div>
         </div>

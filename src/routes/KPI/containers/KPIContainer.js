@@ -22,24 +22,26 @@ class KPIContainer extends React.Component {
     super(props)
     this.onChangeFilter = this.onChangeFilter.bind(this)
     this.state = {
-      shop: '*',
-      carrier: '*',
-      user: '*',
+      query: {
+        shop: '*',
+        carrier: '*',
+        user: '*',
+      },
     }
   }
   componentWillMount() {
     this.props.fetchData()
   }
   onChangeFilter({ key, value }) {
-    const query = { [key]: value }
-    this.setState({ carrier: value })
+    const query = Object.assign({}, this.state.query, { [key]: value })
+    this.setState({ query })
     this.props.fetchData({ query })
   }
   render() {
     return (
       <KPIView
         {...this.props}
-        carrier={this.state.carrier}
+        query={this.state.query}
         onChangeFilter={this.onChangeFilter}
       />
     )

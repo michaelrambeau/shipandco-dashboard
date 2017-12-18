@@ -4,6 +4,7 @@ import Filters from './Filters'
 
 import Loading from 'components/utils/Loading'
 import CarrierIcon from 'components/utils/CarrierIcon'
+import ShopIcon from 'components/utils/ShopIcon'
 
 const getBestResults = data => {
   return data
@@ -12,7 +13,8 @@ const getBestResults = data => {
     .slice(0, 3)
 }
 
-const KPIPage = ({ data, loading, carrier, onChangeFilter }) => {
+const KPIPage = ({ data, loading, query, onChangeFilter }) => {
+  const { carrier, shop } = query
   return (
     <section className="section">
       <div className="container">
@@ -23,7 +25,7 @@ const KPIPage = ({ data, loading, carrier, onChangeFilter }) => {
         ) : (
           <div>
             <div style={{ marginBottom: '1rem' }}>
-              <Filters onChangeFilter={onChangeFilter} carrier={carrier} />
+              <Filters onChangeFilter={onChangeFilter} query={query} />
             </div>
             <div className="columns">
               <div className="column is-half">
@@ -31,9 +33,16 @@ const KPIPage = ({ data, loading, carrier, onChangeFilter }) => {
                   <h4 className="title is-4">
                     By month{' '}
                     {carrier !== '*' && <CarrierIcon carrier={carrier} />}
+                    {shop !== '*' && <ShopIcon type={shop} />}
                   </h4>
-                  {true && <Graph data={data} />}
-                  <BestMonths data={data} />
+                  {data.length > 0 ? (
+                    <div>
+                      <Graph data={data} />
+                      <BestMonths data={data} />
+                    </div>
+                  ) : (
+                    <div>No data, try other filters!</div>
+                  )}
                 </div>
               </div>
             </div>
