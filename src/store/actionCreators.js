@@ -8,7 +8,7 @@ import {
   FETCH_ITEM_ERROR,
   FETCH_DASHBOARD_REQUEST,
   FETCH_DASHBOARD_SUCCESS,
-  FETCH_DASHBOARD_ERROR
+  FETCH_DASHBOARD_ERROR,
 } from './actionTypes'
 
 export function fetchItemListRequest(model, options) {
@@ -17,8 +17,8 @@ export function fetchItemListRequest(model, options) {
       type: FETCH_ITEM_LIST_REQUEST,
       payload: {
         model,
-        options
-      }
+        options,
+      },
     })
     const token = getState().auth.token
     return apiFetchItemList(token, model, options)
@@ -27,8 +27,8 @@ export function fetchItemListRequest(model, options) {
           type: FETCH_ITEM_LIST_SUCCESS,
           payload: {
             ...result,
-            model
-          }
+            model,
+          },
         })
       })
       .catch(err => {
@@ -43,8 +43,8 @@ export function fetchItem(model, id) {
       type: FETCH_ITEM_REQUEST,
       payload: {
         model,
-        id
-      }
+        id,
+      },
     })
     const token = getState().auth.token
     return apiFetchItem(token, model, id)
@@ -54,8 +54,8 @@ export function fetchItem(model, id) {
           payload: {
             id,
             model,
-            item
-          }
+            item,
+          },
         })
       })
       .catch(err => {
@@ -64,8 +64,8 @@ export function fetchItem(model, id) {
           type: FETCH_ITEM_ERROR,
           payload: {
             id,
-            model
-          }
+            model,
+          },
         })
       })
   }
@@ -76,14 +76,16 @@ const fetchData = ({ key }) => ({ query } = { query: {} }) => {
   return (dispatch, getState) => {
     dispatch({
       type: `FETCH_${key}_REQUEST`,
-      payload: query
+      payload: query,
     })
     const token = getState().auth.token
+    console.log('>> Fetch', query)
+
     return apiFetchData({ token, key, query })
       .then(result => {
         return dispatch({
           type: `FETCH_${key}_SUCCESS`,
-          payload: result
+          payload: result,
         })
       })
       .catch(err => {
@@ -91,7 +93,7 @@ const fetchData = ({ key }) => ({ query } = { query: {} }) => {
         return dispatch({
           type: `FETCH_${key}_ERROR`,
           error: true,
-          payload: err.message
+          payload: err.message,
         })
       })
   }

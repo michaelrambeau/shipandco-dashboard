@@ -1,19 +1,29 @@
 import { connect } from 'react-redux'
 import React from 'react'
+import get from 'lodash.get'
 
 import KPIView from '../components/KPIView'
 import { fetchKPI } from 'store/actionCreators'
 
+import byDay from './sample-by-day.json'
+import byMonth from './sample-by-month.json'
+
 const mapStateToProps = state => {
   const kpi = state.kpi
   return {
-    data: kpi.results,
+    data: {
+      byMonth: get(kpi, 'results.byMonth'),
+      byDay: get(kpi, 'results.byDay'),
+    },
     loading: kpi.loading,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchData: params => dispatch(fetchKPI(params)),
+  fetchData: ({ query } = {}) => {
+    const options = { query: { ...query, type: 'all' } }
+    return dispatch(fetchKPI(options))
+  },
   // onRefresh: () => dispatch(fetchDashboard()),
 })
 

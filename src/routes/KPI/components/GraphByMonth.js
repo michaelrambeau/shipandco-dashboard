@@ -44,7 +44,7 @@ const Graph = ({ data }) => (
         data={convert(data)}
         labelComponent={<VictoryTooltip />}
         style={{
-          data: { fill: '#f43d2e', widthX: 20 },
+          data: { fill: '#F47560' },
         }}
       />
     </VictoryChart>
