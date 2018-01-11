@@ -16,7 +16,6 @@ const users = flatten(
     })
   )
 )
-console.log({ users })
 
 const carriers = Object.keys(carriersByKey).map(key => ({
   value: key,

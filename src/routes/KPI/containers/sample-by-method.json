@@ -1,0 +1,142 @@
+[
+  {
+    "carrier": "dhl",
+    "method": "EXPRESS WORLDWIDE",
+    "count": 38586
+  },
+  {
+    "carrier": "japanpost",
+    "method": "kakitome",
+    "count": 20696
+  },
+  {
+    "carrier": "japanpost",
+    "method": "epacket",
+    "count": 20032
+  },
+  {
+    "carrier": "japanpost",
+    "method": "ems",
+    "count": 17170
+  },
+  {
+    "carrier": "yuupack",
+    "method": "yuupack",
+    "count": 1564
+  },
+  {
+    "carrier": "ups",
+    "method": "Saver",
+    "count": 1394
+  },
+  {
+    "carrier": "fedex",
+    "method": "International Economy",
+    "count": 921
+  },
+  {
+    "carrier": "japanpost",
+    "method": "sal",
+    "count": 885
+  },
+  {
+    "carrier": "fedex",
+    "method": "International Priority",
+    "count": 845
+  },
+  {
+    "carrier": "japanpost",
+    "method": "epacketlight",
+    "count": 805
+  },
+  {
+    "carrier": "ups",
+    "method": "UPS Saver",
+    "count": 516
+  },
+  {
+    "carrier": "sagawa",
+    "method": "regular",
+    "count": 346
+  },
+  {
+    "carrier": "japanpost",
+    "method": null,
+    "count": 240
+  },
+  {
+    "carrier": "dhl",
+    "method": null,
+    "count": 180
+  },
+  {
+    "carrier": "ups",
+    "method": "Worldwide Expedited",
+    "count": 159
+  },
+  {
+    "carrier": "ups",
+    "method": null,
+    "count": 101
+  },
+  {
+    "carrier": "japanpost",
+    "method": "airmail",
+    "count": 48
+  },
+  {
+    "carrier": "dhl",
+    "method": "EXPRESS 12:00",
+    "count": 48
+  },
+  {
+    "carrier": "yamato",
+    "method": "yamato",
+    "count": 43
+  },
+  {
+    "carrier": "dhl",
+    "method": "EXPRESS JUMBO",
+    "count": 30
+  },
+  {
+    "carrier": "fedex",
+    "method": null,
+    "count": 8
+  },
+  {
+    "carrier": "fedex",
+    "method": "International First",
+    "count": 3
+  },
+  {
+    "carrier": "dhl",
+    "method": "EXPRESS 9:00",
+    "count": 1
+  },
+  {
+    "carrier": "sagawa",
+    "method": "plane",
+    "count": 1
+  },
+  {
+    "carrier": "ups",
+    "method": "UPS Worldwide Express",
+    "count": 1
+  },
+  {
+    "carrier": "dhl",
+    "method": "EXPRESS ENVELOPE",
+    "count": 1
+  },
+  {
+    "carrier": "ups",
+    "method": "Worldwide Express",
+    "count": 1
+  },
+  {
+    "carrier": "dhl",
+    "method": "EXPRESS 10:30",
+    "count": 1
+  }
+]

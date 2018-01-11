@@ -7,6 +7,7 @@ import { fetchKPI } from 'store/actionCreators'
 
 import byDay from './sample-by-day.json'
 import byMonth from './sample-by-month.json'
+import byMethod from './sample-by-method.json'
 
 const mapStateToProps = state => {
   const kpi = state.kpi
@@ -14,6 +15,7 @@ const mapStateToProps = state => {
     data: {
       byMonth: get(kpi, 'results.byMonth'),
       byDay: get(kpi, 'results.byDay'),
+      byMethod: get(kpi, 'results.byMethod'),
     },
     loading: kpi.loading,
   }
@@ -24,7 +26,6 @@ const mapDispatchToProps = dispatch => ({
     const options = { query: { ...query, type: 'all' } }
     return dispatch(fetchKPI(options))
   },
-  // onRefresh: () => dispatch(fetchDashboard()),
 })
 
 class KPIContainer extends React.Component {
@@ -40,7 +41,8 @@ class KPIContainer extends React.Component {
     }
   }
   componentWillMount() {
-    this.props.fetchData()
+    const { query } = this.state
+    this.props.fetchData({ query })
   }
   onChangeFilter({ key, value }) {
     const query = Object.assign({}, this.state.query, { [key]: value })

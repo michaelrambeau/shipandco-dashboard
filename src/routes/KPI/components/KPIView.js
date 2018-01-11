@@ -3,6 +3,7 @@ import tinytime from 'tinytime'
 
 import GraphByMonth from './GraphByMonth'
 import GraphByDay from './GraphByDay'
+import GraphByMethod from './GraphByMethod'
 import Filters from './Filters'
 
 import Loading from 'components/utils/Loading'
@@ -18,8 +19,6 @@ const getBestResults = data => {
 
 const KPIPage = ({ data, loading, query, onChangeFilter }) => {
   const { carrier, shop } = query
-  console.log('Data', data)
-
   return (
     <section className="section">
       <div className="container">
@@ -32,48 +31,67 @@ const KPIPage = ({ data, loading, query, onChangeFilter }) => {
             <div style={{ marginBottom: '1rem' }}>
               <Filters onChangeFilter={onChangeFilter} query={query} />
             </div>
-            <div className="columns">
-              <div className="column is-half">
-                <div className="box">
-                  <h4 className="title is-4">
-                    Last 12 months{' '}
-                    {carrier !== '*' && <CarrierIcon carrier={carrier} />}
-                    {shop !== '*' && <ShopIcon type={shop} />}
-                  </h4>
-                  {data.byMonth.length > 0 ? (
-                    <div>
-                      <GraphByMonth data={data.byMonth} />
-                      <hr />
-                      <BestMonths data={data.byMonth} />
-                    </div>
-                  ) : (
-                    <div>No data, try other filters!</div>
-                  )}
-                </div>
-              </div>
-              <div className="column is-half">
-                <div className="box">
-                  <h4 className="title is-4">
-                    Last 30 days{' '}
-                    {carrier !== '*' && <CarrierIcon carrier={carrier} />}
-                    {shop !== '*' && <ShopIcon type={shop} />}
-                  </h4>
-                  {data.byDay.length > 0 ? (
-                    <div>
-                      <GraphByDay data={data.byDay} />
-                      <hr />
-                      <BestDays data={data.byDay} />
-                    </div>
-                  ) : (
-                    <div>No data, try other filters!</div>
-                  )}
-                </div>
-              </div>
-            </div>
+            <FirstRow data={data} carrier={carrier} shop={shop} />
+            <SecondRow data={data} carrier={carrier} shop={shop} />
           </div>
         )}
       </div>
     </section>
+  )
+}
+
+const FirstRow = ({ data, carrier, shop }) => {
+  return (
+    <div className="columns">
+      <div className="column is-half">
+        <div className="box">
+          <h4 className="title is-4">
+            Last 12 months{' '}
+            {carrier !== '*' && <CarrierIcon carrier={carrier} />}
+            {shop !== '*' && <ShopIcon type={shop} />}
+          </h4>
+          {data.byMonth.length > 0 ? (
+            <div>
+              <GraphByMonth data={data.byMonth} />
+              <hr />
+              <BestMonths data={data.byMonth} />
+            </div>
+          ) : (
+            <div>No data, try other filters!</div>
+          )}
+        </div>
+      </div>
+      <div className="column is-half">
+        <div className="box">
+          <h4 className="title is-4">
+            Last 30 days {carrier !== '*' && <CarrierIcon carrier={carrier} />}
+            {shop !== '*' && <ShopIcon type={shop} />}
+          </h4>
+          {data.byDay.length > 0 ? (
+            <div>
+              <GraphByDay data={data.byDay} />
+              <hr />
+              <BestDays data={data.byDay} />
+            </div>
+          ) : (
+            <div>No data, try other filters!</div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const SecondRow = ({ data }) => {
+  return (
+    <div className="columns">
+      <div className="column is-half">
+        <div className="box">
+          <h4 className="title is-4">Top 10 Shipping Methods</h4>
+          <GraphByMethod data={data.byMethod} />
+        </div>
+      </div>
+    </div>
   )
 }
 

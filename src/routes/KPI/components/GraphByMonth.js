@@ -10,7 +10,22 @@ import {
 
 const times = require('lodash.times')
 const get = require('lodash.get')
-const keys = times(12).map(i => `2017/${i + 1}`)
+const today = new Date()
+const oneYearAgo = new Date(
+  today.getFullYear() - 1,
+  today.getMonth(),
+  1,
+  9,
+  0,
+  0
+)
+const dates = times(13).map(i => {
+  const date = new Date(oneYearAgo)
+  date.setMonth(date.getMonth() + i)
+  return date
+  // return `${date.getFullYear()}/${date.getMonth() + 1}`
+})
+console.log({ dates })
 
 const formatMonth = d => {
   const m = d.getMonth() + 1
@@ -19,10 +34,10 @@ const formatMonth = d => {
 
 function convert(data) {
   const findDatum = key => data.find(datum => datum.date === key)
-  return keys.map((key, i) => {
+  return dates.map((date, i) => {
+    const key = `${date.getFullYear()}/${date.getMonth() + 1}`
     const datum = findDatum(key)
     const count = datum ? datum.count : 0
-    const date = new Date(2017, i, 1)
     return {
       x: date,
       y: count,
