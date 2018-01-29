@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import React from 'react'
 import get from 'lodash.get'
 
-import KPIView from '../components/KPIView'
+import KPIView from '../components/KPIShipmentsView'
 import { fetchKPI } from 'store/actionCreators'
 
 import byDay from './sample-by-day.json'
@@ -15,9 +15,9 @@ const mapStateToProps = state => {
     data: {
       byMonth: get(kpi, 'results.byMonth'),
       byDay: get(kpi, 'results.byDay'),
-      byMethod: get(kpi, 'results.byMethod'),
+      byMethod: get(kpi, 'results.byMethod')
     },
-    loading: kpi.loading,
+    loading: kpi.loading
   }
 }
 
@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
   fetchData: ({ query } = {}) => {
     const options = { query: { ...query, type: 'all' } }
     return dispatch(fetchKPI(options))
-  },
+  }
 })
 
 class KPIContainer extends React.Component {
@@ -36,8 +36,8 @@ class KPIContainer extends React.Component {
       query: {
         shop: '*',
         carrier: '*',
-        user: '*',
-      },
+        user: '*'
+      }
     }
   }
   componentWillMount() {
