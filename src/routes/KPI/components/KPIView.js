@@ -9,6 +9,7 @@ import Filters from './Filters'
 import Loading from 'components/utils/Loading'
 import CarrierIcon from 'components/utils/CarrierIcon'
 import ShopIcon from 'components/utils/ShopIcon'
+import KPIMenu from './KPIMenu'
 
 const getBestResults = data => {
   return data
@@ -22,6 +23,7 @@ const KPIPage = ({ data, loading, query, onChangeFilter }) => {
   return (
     <section className="section">
       <div className="container">
+        <KPIMenu />
         <h2 className="title is-3">Shipment Statistics</h2>
         {false && <h3 className="title is-4">Shipments by Month in 2017</h3>}
         {loading ? (
