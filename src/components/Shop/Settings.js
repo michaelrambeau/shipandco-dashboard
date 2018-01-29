@@ -1,5 +1,7 @@
 import React from 'react'
 
+import TimeAgo from 'components/utils/TimeAgo'
+
 const settingsKeys = ['licenseKey']
 const excludedKeys = ['warehouseId']
 
@@ -12,6 +14,11 @@ const Settings = ({ shop }) => (
       {shop && <KeyValueHash hash={shop.settings} />}
       {shop && shop.type === 'amazon' && <KeyValueHash hash={shop.data} />}
       {shop && <KeyValueHash hash={shop} keys={settingsKeys} />}
+      {shop.tokenExpiration && (
+        <div>
+          Token expiration date: <TimeAgo datetime={shop.tokenExpiration} />
+        </div>
+      )}
     </div>
   </div>
 )

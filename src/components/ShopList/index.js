@@ -18,9 +18,7 @@ const Table = ({ shops, count }) => {
             <th>Last sync.</th>
           </tr>
         </thead>
-        <tbody>
-          {shops.map(shop => <Row shop={shop} key={shop._id} />)}
-        </tbody>
+        <tbody>{shops.map(shop => <Row shop={shop} key={shop._id} />)}</tbody>
       </table>
     </div>
   )
@@ -46,15 +44,17 @@ const Autofulfill = ({ shop }) => {
 }
 
 const ShopState = ({ shop }) => {
-  const {state} = shop
+  const { state } = shop
   if (!state) return null
   const mapping = {
-    'pending': 'is-warning'
+    pending: 'is-warning',
   }
   const className = mapping[state] || 'is-success'
-  return <div>
-    <span className={`tag ${className}`}>{state}</span>
-  </div>
+  return (
+    <div>
+      <span className={`tag ${className}`}>{state}</span>
+    </div>
+  )
 }
 
 const Row = ({ shop }) => {
@@ -65,9 +65,7 @@ const Row = ({ shop }) => {
       <td>
         <ShopIcon type={shop.type} />
       </td>
-      <td>
-        {shop.name}
-      </td>
+      <td>{shop.name}</td>
       <td>
         <Autofulfill shop={shop} />
         <ShopState shop={shop} />
@@ -76,12 +74,16 @@ const Row = ({ shop }) => {
         {date ? <TimeAgo datetime={date} /> : <span className="empty">-</span>}
       </td>
       <td>
-        {shop.lastSync
-          ? <TimeAgo datetime={shop.lastSync} />
-          : <span className="empty">-</span>}
-          {shop.tokenExpiration && <div style={{ color: '#999'}}>
-            Token expires <TimeAgo datetime={shop.tokenExpiration} />
-            </div>}
+        {shop.lastSync ? (
+          <TimeAgo datetime={shop.lastSync} />
+        ) : (
+          <span className="empty">-</span>
+        )}
+        {shop.tokenExpiration && (
+          <div style={{ color: '#999' }}>
+            Token expiration date: <TimeAgo datetime={shop.tokenExpiration} />
+          </div>
+        )}
       </td>
     </tr>
   )
