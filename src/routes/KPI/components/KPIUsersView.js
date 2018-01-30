@@ -10,13 +10,11 @@ const KPIUsersView = ({ data, loading }) => {
       <div className="container">
         <KPIMenu activeTab="customers" />
         <h2 className="title is-3">Customer Statistics</h2>
-        {loading ? (
-          <Loading />
-        ) : (
-          <div>
-            <Row data={data} />
-          </div>
-        )}
+        {!data || loading
+          ? <Loading />
+          : <div>
+              <Row data={data} />
+            </div>}
       </div>
     </section>
   )

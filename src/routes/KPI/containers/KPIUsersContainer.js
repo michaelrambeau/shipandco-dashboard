@@ -10,21 +10,17 @@ const mapStateToProps = state => {
   return {
     data: {
       byMonth: get(kpi, 'results.byMonth'),
-      byDay: get(kpi, 'results.byDay'),
-      byMethod: get(kpi, 'results.byMethod'),
-      paid: get(kpi, 'results.paid'),
+      paid: get(kpi, 'results.paid')
     },
-    loading: kpi.loading,
+    loading: kpi.loading
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   fetchData: ({ query } = {}) => {
     const options = { query: { ...query, type: 'customers' } }
-    console.log('> Fetch', options)
-
     return dispatch(fetchKPI('customers')(options))
-  },
+  }
 })
 
 class KPIUsersContainer extends React.Component {
@@ -32,7 +28,7 @@ class KPIUsersContainer extends React.Component {
     super(props)
     // this.onChangeFilter = this.onChangeFilter.bind(this)
     this.state = {
-      query: {},
+      query: {}
     }
   }
   componentWillMount() {

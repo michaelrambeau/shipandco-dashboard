@@ -1,23 +1,25 @@
 import { FETCH_KPI_SUCCESS, FETCH_KPI_REQUEST } from './actionTypes'
 
 const initialState = {
-  results: { byMonth: [], byDay: [], byMethod: [], paid: [] },
+  loading: true,
+  results: null
 }
 
 const ACTION_HANDLERS = {
   [FETCH_KPI_REQUEST]: (state, action) => {
     return {
       ...state,
-      loading: true,
+      results: null,
+      loading: true
     }
   },
   [FETCH_KPI_SUCCESS]: (state, action) => {
     return {
       ...state,
       ...action.payload,
-      loading: false,
+      loading: false
     }
-  },
+  }
 }
 
 export default function reducer(state = initialState, action) {
