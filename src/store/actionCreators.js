@@ -72,7 +72,7 @@ export function fetchItem(model, id) {
 }
 
 // Abstract action creator HOF used by `fetchDashboard` and `fetchKPI`
-const fetchData = ({ key }) => ({ query } = { query: {} }) => {
+const fetchData = ({ key, type }) => ({ query } = { query: {} }) => {
   return (dispatch, getState) => {
     dispatch({
       type: `FETCH_${key}_REQUEST`,
@@ -81,7 +81,7 @@ const fetchData = ({ key }) => ({ query } = { query: {} }) => {
     const token = getState().auth.token
     console.log('>> Fetch', query)
 
-    return apiFetchData({ token, key, query })
+    return apiFetchData({ token, key, query, type })
       .then(result => {
         return dispatch({
           type: `FETCH_${key}_SUCCESS`,
@@ -101,4 +101,4 @@ const fetchData = ({ key }) => ({ query } = { query: {} }) => {
 
 // Exported action creators to be called from page components
 export const fetchDashboard = fetchData({ key: 'DASHBOARD' })
-export const fetchKPI = fetchData({ key: 'KPI' })
+export const fetchKPI = type => fetchData({ key: 'KPI', type })

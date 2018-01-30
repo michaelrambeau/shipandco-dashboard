@@ -1,6 +1,8 @@
 import { FETCH_KPI_SUCCESS, FETCH_KPI_REQUEST } from './actionTypes'
 
-const initialState = { results: { byMonth: [], byDay: [], byMethod: [] } }
+const initialState = {
+  results: { byMonth: [], byDay: [], byMethod: [], paid: [] },
+}
 
 const ACTION_HANDLERS = {
   [FETCH_KPI_REQUEST]: (state, action) => {

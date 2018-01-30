@@ -64,11 +64,12 @@ export function apiFetchItem(token, model, id) {
   return requestWithToken(token)(url)
 }
 
-export function apiFetchData({ token, key, query }) {
+export function apiFetchData({ token, key, query, type }) {
   const mapping = {
-    KPI: 'kpi/shipments',
+    shipments: 'kpi/shipments',
+    customers: 'kpi/customers',
   }
-  const endPoint = mapping[key] || key
+  const endPoint = (type && mapping[type]) || key
   const url = `${API_BASE_URL}/${endPoint}`
   const qs = Object.keys(query)
     .map(k => `${k}=${query[k]}`)
