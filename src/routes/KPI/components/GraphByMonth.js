@@ -25,7 +25,6 @@ const dates = times(13).map(i => {
   return date
   // return `${date.getFullYear()}/${date.getMonth() + 1}`
 })
-console.log({ dates })
 
 const formatMonth = d => {
   const m = d.getMonth() + 1

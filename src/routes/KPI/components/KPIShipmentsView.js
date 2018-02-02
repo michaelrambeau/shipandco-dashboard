@@ -12,27 +12,31 @@ import ShopIcon from 'components/utils/ShopIcon'
 import KPIMenu from './KPIMenu'
 
 const getBestResults = data => {
-  return data.slice().sort((a, b) => b.count - a.count).slice(0, 3)
+  return data
+    .slice()
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 3)
 }
 
 const KPIPage = ({ data, loading, query, onChangeFilter }) => {
   const { carrier, shop } = query
-  console.log('> Data', loading, data)
-
+  if (!data || !data.byDay) return null
   return (
     <section className="section">
       <div className="container">
         <KPIMenu activeTab="shipments" />
         <h2 className="title is-3">Shipment Statistics</h2>
-        {!data || loading
-          ? <Loading />
-          : <div>
-              <div style={{ marginBottom: '1rem' }}>
-                <Filters onChangeFilter={onChangeFilter} query={query} />
-              </div>
-              <FirstRow data={data} carrier={carrier} shop={shop} />
-              <SecondRow data={data} carrier={carrier} shop={shop} />
-            </div>}
+        {!data || loading ? (
+          <Loading />
+        ) : (
+          <div>
+            <div style={{ marginBottom: '1rem' }}>
+              <Filters onChangeFilter={onChangeFilter} query={query} />
+            </div>
+            <FirstRow data={data} carrier={carrier} shop={shop} />
+            <SecondRow data={data} carrier={carrier} shop={shop} />
+          </div>
+        )}
       </div>
     </section>
   )
@@ -48,13 +52,15 @@ const FirstRow = ({ data, carrier, shop }) => {
             {carrier !== '*' && <CarrierIcon carrier={carrier} />}
             {shop !== '*' && <ShopIcon type={shop} />}
           </h4>
-          {data.byMonth.length > 0
-            ? <div>
-                <GraphByMonth data={data.byMonth} />
-                <hr />
-                <BestMonths data={data.byMonth} />
-              </div>
-            : <div>No data, try other filters!</div>}
+          {data.byMonth.length > 0 ? (
+            <div>
+              <GraphByMonth data={data.byMonth} />
+              <hr />
+              <BestMonths data={data.byMonth} />
+            </div>
+          ) : (
+            <div>No data, try other filters!</div>
+          )}
         </div>
       </div>
       <div className="column is-half">
@@ -63,13 +69,15 @@ const FirstRow = ({ data, carrier, shop }) => {
             Last 30 days {carrier !== '*' && <CarrierIcon carrier={carrier} />}
             {shop !== '*' && <ShopIcon type={shop} />}
           </h4>
-          {data.byDay.length > 0
-            ? <div>
-                <GraphByDay data={data.byDay} />
-                <hr />
-                <BestDays data={data.byDay} />
-              </div>
-            : <div>No data, try other filters!</div>}
+          {data.byDay.length > 0 ? (
+            <div>
+              <GraphByDay data={data.byDay} />
+              <hr />
+              <BestDays data={data.byDay} />
+            </div>
+          ) : (
+            <div>No data, try other filters!</div>
+          )}
         </div>
       </div>
     </div>
@@ -99,23 +107,21 @@ const BestMonths = ({ data }) => {
     <div>
       <p>Best 3 months:</p>
       <ol style={{ paddingLeft: 20 }}>
-        {bestMonths.map((item, i) =>
+        {bestMonths.map((item, i) => (
           <li key={i}>
             {item.date}: {item.count} shipments
           </li>
-        )}
+        ))}
       </ol>
       <hr />
-      <p>
-        Average: {avg.toFixed()} shipments by month
-      </p>
+      <p>Average: {avg.toFixed()} shipments by month</p>
     </div>
   )
 }
 
 const template = tinytime('{MM} {DD} ({dddd})', {
   padMonth: true,
-  padDays: true
+  padDays: true,
 })
 
 const formatDay = item => {
@@ -129,7 +135,7 @@ const BestDays = ({ data }) => {
     data
       .map(item => ({
         dayInWeek: new Date(item.year, item.month - 1, item.day).getDay(),
-        count: item.count
+        count: item.count,
       }))
       .filter(item => isBusinessDay(item.dayInWeek))
   )
@@ -137,11 +143,11 @@ const BestDays = ({ data }) => {
     <div>
       <p>Best 3 days:</p>
       <ol style={{ paddingLeft: 20 }}>
-        {bestDays.map((item, i) =>
+        {bestDays.map((item, i) => (
           <li key={i}>
             {formatDay(item)}: {item.count} shipments
           </li>
-        )}
+        ))}
       </ol>
       <hr />
       <p>

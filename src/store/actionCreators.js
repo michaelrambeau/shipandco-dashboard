@@ -79,8 +79,6 @@ const fetchData = ({ key, type }) => ({ query } = { query: {} }) => {
       payload: query,
     })
     const token = getState().auth.token
-    console.log('>> Fetch', query)
-
     return apiFetchData({ token, key, query, type })
       .then(result => {
         return dispatch({

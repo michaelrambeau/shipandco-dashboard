@@ -12,12 +12,8 @@ import byMethod from './sample-by-method.json'
 const mapStateToProps = state => {
   const kpi = state.kpi
   return {
-    data: {
-      byMonth: get(kpi, 'results.byMonth'),
-      byDay: get(kpi, 'results.byDay'),
-      byMethod: get(kpi, 'results.byMethod')
-    },
-    loading: kpi.loading
+    data: kpi.results,
+    loading: kpi.loading,
   }
 }
 
@@ -25,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
   fetchData: ({ query } = {}) => {
     const options = { query: { ...query } }
     return dispatch(fetchKPI('shipments')(options))
-  }
+  },
 })
 
 class KPIContainer extends React.Component {
@@ -36,8 +32,8 @@ class KPIContainer extends React.Component {
       query: {
         shop: '*',
         carrier: '*',
-        user: '*'
-      }
+        user: '*',
+      },
     }
   }
   componentWillMount() {
